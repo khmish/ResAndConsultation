@@ -1,0 +1,28 @@
+<div style="margin-bottom:10px;">
+  <div class="ui-grid-row">
+    <div class="ui-g-12 ui-md-4">
+      <label>Start Date : </label>
+    </div>
+    <div>
+      <p-calendar [(ngModel)]="startDate" [minDate]="minDateValue" [readonlyInput]="true" data-value=""></p-calendar>
+    </div>
+  </div>
+  <div class="ui-grid-row">
+    <div class="ui-g-12 ui-md-4">
+      <label>End Date : </label>
+    </div>
+    <div>
+      <p-calendar [(ngModel)]="endDate" [minDate]="startDate" [readonlyInput]="true"></p-calendar>
+    </div>
+  </div>
+  <div class="ui-grid-row">
+    <p-dropdown [options]="allActivityTypes" [(ngModel)]="selected" placeholder="Select Activity Type"
+                optionLabel="actTypeArabicName"
+                [showClear]="true" [style]="{'width':'350px; margin-left: 5px'}"></p-dropdown>
+  </div>
+</div>
+
+<div align="center" style="margin-top: 35px">
+  <button (click)="addTeam()" class="btn btn-success">Add</button>&nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>
