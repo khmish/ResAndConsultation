@@ -38,7 +38,8 @@ import {
 } from '../../../../service/data/generate-json.service';
 import {
   HttpResponse,
-  HttpClient
+  HttpClient,
+  HttpErrorResponse
 } from '@angular/common/http';
 import {
   GetAllRfcDataBean
@@ -191,7 +192,7 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
   acceptRejectTask3(acceptPara: boolean) {
 
     this.selectedConsApproval = {
-      constId: this.selRow,
+      constId: '300',//this.selRow,
       remark: this.remark,
       consulDeputyTeamsApproval: acceptPara,
       userId: sessionStorage.getItem('authenticatedUser')
@@ -202,17 +203,15 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
       // synchronous operation
       this.http.post<any>(this.acceptTask3Url, this.selectedConsApproval)
       .subscribe(
-        data => {
-          if(data.err)
-          {
-            console.log(data.errorADescription);
-
-          }
-          this.showSuccess(data.errorADescription);
+        (data: HttpResponse<any>) => {
+          // console.log("data "+data);
+          
+          this.showSuccess(data.body.errorADescription);
           this.ngOnInit();
         },
-        err =>{
-          this.showError(err.errorADescription);
+        (err: HttpErrorResponse) =>{
+          // console.log("err "+err.error.errorADescription);
+          this.showError(err.error.errorADescription);
         }
       );
     } catch (error) {
