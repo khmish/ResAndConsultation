@@ -1,0 +1,21 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {RemarksBodyBean} from '../../reusableComponents/remarks-details/remarks-details.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RemarkDetailsService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  getRemarkDetails(rfcId1: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response' as 'response'
+    };
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<RemarksBodyBean>('http://springdev.ipaedu.sa:8082/getRfcRemarks/' + rfcId1);
+  }
+}

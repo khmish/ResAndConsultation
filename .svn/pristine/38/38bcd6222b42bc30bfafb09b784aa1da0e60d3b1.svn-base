@@ -1,0 +1,15 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import {ButtonModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {CreateConsultationRecordRoutingModule} from './create-consultation-record-routing.module';
+import {CreateConsultationRecordComponent} from './create-consultation-record.component';
+import {RfcReviewAfterGmreviewModule} from '../../deputyNewRfcs/rfc-review-after-gmreview/rfc-review-after-gmreview-module';
+
+@NgModule({
+  imports: [CommonModule, CreateConsultationRecordRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, RfcReviewAfterGmreviewModule],
+  declarations: [CreateConsultationRecordComponent]
+})
+export class CreateConsultationRecordModule {}

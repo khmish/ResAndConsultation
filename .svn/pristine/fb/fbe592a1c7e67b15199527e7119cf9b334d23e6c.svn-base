@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { GmReviewAfterCommitteeComponent } from './gm-review-after-committee.component';
+
+describe('GmReviewAfterCommitteeComponent', () => {
+  let component: GmReviewAfterCommitteeComponent;
+  let fixture: ComponentFixture<GmReviewAfterCommitteeComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ GmReviewAfterCommitteeComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(GmReviewAfterCommitteeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

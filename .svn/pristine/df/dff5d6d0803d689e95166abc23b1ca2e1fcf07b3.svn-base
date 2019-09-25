@@ -1,0 +1,93 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+  <div class="list-group">
+    <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+      <span>{{ 'Dashboard' | translate }}</span>
+    </a>
+    <!--    <a [routerLink]="['/allConsultations']" [routerLinkActive]="['router-link-active']" class="list-group-item">-->
+    <!--      <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;-->
+    <!--      <span>{{ 'AllConsultations' | translate }}</span>-->
+    <!--    </a>-->
+    <div class="nested-menu">
+      <ul *ngFor="let item of subSystems" style="padding-inline-start: 0px;">
+        <li>
+          <a class="list-group-item" (click)="addExpandClass('roles')">
+            <i class="fa fa-plus"></i>
+            <span style="color:White; margin:5px;">{{item.subSystemAName}}</span>
+          </a>
+        <li class="nested" [class.expand]="showMenu === 'roles' || showMenu === 'functions'">
+          <ul *ngFor="let item1 of item.systemRoles" style="padding-inline-start: 10px;" class="submenu">
+<!--            <li>-->
+<!--              <a class="list-group-item">-->
+<!--                <i class="fa fa-plus"></i>-->
+<!--                <span style="color:White;">{{item1.systemRoleAName}}</span>-->
+<!--              </a>-->
+            <li>
+              <ul *ngFor="let item2 of item1.systemFunctions" style="padding-inline-start: 0px;" class="submenu">
+                <li>
+                  <a class="list-group-item" (click)="storeLocalVariable(item2.systemFunctionDsQueryHttpBodies, item2.angularRouteLink)"
+                     [routerLinkActive]="['router-link-active']" >
+                    <span style="color:White;">{{item2.systemFunctionAName}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+<!--        </li>-->
+      </ul>
+    </div>
+
+    <div class="header-fields">
+      <!--      <a (click)="rltAndLtr()" class="list-group-item">-->
+      <!--        <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>-->
+      <!--      </a>-->
+      <div class="nested-menu">
+        <a class="list-group-item" (click)="addExpandClass('languages')">
+          <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
+        </a>
+        <li class="nested" [class.expand]="showMenu === 'languages'">
+          <ul class="submenu">
+            <li>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang()">
+                {{ direction == 'en' ? 'English' : 'Arabic' | translate }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="nested-menu">
+        <a class="list-group-item" (click)="addExpandClass('profile')">
+          <span><i class="fa fa-user"></i>&nbsp; John Smith</span>
+        </a>
+        <li class="nested" [class.expand]="showMenu === 'profile'">
+          <ul class="submenu">
+            <li>
+              <a href="javascript:void(0)">
+                <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/login']" (click)="onLoggedout()">
+                <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
+  </div>
+  <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+    <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+    <span>{{ 'Collapse Sidebar' | translate }}</span>
+  </div>
+</nav>

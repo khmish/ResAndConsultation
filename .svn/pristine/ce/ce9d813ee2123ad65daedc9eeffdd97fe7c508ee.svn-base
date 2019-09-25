@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {ButtonModule, DialogService, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {GmReviewAfterCommitteRoutingModule} from './gm-review-after-committe-routing.module';
+import {GmReviewAfterCommitteeComponent} from './gm-review-after-committee.component';
+
+@NgModule({
+  imports: [CommonModule, GmReviewAfterCommitteRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule],
+  declarations: [GmReviewAfterCommitteeComponent]
+})
+export class GmReviewAfterCommitteModule {}

@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SpecDeptNewRfcsComponent } from './spec-dept-new-rfcs.component';
+
+describe('SpecDeptNewRfcsComponent', () => {
+  let component: SpecDeptNewRfcsComponent;
+  let fixture: ComponentFixture<SpecDeptNewRfcsComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ SpecDeptNewRfcsComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SpecDeptNewRfcsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,65 @@
+import { Component, OnInit } from '@angular/core';
+import {ReviewResultAndFinalDecisionComponent} from '../review-result-and-final-decision.component';
+import {HttpResponse} from '@angular/common/http';
+import {ReviewResultAndFinalDecisionService} from '../../../../../../service/data/review-result-and-final-decision.service';
+
+@Component({
+  selector: 'app-review-result-and-final-decision-remarks',
+  templateUrl: './review-result-and-final-decision-remarks.component.html',
+  styleUrls: ['./review-result-and-final-decision-remarks.component.scss']
+})
+export class ReviewResultAndFinalDecisionRemarksComponent implements OnInit {
+
+  selERfcValue: string;
+  selBCValue: string;
+  selectedRfcId: string;
+  showBussCenter: boolean;
+  rfcRemarks: '';
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private viewAllCon: ReviewResultAndFinalDecisionComponent, private reviewResultFinalDecisionService: ReviewResultAndFinalDecisionService) { }
+
+  ngOnInit() {
+    this.selBCValue = 'No';
+    this.showBussCenter = false;
+    this.selectedRfcId = this.viewAllCon.selRow;
+    this.rfcRemarks = null;
+  }
+
+  toogleExecRfc() {
+    if (this.selERfcValue === 'Yes') {
+      this.showBussCenter = true;
+    } else if (this.selERfcValue === 'No') {
+      this.showBussCenter = false;
+    }
+
+  }
+
+  updateReviewResultAndFinalDecision() {
+    console.log(this.selectedRfcId);
+    console.log(this.selERfcValue === 'Yes' ? 'true' : 'false');
+    console.log(this.selBCValue === 'Yes' ? 'true' : 'false');
+    console.log(this.rfcRemarks);
+    this.reviewResultFinalDecisionService.updateReviewResultAndFinalDecision(this.selectedRfcId,
+      this.selERfcValue === 'Yes' ? 'true' : 'false',
+      this.selBCValue === 'Yes' ? 'true' : 'false',
+      this.rfcRemarks).subscribe((res: HttpResponse<any>) => {
+      console.log(res.body.errorCode);
+      if (res.body.errorCode === '0') {
+        this.viewAllCon.dialogService.dialogComponentRef.destroy();
+        this.viewAllCon.ngOnInit();
+        this.viewAllCon.showSuccess('Consultation reviewed Successfully');
+      } else {
+        console.log(res.body.errorEDescription);
+        this.viewAllCon.showError(res.body.errorEDescription);
+      }
+    }, error => {
+      this.viewAllCon.showError('Service is down');
+    });
+  }
+
+  onReset() {
+    this.viewAllCon.refreshPage();
+  }
+
+}

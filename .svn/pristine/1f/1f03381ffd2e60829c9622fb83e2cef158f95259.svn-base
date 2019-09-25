@@ -1,0 +1,64 @@
+<div *ngIf="rfcFullDetailsChild">
+  <!--  <h1> {{ rfcId }}</h1>-->
+  <p-toast position="bottom-right"></p-toast>
+
+  <p-panel header="Rfc Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <div>
+      <div>Title : {{rfcFullDetailsBody.rfcTitle}} </div>
+      <div>Field : {{rfcFullDetailsBody.fieldCode}} </div>
+      <div>Arabic Name : {{rfcFullDetailsBody.orgArabicName}} </div>
+      <div>Contact Name : {{rfcFullDetailsBody.orgContactName}} </div>
+      <div>Phone : {{rfcFullDetailsBody.orgContactPhone}} </div>
+      <div>Email : {{rfcFullDetailsBody.orgContactEmail}} </div>
+      <div>Job : {{rfcFullDetailsBody.orgContactJob}} </div>
+    </div>
+  </p-panel>
+
+  <p-panel header="Meetings History" [toggleable]="true">
+    <ul *ngFor="let meetingElementDetails of meetingElementDetails">
+      <p-fieldset collapsed="collapsed" legend="{{meetingElementDetails.meetingSubject}}" [toggleable]="true"
+                  styleClass="myFieldset">
+        <div style="margin-left: 50px;">
+          <p-card class="ui-card-title"><label>Meeting Status : </label> {{meetingElementDetails.meetingElementAStatus}}
+          </p-card>
+          <br/>
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingDate !== null"><label>Meeting
+            Date
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingDate}}</p-card>
+          <br/>
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingSTime !== null"><label>Meeting
+            Start Time
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingSTime }}</p-card>
+          <br/>
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingETime !== null"><label>Meeting
+            End Time
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingETime}}</p-card>
+          <br>
+          <p-fieldset collapsed="collapsed" *ngIf="meetingElementDetails.recommendationHttpBodies.length !== 0"
+                      legend="Recomendations" [toggleable]="true">
+            <p-card class="ui-card-title" styleClass="recStyle"
+                    *ngFor="let recommendationHttpBodies of meetingElementDetails.recommendationHttpBodies">
+              {{recommendationHttpBodies.recText}}
+            </p-card>
+          </p-fieldset>
+        </div>
+      </p-fieldset>
+    </ul>
+  </p-panel>
+
+  <p-panel header="Remark Details Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <p-dataView #dv [value]="remarkDetails" [paginator]="true" [rows]="4" paginatorPosition="both">
+      <ng-template let-remark pTemplate="listItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+          <p-panel [header]="remark.remarkId" [style]="{'text-align':'center'}">
+            <!--        <img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">-->
+            <div>Details : {{remark.remarkDescription}} </div>
+            <div>User Id : {{remark.remarkUserId}} </div>
+            <div>Name : {{remark.remarkUserName}} </div>
+            <div>Date : {{remark.remarkDate}} </div>
+          </p-panel>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </p-panel>
+</div>

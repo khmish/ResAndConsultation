@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { GmReviewDeputyRejectComponent } from './gm-review-deputy-reject.component';
+
+describe('GmReviewDeputyRejectComponent', () => {
+  let component: GmReviewDeputyRejectComponent;
+  let fixture: ComponentFixture<GmReviewDeputyRejectComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ GmReviewDeputyRejectComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(GmReviewDeputyRejectComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,8 @@
+import { ConsultationGetFullDataHttpBody } from './consultation-get-full-data-http-body';
+
+describe('ConsultationGetFullDataHttpBody', () => {
+  it('should create an instance', () => {
+    // @ts-ignore
+    expect(new ConsultationGetFullDataHttpBody()).toBeTruthy();
+  });
+});

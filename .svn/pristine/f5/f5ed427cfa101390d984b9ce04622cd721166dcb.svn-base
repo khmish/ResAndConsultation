@@ -1,0 +1,20 @@
+<div style="margin: 5px" class="row">
+  <div class="alert alert-warning" *ngIf='errorOccurred'>{{errorMessage}}</div>
+  <!--    Rfc GM Id: {{ selectedRfcId }}-->
+  <div style="margin-left: 5px">
+    <p-dropdown [options]="allDepartments" [(ngModel)]="selected" placeholder="Select"
+                optionLabel="departmentArabicName"
+                [showClear]="true" [style]="{'width':'370px'}"></p-dropdown>
+<!--    {{selected ? selected.departmentCode : 'none'}}-->
+  </div>
+  <br/><br/>
+  <div>
+  <textarea name="deputyRemarks" [rows]="5" [cols]="50" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="rfcConsulGmRemarks"></textarea>
+  </div>
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</div>

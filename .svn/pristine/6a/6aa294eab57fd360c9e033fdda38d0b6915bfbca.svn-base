@@ -1,0 +1,96 @@
+<div style="margin: 5px" class="row">
+  <p-toast position="bottom-right"></p-toast>
+  <div>
+    <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
+             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData"
+             (onRowSelect)="refreshTeams(selectedConsData)">
+      <ng-template pTemplate="caption">
+        <h3> {{ 'ConsulHeader' | translate}}</h3>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em"></th>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <a href="#" [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+            </a>
+          </td>
+          <td *ngFor="let col of columns">
+            <span class="ui-column-title">{{col.header}}</span>
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr style="background: #6495ed21">
+          <td [attr.colspan]="columns.length + 1">
+            <!--            <p-toolbar>-->
+            <div class="ui-toolbar-group-right">
+              <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Team Type" (click)="assignConsultationTeamType(rowData)"></button>&nbsp;
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <br/>
+  <div>
+    <p-panel>
+      <p-table #dt [columns]="cols" [value]="allTeamsList" [responsive]="true" dataKey="constId"
+               rowExpandMode="none" selectionMode="single" [(selection)]="selectedConsData">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <button pButton class="btn" label="Create Teams" (click)="createTeams()"></button>&nbsp;
+          </tr>
+          <br/>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <br/>
+      <p-table #dt [columns]="cols" [value]="allMembersList" [responsive]="true" dataKey="constId"
+               rowExpandMode="none" selectionMode="single" [(selection)]="selectedConsData">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+
+</div>
+
+
+<app-consultation-full-details
+  [consultationFullDetailsChild]="selectedConsulForFullDetails"></app-consultation-full-details>
+

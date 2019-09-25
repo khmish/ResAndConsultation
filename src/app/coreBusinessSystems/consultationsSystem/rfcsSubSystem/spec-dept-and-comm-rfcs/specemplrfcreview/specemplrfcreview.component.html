@@ -1,0 +1,13 @@
+<div style="margin: 5px" class="row">
+<!--  Rfc Id: {{ selectedRfcId }}-->
+  <div>
+  <textarea name="specDeptSuggestion" [rows]="5" [cols]="51" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="specDeptRfcSuggestion"></textarea>
+  </div>
+  <br/>
+  <div align="center">
+    <button (click)=updateSpecEmplReview() class="btn btn-success">Add</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</div>

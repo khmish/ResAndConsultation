@@ -1,0 +1,155 @@
+import { Component, OnInit } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DialogService, MessageService} from 'primeng/api';
+import {SystemFunctionDsQueryHttpBody} from '../../../../../service/data/httpBodies/user-privilages-http-body.service';
+import {ActivatedRoute} from '@angular/router';
+import {UserAccessService} from '../../../../../service/user-access.service';
+import {HttpResponse} from '@angular/common/http';
+import {GmReviewAfterCommitteeService} from '../../../../../service/data/gm-review-after-committee.service';
+import {ReviewAfterCommitteeRemarkComponent} from './review-after-committee-remark/review-after-committee-remark.component';
+
+export class GetConsulGmRfcAfterCommitteeDataBean {
+  constructor(
+    public rfcId: string,
+    public rfcTitle: string,
+    public rfcDescription: string,
+    public fieldCode: string,
+    public fieldArabicDescription: string,
+    public fieldEnglishDescription: string,
+    public orgId: string,
+    public orgArabicName: string,
+    public orgEnglishName: string,
+    public orgContactName: string,
+    public orgContactJob: string,
+    public orgContactPhone: string,
+    public orgContactEmail: string,
+    public statusCode: string,
+    public statusArabicDescription: string,
+    public statusEnglishDescription: string
+  ) {
+  }
+}
+
+@Component({
+  selector: 'app-gm-review-after-committee',
+  templateUrl: './gm-review-after-committee.component.html',
+  styleUrls: ['./gm-review-after-committee.component.scss'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ], providers: [DialogService, MessageService]
+})
+
+export class GmReviewAfterCommitteeComponent implements OnInit {
+
+  systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
+
+  cols: any[];
+  allConsGMRfcsAfterCommittee: GetConsulGmRfcAfterCommitteeDataBean[];
+
+  selectedRfc: GetConsulGmRfcAfterCommitteeDataBean;
+  selectedRfc1: GetConsulGmRfcAfterCommitteeDataBean;
+
+  selRow: string;
+  dsId: string;
+  dsProcessVariables: string;
+  dsProcessFilterFunctions: string;
+
+  dsProcessVariablesSplitedArray: string[];
+  dsProcessFilterFunctionsSplittedArray: string[];
+
+  daFinalVariables = new Map();
+  daFinalFilterFunctions = new Map();
+
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private route: ActivatedRoute, public userAccessService: UserAccessService, public dialogService: DialogService, private messageService: MessageService, public gmAfterCommitteeService: GmReviewAfterCommitteeService) {
+  }
+
+  ngOnInit() {
+    this.systemFunctionDsQueryHttpBodies = this.userAccessService.getSystemFunctionDsQueryHttpBody();
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.systemFunctionDsQueryHttpBodies.length; i++) {
+      this.dsId = this.systemFunctionDsQueryHttpBodies[i].dsId;
+      this.dsProcessVariables = this.systemFunctionDsQueryHttpBodies[i].dsProcessVariables;
+      this.dsProcessFilterFunctions = this.systemFunctionDsQueryHttpBodies[i].dsProcessFilterFunctions;
+
+      if (this.dsProcessVariables === null) {
+        this.dsProcessVariables = null;
+      } else {
+        this.dsProcessVariablesSplitedArray = this.dsProcessVariables.split(',');
+        // tslint:disable-next-line:prefer-for-of no-shadowed-variable
+        for (let i = 0; i < this.dsProcessVariablesSplitedArray.length; i++) {
+          // console.log(this.dsProcessVariablesSplitedArray[i]);
+        }
+      }
+
+
+      if (this.dsProcessFilterFunctions === null) {
+        this.dsProcessFilterFunctions = null;
+      } else {
+        this.dsProcessFilterFunctionsSplittedArray = this.dsProcessFilterFunctions.split(',');
+        // tslint:disable-next-line:prefer-for-of no-shadowed-variable
+        for (let i = 0; i < this.dsProcessFilterFunctionsSplittedArray.length; i++) {
+          // console.log(this.dsProcessFilterFunctionsSplittedArray[i]);
+          // tslint:disable-next-line:max-line-length
+          this.daFinalFilterFunctions.set(this.dsProcessFilterFunctionsSplittedArray[i], this.dsProcessFilterFunctionsSplittedArray[i] === 'taskAssignee' ? sessionStorage.getItem('authenticatedUser') : this.dsProcessFilterFunctionsSplittedArray[i] === 'taskUnassigned' ? '' : 'Task_06');
+        }
+      }
+
+
+      this.gmAfterCommitteeService.sendJSONDataAndGetAllConsGMAfterCommRfc(this.dsId,
+        this.daFinalVariables,
+        this.daFinalFilterFunctions).subscribe((res: HttpResponse<any>) => {
+        this.allConsGMRfcsAfterCommittee = res.body.dsQueryResult;
+        console.log(this.allConsGMRfcsAfterCommittee);
+      });
+    }
+
+    this.cols = [
+      {field: 'rfcTitle', header: 'Title'},
+      {field: 'fieldArabicDescription', header: 'Arabic Description'},
+      {field: 'orgArabicName', header: 'Arabic Name'},
+      {field: 'statusArabicDescription', header: 'Status (Ar)'}
+    ];
+
+  }
+
+  updateConsulGmRfcReviewAfterCommittee(selCon: GetConsulGmRfcAfterCommitteeDataBean) {
+    this.selectedRfc1 = selCon;
+    this.selRow = this.selectedRfc1 ? this.selectedRfc1.rfcId : 'none';
+    console.log(this.selRow);
+    const ref = this.dialogService.open(ReviewAfterCommitteeRemarkComponent, {
+      header: 'Consultation GM Rfc Review After Committee',
+      width: '500px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  refreshPage() {
+    this.dialogService.dialogComponentRef.destroy();
+  }
+
+  showSuccess(successMessage: string) {
+    this.messageService.add({severity: 'success', summary: 'Success Message', detail: successMessage});
+  }
+
+  showError(errorMessage: string) {
+    this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
+
+}

@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-consul-gm-new-consultations',
+  templateUrl: './consul-gm-new-consultations.component.html',
+  styleUrls: ['./consul-gm-new-consultations.component.scss']
+})
+export class ConsulGmNewConsultationsComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

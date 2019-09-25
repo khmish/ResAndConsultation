@@ -1,0 +1,143 @@
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LanguageTranslationModule} from './shared/modules/language-translation/language-translation.module';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AuthGuard} from './shared';
+import {ConsultationComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/addNewRfcGM/consultation.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+// tslint:disable-next-line:max-line-length
+import {StudyneedandbusscenterComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/studyneedandbusscenter/studyneedandbusscenter.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {AccordionModule} from 'primeng/components/accordion/accordion';
+import {
+  CardModule,
+  DialogService,
+  FieldsetModule,
+  MenubarModule,
+  MenuModule,
+  MessageModule,
+  PanelModule,
+  RadioButtonModule,
+  SplitButtonModule,
+  ToolbarModule
+} from 'primeng/primeng';
+import {InputTextModule} from 'primeng/inputtext';
+import {LoginModule} from './login/login.module';
+import {TableModule} from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
+import {LayoutModule} from './layout/layout.module';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {DashboardModule} from './layout/dashboard/dashboard.module';
+import {DashboardComponent} from './layout/dashboard/dashboard.component';
+import {UserPrivilagesHttpBodyService} from './service/data/httpBodies/user-privilages-http-body.service';
+import {SidebarComponent} from './layout/components/sidebar/sidebar.component';
+import {UserAccessService} from './service/user-access.service';
+// tslint:disable-next-line:max-line-length
+import {NewRfcsDeputyReviewComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/new-rfcs-deputy-review/new-rfcs-deputy-review.component';
+// tslint:disable-next-line:max-line-length
+import {ConsulGmRfcsReviewComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/consul-gm-rfcs-review/consul-gm-rfcs-review.component';
+// tslint:disable-next-line:max-line-length
+import {GetdepartmentemployeesComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/specDepartmentRfcs/spec-dept-new-rfcs/getdepartmentemployees/getdepartmentemployees.component';
+// tslint:disable-next-line:max-line-length
+import {SpecemplrfcreviewComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/specDepartmentRfcs/spec-empl-new-rfcs/specemplrfcreview/specemplrfcreview.component';
+import {ToastModule} from 'primeng/toast';
+// tslint:disable-next-line:max-line-length
+import {RfcCommitteeManualApprovalComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/rfc-committee-desisions/rfc-committee-manual-approval/rfc-committee-manual-approval.component';
+// tslint:disable-next-line:max-line-length
+import {ReviewAfterCommitteeRemarkComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/gm-review-after-committee/review-after-committee-remark/review-after-committee-remark.component';
+// tslint:disable-next-line:max-line-length
+import {DeputyRejectRemarkComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/gm-review-deputy-reject/deputy-reject-remark/deputy-reject-remark.component';
+import {MeetingDetailsComponent} from './reusableComponents/meeting-details/meeting-details.component';
+// tslint:disable-next-line:max-line-length
+import {AcceptRejectReviewComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/rfc-review-after-gmreview/accept-reject-review/accept-reject-review.component';
+// tslint:disable-next-line:max-line-length
+import {ReviewResultAndFinalDecisionRemarksComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/review-result-and-final-decision/review-result-and-final-decision-remarks/review-result-and-final-decision-remarks.component';
+import {RemarksDetailsComponent} from './reusableComponents/remarks-details/remarks-details.component';
+import { RfcFullDetailsComponent } from './reusableComponents/rfc-full-details/rfc-full-details.component';
+import {DataViewModule} from 'primeng/dataview';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFontAwesomeModule,
+    DashboardModule,
+    AccordionModule,
+    MenuModule,
+    MenubarModule,
+    AppRoutingModule,
+    FormsModule,
+    InputTextModule,
+    LoginModule,
+    HttpClientModule,
+    TableModule,
+    DropdownModule,
+    AutoCompleteModule,
+    LayoutModule,
+    ToolbarModule,
+    SplitButtonModule,
+    DynamicDialogModule,
+    RadioButtonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    LanguageTranslationModule,
+    AppRoutingModule,
+    AutoCompleteModule,
+    DropdownModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFontAwesomeModule,
+    DashboardModule,
+    AccordionModule,
+    MenuModule,
+    MenubarModule,
+    AppRoutingModule,
+    FormsModule,
+    InputTextModule,
+    HttpClientModule,
+    TableModule,
+    DropdownModule,
+    AutoCompleteModule,
+    ToolbarModule,
+    SplitButtonModule,
+    DynamicDialogModule,
+    RadioButtonModule,
+    MessageModule,
+    ToastModule,
+    PanelModule,
+    FieldsetModule,
+    CardModule,
+    DataViewModule,
+  ],
+  declarations: [AppComponent, StudyneedandbusscenterComponent,
+    ConsultationComponent,
+    NewRfcsDeputyReviewComponent,
+    ConsulGmRfcsReviewComponent,
+    GetdepartmentemployeesComponent,
+    SpecemplrfcreviewComponent,
+    RfcCommitteeManualApprovalComponent,
+    ReviewAfterCommitteeRemarkComponent,
+    DeputyRejectRemarkComponent,
+    AcceptRejectReviewComponent,
+    ReviewResultAndFinalDecisionRemarksComponent
+  ],
+  // tslint:disable-next-line:max-line-length
+  providers: [AuthGuard, DashboardComponent, DialogService, UserPrivilagesHttpBodyService, SidebarComponent, UserAccessService, MeetingDetailsComponent, RemarksDetailsComponent, RfcFullDetailsComponent],
+  bootstrap: [AppComponent],
+  exports: [
+  ],
+  // tslint:disable-next-line:max-line-length
+  entryComponents: [StudyneedandbusscenterComponent, NewRfcsDeputyReviewComponent, ConsulGmRfcsReviewComponent,
+    GetdepartmentemployeesComponent, SpecemplrfcreviewComponent, RfcCommitteeManualApprovalComponent,
+    ReviewAfterCommitteeRemarkComponent, DeputyRejectRemarkComponent, AcceptRejectReviewComponent,
+    ReviewResultAndFinalDecisionRemarksComponent]
+})
+export class AppModule {
+
+}

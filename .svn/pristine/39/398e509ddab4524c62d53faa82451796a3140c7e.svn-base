@@ -1,0 +1,52 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from './layout.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'prefix' },
+      { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+      // tslint:disable-next-line:max-line-length
+      // { path: 'meetingDetails', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/meeting-details/meeting-details.component').then(m => m.MeetingDetailsComponent) },
+      // tslint:disable-next-line:max-line-length
+      { path: 'allConsultations', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/viewallconsultation-module').then(m => m.ViewallconsultationModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'deputyNewRfcs', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/deputy-new-rfcs-module').then(m => m.DeputyNewRfcsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'consulGmNewRfcs', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/consul-gm-new-rfcs-module').then(m => m.ConsulGmNewRfcsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'specDeptNewRfcs', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/specDepartmentRfcs/spec-dept-new-rfcs/spec-dept-new-rfcs-module').then(m => m.SpecDeptNewRfcsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'specEmplNewRfcs', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/specDepartmentRfcs/spec-empl-new-rfcs/spec-empl-new-rfcs-module').then(m => m.SpecEmplNewRfcsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'commiteeDecisionRfcs', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/rfc-committee-desisions/rfc-committee-decisions-module').then(m => m.RfcCommitteeDecisionsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'gmReviewAfterCommittee', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/gm-review-after-committee/gm-review-after-committe-module').then(m => m.GmReviewAfterCommitteModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'gmReviewDeputyReject', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/gm-review-deputy-reject/gm-review-deputy-reject-module').then(m => m.GmReviewDeputyRejectModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'depRevAfterGMComRev', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/rfc-review-after-gmreview/rfc-review-after-gmreview-module').then(m => m.RfcReviewAfterGmreviewModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'gmReviewFinalDecision', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/review-result-and-final-decision/review-result-and-final-decision-module').then(m => m.ReviewResultAndFinalDecisionModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'gmCreateConsultationRecord', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/create-consultation-record/create-consultation-record-module').then(m => m.CreateConsultationRecordModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'secDefinitions', loadChildren: () => import('../adminSystems/securitySystem/privlegeManagement/security-definition/security-definition-module').then(m => m.SecurityDefinitionModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'usrPrivleges', loadChildren: () => import('../adminSystems/securitySystem/privlegeManagement/user-privleges/user-privleges-module').then(m => m.UserPrivlegesModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'consulGMNewConsultations', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/consul-gm-new-consultations/consul-gm-new-consultations-module').then(m => m.ConsulGmNewConsultationsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'specDeptNewConsultations', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/spec-dept-new-consultations-module').then(m => m.SpecDeptNewConsultationsModule)}
+      ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class LayoutRoutingModule {}

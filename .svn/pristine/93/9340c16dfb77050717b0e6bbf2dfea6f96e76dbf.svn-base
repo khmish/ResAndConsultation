@@ -1,0 +1,47 @@
+<p-dataView #dv [value]="remarkDetails" [paginator]="true" [rows]="4" paginatorPosition="both">
+<!--  <p-header>-->
+<!--    <div class="ui-helper-clearfix">-->
+<!--      <div class="ui-g">-->
+<!--        <div class="ui-g-6 ui-md-4" style="text-align:right">-->
+<!--          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </p-header>-->
+<!--  <ng-template let-remark pTemplate="listItem">-->
+<!--    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">-->
+<!--      <div class="ui-g-12 ui-md-3" style="text-align:center">-->
+<!--        <img src="assets/images/logo.jpg">-->
+<!--      </div>-->
+<!--      <div class="ui-g-12 ui-md-8 car-details">-->
+<!--        <div class="ui-g">-->
+<!--          <div class="ui-g-2 ui-sm-6">Id:</div>-->
+<!--          <div class="ui-g-10 ui-sm-6"><b>{{remark.remarkId}}</b></div>-->
+
+<!--          <div class="ui-g-2 ui-sm-6">Description:</div>-->
+<!--          <div class="ui-g-10 ui-sm-6"><b>{{remark.remarkDescription}}</b></div>-->
+
+<!--          <div class="ui-g-2 ui-sm-6">User Id:</div>-->
+<!--          <div class="ui-g-10 ui-sm-6"><b>{{remark.remarkUserId}}</b></div>-->
+
+<!--          <div class="ui-g-2 ui-sm-6">User Name:</div>-->
+<!--          <div class="ui-g-10 ui-sm-6"><b>{{remark.remarkUserName}}</b></div>-->
+
+<!--          <div class="ui-g-2 ui-sm-6">Date:</div>-->
+<!--          <div class="ui-g-10 ui-sm-6"><b>{{remark.remarkDate}}</b></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+  <ng-template let-remark pTemplate="listItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [header]="remark.remarkId" [style]="{'text-align':'center'}">
+<!--        <img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">-->
+        <div>Details : {{remark.remarkDescription}} </div>
+        <div>User Id : {{remark.remarkUserId}} </div>
+        <div>Name    : {{remark.remarkUserName}} </div>
+        <div>Date    : {{remark.remarkDate}} </div>
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataView>

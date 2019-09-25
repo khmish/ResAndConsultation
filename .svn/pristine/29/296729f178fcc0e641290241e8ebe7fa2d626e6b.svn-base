@@ -1,0 +1,8 @@
+p     { display: table-row;  margin: 5px}
+label { display: table-cell; margin: 5px}
+input { display: table-cell; margin: 5px}
+
+::placeholder {
+  color: gray;
+  opacity: 1; /* Firefox */
+}

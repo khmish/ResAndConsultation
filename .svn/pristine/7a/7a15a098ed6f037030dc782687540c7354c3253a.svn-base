@@ -1,0 +1,168 @@
+<div style="margin: 5px" class="row ui-grid ui-grid-responsive">
+  <form [formGroup]="newConsultationForm">
+    <div class="alert alert-warning" *ngIf='errorOccurred'>{{errorMessage}}</div>
+    <div class="ui-grid-row">
+      <!--    <label>Organisation Name (Ar) : </label>-->
+      <div style="margin-left: 5px;">
+        <p-autoComplete [(ngModel)]="organization" [suggestions]="filteredOrganizationSingle"
+                        (completeMethod)="filteredOrganizationsSingle($event)" field="arabicName" [size]="40"
+                        placeholder="Organization Name (Ar)" [minLength]="1"
+                        (onSelect)="getSelectedOrg()" formControlName="orgListAr"></p-autoComplete>
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.orgListAr.errors">
+          <div *ngIf="f.orgListAr.errors.required">
+            <p-message severity="error" text="{{ 'Required' | translate}}"
+                       *ngIf="f.orgListAr.errors.required"></p-message>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Organisation Name (En) : </label>-->
+      <div><input type="text" name="orgNameEn" maxlength="25" size="40" placeholder="Organisation Name (En)" pInputText
+                  [(ngModel)]="orgNameEn" formControlName="orgNameEnV"></div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.orgNameEnV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.orgNameEnV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Img Name : </label>-->
+      <div><input type="text" name="contactName" maxlength="25" size="40" placeholder="Contact Name" pInputText
+                  [(ngModel)]="contactName" formControlName="contactNameV"></div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.contactNameV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.contactNameV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Current Job : </label>-->
+      <div><input type="text" name="curJob" maxlength="25" size="40" placeholder="Current Job" pInputText
+                  [(ngModel)]="currJob" formControlName="curJobV"></div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.curJobV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.curJobV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Current Phone : </label>-->
+      <div><input type="text" name="curPhone" maxlength="10" size="40" placeholder="Current Phone" pInputText
+                  [(ngModel)]="currPhone" formControlName="curPhoneV"></div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.curPhoneV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.curPhoneV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Current Email : </label>-->
+      <div><input type="text" name="curEmail" maxlength="30" size="40" placeholder="Current Email" pInputText
+                  [(ngModel)]="currEmail" formControlName="curEmailV"></div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.curEmailV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.curEmailV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <br>
+    <!--<h1><u style="color: lightsalmon">Info about Consultation</u></h1>-->
+    <div class="ui-grid-row" style="margin-left: 5px">
+      <!--    <label>Consultation Type : </label>-->
+      <div>
+        <p-dropdown [options]="allRfcItems" [(ngModel)]="selected" placeholder="Select"
+                    optionLabel="arabic_description"
+                    [showClear]="true" [style]="{'width':'310px'}"
+                    formControlName="selectedV"></p-dropdown>
+        <!--            {{selected ? selected.code : 'none'}}-->
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.selectedV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.selectedV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Consultation Title : </label>-->
+      <div>
+        <input type="text" name="consultationTitle" maxlength="25" size="40" placeholder="Consultation Title"
+               pInputText
+               [(ngModel)]="consultationTitle" formControlName="consultationTitleV">
+      </div>
+      &nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.consultationTitleV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.consultationTitleV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <!--    <label>Consultation Description : </label>-->
+      <div>
+      <textarea name="consultationDesc" [rows]="5" [cols]="41" placeholder="Consultation Description"
+                autoResize="autoResize" pInputTextarea
+                style="margin-left: 5px;" [(ngModel)]="consultationDesc" formControlName="consultationDescV"></textarea>
+      </div>
+      &nbsp;&nbsp;&nbsp;
+      <div class="ui-grid-col-3">
+        <div *ngIf="submitted && f.consultationDescV.errors" style="display: compact;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;">
+          <p-message severity="error" text="{{ 'Required' | translate}}"
+                     *ngIf="f.consultationDescV.errors.required"></p-message>
+        </div>
+      </div>
+    </div>
+    <div align="center">
+      <button (click)=onSubmit() class="btn btn-success">Add</button>&nbsp;
+      <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+    </div>
+  </form>
+</div>

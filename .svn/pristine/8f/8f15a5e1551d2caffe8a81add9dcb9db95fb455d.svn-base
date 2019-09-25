@@ -1,0 +1,14 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import {ButtonModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ConsulGmNewConsultationsRoutingModule} from './consul-gm-new-consultations-routing.module';
+import {ConsulGmNewConsultationsComponent} from './consul-gm-new-consultations.component';
+
+@NgModule({
+  imports: [CommonModule, ConsulGmNewConsultationsRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule],
+  declarations: [ConsulGmNewConsultationsComponent]
+})
+export class ConsulGmNewConsultationsModule {}

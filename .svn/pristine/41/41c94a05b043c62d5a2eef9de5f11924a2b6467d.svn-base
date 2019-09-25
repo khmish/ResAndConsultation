@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import {ButtonModule, SidebarModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ReviewResultAndFinalDecisionRoutingModule} from './review-result-and-final-decision-routing.module';
+import {ReviewResultAndFinalDecisionComponent} from './review-result-and-final-decision.component';
+import {RfcReviewAfterGmreviewModule} from '../../deputyNewRfcs/rfc-review-after-gmreview/rfc-review-after-gmreview-module';
+import {ConsulGmNewRfcsModule} from '../../consul-gm-new-rfcs/consul-gm-new-rfcs-module';
+
+@NgModule({
+  // tslint:disable-next-line:max-line-length
+  imports: [CommonModule, ReviewResultAndFinalDecisionRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, RfcReviewAfterGmreviewModule, SidebarModule, ConsulGmNewRfcsModule],
+  declarations: [ReviewResultAndFinalDecisionComponent]
+})
+export class ReviewResultAndFinalDecisionModule {}

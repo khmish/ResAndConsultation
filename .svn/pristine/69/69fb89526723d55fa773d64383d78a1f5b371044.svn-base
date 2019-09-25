@@ -1,0 +1,74 @@
+<div style="margin: 5px" class="row">
+  <p-toast position="bottom-right"></p-toast>
+  <div>
+    <p-table #dt [columns]="cols" [value]="allConsGMRfcs" [responsive]="true" dataKey="rfcId"
+             rowExpandMode="single" selectionMode="single" [(selection)]="selectedRfc">
+      <ng-template pTemplate="caption">
+        List of Consultations
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em"></th>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+<!--          <th style="width: 10em"></th>-->
+<!--          <th style="width: 7em"></th>-->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <a href="#" [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+            </a>
+          </td>
+          <td *ngFor="let col of columns">
+            <span class="ui-column-title">{{col.header}}</span>
+            {{rowData[col.field]}}
+          </td>
+<!--          <td align="center">-->
+<!--            <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <button pButton class="btn" label="Update" (click)="updateConsulGmRfcReview(rowData)"></button>-->
+<!--          </td>-->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr style="background: #6495ed21">
+          <td [attr.colspan]="columns.length + 1">
+            <!--            <p-toolbar>-->
+            <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_03'">
+              <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Update" (click)="updateConsulGmRfcReview(rowData)"></button>
+            </div>
+            <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_06'">
+              <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>&nbsp;            &nbsp;
+              <button pButton class="btn" label="Review After Committee" (click)="updateConsulGmRfcReviewAfterCommitteeRemark(rowData)"></button>
+            </div>
+            <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_09'">&nbsp;
+              <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>                &nbsp;
+              <button pButton class="btn" label="Deputy Review" (click)="updateConsulGmRfcReviewAfterCommittee(rowData)"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+<!--      <ng-template pTemplate="summary">-->
+<!--        There are {{allConsGMRfcs?.length}} consultations-->
+<!--        <div style="text-align: left">-->
+<!--          Selected-->
+<!--          Consultation: {{selectedRfc ? selectedRfc.rfcDescription + ' - ' + selectedRfc.orgContactName : 'none'}}-->
+<!--        </div>-->
+<!--      </ng-template>-->
+    </p-table>
+  </div>
+</div>
+
+<app-rfc-full-details [rfcFullDetailsChild]="selectedRfcForFullDetails"></app-rfc-full-details>
+
+<!--<p-sidebar  [(visible)]="remarksVisible" position="right" [baseZIndex]="10000">-->
+<!--  <div class="col-sm-12">-->
+<!--    <app-remarks-details [remarkDetailsChild]="selectedRfcForRemark"></app-remarks-details>-->
+<!--  </div>-->
+<!--</p-sidebar>-->

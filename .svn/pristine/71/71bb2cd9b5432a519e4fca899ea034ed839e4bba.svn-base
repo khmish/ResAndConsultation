@@ -1,0 +1,100 @@
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {RemarkDetailsService} from '../../service/data/remark-details.service';
+import {MessageService} from 'primeng/api';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+
+export class RemarksBodyBean {
+  constructor(
+    public rfcId: string,
+    public remarkHttpBodies: Array<RemarkHttpBodies>,
+    public errorMessage: ErrorMessage
+  ) {
+  }
+}
+
+export class RemarkHttpBodies {
+  constructor(
+    public remarkId: string,
+    public remarkDescription: string,
+    public remarkUserId: string,
+    public remarkUserName: string,
+    public remarkDate: string) {
+  }
+}
+
+export class ErrorMessage {
+  constructor(
+    public errorCode: string,
+    public errorADescription: string,
+    public errorEDescription: string
+  ) {
+  }
+}
+
+@Component({
+  selector: 'app-remarks-details',
+  templateUrl: './remarks-details.component.html',
+  styleUrls: ['./remarks-details.component.scss'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
+})
+export class RemarksDetailsComponent implements OnInit, OnChanges {
+
+  remarkBody: RemarksBodyBean;
+  remarkDetails: RemarkHttpBodies[];
+  cols: any[];
+  rfcId: string;
+  @Input() remarkDetailsChild: string;
+
+  constructor(private remarkDetailsService: RemarkDetailsService, private messageService: MessageService) {
+  }
+
+  ngOnInit() {
+    console.log('this.remarkDetailsChild.rfcId' + this.remarkDetailsChild);
+    this.rfcId = this.remarkDetailsChild;
+    console.log('this.rfcId : ' + this.rfcId);
+    if (this.rfcId !== null) {
+      this.remarkDetailsService.getRemarkDetails(this.rfcId).subscribe(res => {
+        this.remarkBody = res;
+        console.log('res --------> ' + this.remarkBody.remarkHttpBodies);
+        console.log('res errorMessage.errorCode --------> ' + this.remarkBody.errorMessage.errorCode);
+
+        if (this.remarkBody.errorMessage.errorCode === '0') {
+          // this.remarkDetailsComponent.dialogService.dialogComponentRef.destroy();
+          this.remarkDetails = this.remarkBody.remarkHttpBodies;
+
+        } else {
+          console.log(this.remarkBody.errorMessage.errorEDescription);
+          this.showError(this.remarkBody.errorMessage.errorEDescription);
+        }
+      }, error => {
+        // this.showError('Service is down');
+      });
+    }
+  }
+
+  showSuccess(successMessage: string) {
+    this.messageService.add({severity: 'success', summary: 'Success Message', detail: successMessage});
+  }
+
+  showError(errorMessage: string) {
+    this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Changed----------------> ' + changes.toString());
+    this.ngOnInit();
+  }
+
+}

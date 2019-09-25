@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {ButtonModule, CardModule, DialogService, FieldsetModule, PanelModule, SidebarModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {RfcReviewAfterGmreviewRoutingModule} from './rfc-review-after-gmreview-routing.module';
+import {RfcReviewAfterGMReviewComponent} from './rfc-review-after-gmreview.component';
+import {MeetingDetailsComponent} from '../../meeting-details/meeting-details.component';
+import {FormsModule} from '@angular/forms';
+
+@NgModule({
+  // tslint:disable-next-line:max-line-length
+  imports: [CommonModule, RfcReviewAfterGmreviewRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, FormsModule, PanelModule, FieldsetModule, CardModule, SidebarModule],
+  exports: [
+    MeetingDetailsComponent
+  ],
+  declarations: [RfcReviewAfterGMReviewComponent, MeetingDetailsComponent]
+})
+export class RfcReviewAfterGmreviewModule {}

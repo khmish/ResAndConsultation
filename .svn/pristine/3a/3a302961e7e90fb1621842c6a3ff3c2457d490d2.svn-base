@@ -1,0 +1,12 @@
+<div style="margin: 5px" class="row">
+  <!--      Rfc GM Id: {{ selectedRfcId }}-->
+  <div>
+  <textarea name="deputyRemarksDeputyReject" [rows]="5" [cols]="50" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="rfcGmRemarksDeputyReject"></textarea>
+  </div>
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</div>

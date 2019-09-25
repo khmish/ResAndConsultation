@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="030f7c38-8320-4119-8d83-11bd3a2626e2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/deputy-new-rfcs.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/deputy-new-rfcs.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/meeting-details" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/meeting-details/meeting-details.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/meeting-details/meeting-details.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/meeting-details/meeting-details.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/meeting-details/meeting-details.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/remarks-details" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/remarks-details/remarks-details.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/remarks-details/remarks-details.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/remarks-details/remarks-details.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/reusableComponents/remarks-details/remarks-details.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/data/remark-details.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/data/remark-details.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/data/rfc-full-details-service.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/data/rfc-full-details-service.service.ts" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1PyDrcsW8iL5GmUE1hqWbDnwHF9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/coreBusinessSystems/consultationsSystem/rfcsSubSystem/spec-dept-and-comm-rfcs" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="ts.external.directory.path" value="D:\IPA_SPRING\ANGULAR\ResAndConsultation\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\coreBusinessSystems\consultationsSystem\rfcsSubSystem\spec-dept-and-comm-rfcs" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\coreBusinessSystems\consultationsSystem\rfcsSubSystem\spec-department-and-committee-rfcs" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\coreBusinessSystems\consultationsSystem\rfcsSubSystem" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\coreBusinessSystems\consultationsSystem\rfcsSubSystem\consul-gm-new-rfcs\" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\coreBusinessSystems\consultationsSystem\rfcsSubSystem\deputyNewRfcs\" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\consultation\consultationrequests\deputy-new-rfcs" />
+      <recent name="F:\Angular\Angular\ResAndConsultation\src\app\consultation\viewallconsultation" />
+      <recent name="F:\Angular\Angular\ResAndConsultation\src\app" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app" />
+      <recent name="D:\IPA_SPRING\ANGULAR\ResAndConsultation\src\app\login" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Tests" type="JavaScriptTestRunnerKarma">
+      <config-file value="$PROJECT_DIR$/karma.conf.js" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="E2E Tests" type="JavaScriptTestRunnerProtractor">
+      <config-file value="$PROJECT_DIR$/e2e/protractor.conf.js" />
+      <node-interpreter value="project" />
+      <protractor-options value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\ravindranr\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\IPA_SPRING\ANGULAR\ResAndConsultation" />
+          <option name="myCopyRoot" value="D:\IPA_SPRING\ANGULAR\ResAndConsultation" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\IPA_SPRING\ANGULAR\ResAndConsultation" />
+          <option name="myCopyRoot" value="D:\IPA_SPRING\ANGULAR\ResAndConsultation" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="030f7c38-8320-4119-8d83-11bd3a2626e2" name="Default Changelist" comment="" />
+      <created>1566823114613</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1566823114613</updated>
+      <workItem from="1566823115812" duration="4332000" />
+      <workItem from="1566837650971" duration="15548000" />
+      <workItem from="1566882063451" duration="27526000" />
+      <workItem from="1566950099821" duration="3157000" />
+      <workItem from="1566969608187" duration="1693000" />
+      <workItem from="1566971797923" duration="57000" />
+      <workItem from="1566977053804" duration="43096000" />
+      <workItem from="1567089340101" duration="197000" />
+      <workItem from="1567314126615" duration="25932000" />
+      <workItem from="1567400878950" duration="743000" />
+      <workItem from="1567403091114" duration="1185000" />
+      <workItem from="1567406839624" duration="13017000" />
+      <workItem from="1567507778519" duration="12439000" />
+      <workItem from="1567588154379" duration="57502000" />
+      <workItem from="1568033872061" duration="1343000" />
+      <workItem from="1568035995524" duration="705000" />
+      <workItem from="1568037752833" duration="3986000" />
+      <workItem from="1568102781033" duration="18078000" />
+      <workItem from="1568125883465" duration="1681000" />
+      <workItem from="1568182963505" duration="5881000" />
+      <workItem from="1568188974115" duration="29351000" />
+      <workItem from="1568536776357" duration="42110000" />
+      <workItem from="1568697626247" duration="423000" />
+      <workItem from="1568699086699" duration="367000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1566978344446</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566978344446</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1567089477662</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1567089477662</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1567089531043</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1567089531043</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1567347489476</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1567347489476</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1567521700033</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1567521700033</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1567601143887</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567601143887</updated>
+    </task>
+    <task id="LOCAL-00007">
+      <created>1567607183234</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1567607183234</updated>
+    </task>
+    <task id="LOCAL-00008">
+      <created>1567607720385</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1567607720385</updated>
+    </task>
+    <task id="LOCAL-00009">
+      <created>1567694313657</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1567694313657</updated>
+    </task>
+    <task id="LOCAL-00010">
+      <created>1567949948444</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1567949948444</updated>
+    </task>
+    <task id="LOCAL-00011">
+      <created>1568034647072</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1568034647072</updated>
+    </task>
+    <task id="LOCAL-00012">
+      <created>1568034680780</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1568034680780</updated>
+    </task>
+    <task id="LOCAL-00013">
+      <created>1568120316549</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1568120316549</updated>
+    </task>
+    <task id="LOCAL-00014">
+      <created>1568120335712</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1568120335712</updated>
+    </task>
+    <task id="LOCAL-00015">
+      <created>1568191305139</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1568191305139</updated>
+    </task>
+    <task id="LOCAL-00016">
+      <created>1568638930179</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1568638930179</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

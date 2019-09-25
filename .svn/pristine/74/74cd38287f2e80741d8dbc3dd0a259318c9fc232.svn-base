@@ -1,0 +1,30 @@
+import { Component, OnInit } from '@angular/core';
+import {FunctiontreeserviceService} from '../service/data/functiontreeservice.service';
+import {HttpResponse} from '@angular/common/http';
+import {UserPrivilagesHttpBody} from '../service/data/httpBodies/user-privilages-http-body.service';
+import {UserAccessService} from '../service/user-access.service';
+
+@Component({
+  selector: 'app-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss']
+})
+export class LayoutComponent implements OnInit {
+
+  collapedSideBar: boolean;
+  public userPrivilagesHttpBody: UserPrivilagesHttpBody;
+
+  constructor(public treeService: FunctiontreeserviceService, public userAccessService: UserAccessService) {}
+
+  ngOnInit() {
+    // this.treeService.getAllUserRoles().subscribe((response: HttpResponse<any>) => {
+    //   console.log(response.body);
+    //   this.userPrivilagesHttpBody = response.body;
+    // });
+  }
+
+  receiveCollapsed($event) {
+    this.collapedSideBar = $event;
+  }
+}
+

@@ -1,0 +1,14 @@
+<form>
+    {{ selectedRfcId }}
+  <div>
+  <textarea name="rfcApprovalRemarks" [rows]="5" [cols]="51" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="rfcManualApprovalRemarks"></textarea>
+  </div>
+
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>
+    &nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</form>

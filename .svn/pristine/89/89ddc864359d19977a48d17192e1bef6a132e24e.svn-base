@@ -1,0 +1,12 @@
+import { TestBed } from '@angular/core/testing';
+
+import { RemarkDetailsService } from './remark-details.service';
+
+describe('RemarkDetailsService', () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
+
+  it('should be created', () => {
+    const service: RemarkDetailsService = TestBed.get(RemarkDetailsService);
+    expect(service).toBeTruthy();
+  });
+});

@@ -1,0 +1,42 @@
+<!--Rfc Id: {{ selectedRfcId }}-->
+<div style="margin-bottom:10px;">
+  <div class="ui-grid-row">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4">
+        <label>Team Type : </label>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-3">
+          <p-radioButton name="teamTypeGroup" value="0" label="Consultation" [(ngModel)]="selValue"
+                         inputId="opt1"></p-radioButton>
+        </div>
+        <div class="ui-grid-col-3">
+          <p-radioButton name="teamTypeGroup" value="1" label="Diagnostics" [(ngModel)]="selValue"
+                         inputId="opt2"></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Selected Value = {{selValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
+  <div class="ui-grid-row">
+    <div class="ui-g-12 ui-md-4">
+      <label>Start Date : </label>
+    </div>
+    <div>
+      <p-calendar [(ngModel)]="startDate" [minDate]="minDateValue" [readonlyInput]="true"></p-calendar>
+    </div>
+  </div>
+  <div class="ui-grid-row">
+    <div class="ui-g-12 ui-md-4">
+      <label>End Date : </label>
+    </div>
+    <div>
+      <p-calendar [(ngModel)]="endDate" [minDate]="startDate" [readonlyInput]="true"></p-calendar>
+    </div>
+  </div>
+</div>
+
+<div align="center" style="margin-top: 35px">
+  <button (click)="assignTeamType()" class="btn btn-success">Asssign</button>&nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

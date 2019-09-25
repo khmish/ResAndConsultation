@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {ButtonModule, DialogService, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {SpecEmplNewRfcsRoutingModule} from './spec-empl-new-rfcs-routing.module';
+import {SpecEmplNewRfcsComponent} from './spec-empl-new-rfcs.component';
+import {ToastModule} from 'primeng/toast';
+
+@NgModule({
+  imports: [CommonModule, SpecEmplNewRfcsRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule],
+  declarations: [SpecEmplNewRfcsComponent]
+})
+export class SpecEmplNewRfcsModule {}

@@ -1,0 +1,37 @@
+<!--<p>meeting-details works!</p>-->
+<div *ngIf="meetingDetailsChild">
+<!--  <h1> {{ rfcId }}</h1>-->
+  <p-toast position="bottom-right"></p-toast>
+  <p-panel header="Meetings History" [toggleable]="true">
+    <ul *ngFor="let meetingElementDetails of meetingElementDetails">
+      <p-fieldset collapsed="collapsed" legend="{{meetingElementDetails.meetingSubject}}" [toggleable]="true"
+                  styleClass="myFieldset">
+        <div style="margin-left: 50px;">
+          <p-card class="ui-card-title"><label>Meeting Status : </label> {{meetingElementDetails.meetingElementAStatus}}
+          </p-card>
+          <br/>
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingDate !== null"><label>Meeting
+            Date
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingDate}}</p-card>
+          <br/>
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingSTime !== null"><label>Meeting
+            Start Time
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingSTime }}</p-card>
+          <br/>+
+          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingETime !== null"><label>Meeting
+            End Time
+            : </label> {{meetingElementDetails.meetingHttpBody.meetingETime}}</p-card>
+          <br>
+          <p-fieldset collapsed="collapsed" *ngIf="meetingElementDetails.recommendationHttpBodies.length !== 0"
+                      legend="Recomendations" [toggleable]="true">
+            <p-card class="ui-card-title" styleClass="recStyle"
+                    *ngFor="let recommendationHttpBodies of meetingElementDetails.recommendationHttpBodies">
+              {{recommendationHttpBodies.recText}}
+            </p-card>
+          </p-fieldset>
+        </div>
+      </p-fieldset>
+    </ul>
+  </p-panel>
+</div>
+

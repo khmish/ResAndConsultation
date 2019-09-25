@@ -1,0 +1,23 @@
+<form>
+<!--  Rfc Deputy Id: {{ selectedRfcId }}-->
+  <div>
+  <textarea name="deputyRemarks" [rows]="5" [cols]="51" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="rfcDeputyRemarks"></textarea>
+<!--            formControlName="rfcDeputyRemarksV"-->
+
+<!--    <div *ngIf="submitted && f.rfcDeputyRemarksV.errors" style="display: compact;-->
+<!--      width: 100%;-->
+<!--      margin-top: 0.25rem;-->
+<!--      font-size: 80%;-->
+<!--      color: #dc3545;">-->
+<!--      <div *ngIf="f.rfcDeputyRemarksV.errors.required">{{ 'Required' | translate}}</div>-->
+<!--    </div>-->
+  </div>
+
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>
+    &nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</form>

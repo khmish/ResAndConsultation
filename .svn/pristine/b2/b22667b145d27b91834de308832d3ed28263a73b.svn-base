@@ -1,0 +1,84 @@
+import {Component, OnInit} from '@angular/core';
+import {SpecDeptNewConsultationsComponent} from '../spec-dept-new-consultations.component';
+import {HttpResponse} from '@angular/common/http';
+// tslint:disable-next-line:max-line-length
+import {SpecDeptService} from '../../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept.service';
+import {DatePipe} from '@angular/common';
+import {ErrorMessage} from '../../../../../models/consultation-get-full-data-http-body';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+
+@Component({
+  selector: 'app-assign-team-type',
+  templateUrl: './assign-team-type.component.html',
+  styleUrls: ['./assign-team-type.component.scss']
+})
+export class AssignTeamTypeComponent implements OnInit {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private viewAllConsul: SpecDeptNewConsultationsComponent, private speDeptService: SpecDeptService, private datePipe: DatePipe) {
+  }
+
+  selValue: string;
+  selectedConsulId: string;
+  startDate: Date;
+  endDate: Date;
+  minDateValue: Date;
+  maxDateValue: Date;
+
+  formatedStartDate: string;
+  formatedEndDate: string;
+
+  ngOnInit() {
+    this.selectedConsulId = this.viewAllConsul.selRow;
+    this.selValue = null;
+    this.startDate = null;
+    this.endDate = null;
+  }
+
+  assignTeamType() {
+    console.log(this.selectedConsulId);
+    console.log(this.selValue);
+    // console.log(this.startDate);
+    // console.log(this.endDate);
+    if (this.selValue === null || this.startDate === null || this.endDate === null) {
+      this.viewAllConsul.showError('Please enter all values');
+      return;
+    } else {
+      this.formatedStartDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd\'T\'HH:mm:ss');
+      this.formatedEndDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd\'T\'HH:mm:ss');
+      console.log(this.formatedStartDate);
+      console.log(this.formatedEndDate);
+
+      this.speDeptService.updateTeamType(this.selectedConsulId,
+        this.selValue,
+        this.formatedStartDate,
+        this.formatedEndDate).pipe(
+        catchError(err => {
+          console.log('Handling error locally and rethrowing it...', err);
+          if (!err.message.includes('OK')) {
+            this.viewAllConsul.showError('Service is down');
+          } else {
+            this.viewAllConsul.showError(err.error.errorADescription);
+          }
+          return throwError(err.message);
+        })
+      ).subscribe((res: HttpResponse<ErrorMessage>) => {
+        console.log('res.body ------------> ' + res);
+        console.log(res.body.errorCode);
+        if (res.body.errorCode === '0') {
+          this.viewAllConsul.dialogService.dialogComponentRef.destroy();
+          this.viewAllConsul.ngOnInit();
+          this.viewAllConsul.showSuccess('Consultation reviewed Successfully');
+        } else {
+          console.log(res.body.errorEDescription);
+          this.viewAllConsul.showError(res.body.errorEDescription);
+        }
+      });
+    }
+  }
+
+  onReset() {
+    this.viewAllConsul.refreshPage();
+  }
+}

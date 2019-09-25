@@ -1,0 +1,48 @@
+<!--Rfc Id: {{ selectedRfcId }}-->
+<div class="ui-grid-row" style="margin-bottom:10px; height: 25px;">
+  <div class="ui-grid-col-12">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6">
+        <label>Exec Rfc : </label>
+      </div>
+      <div class="ui-grid-col-3">
+        <p-radioButton name="execRfcGroup" value="Yes" label="Yes" [(ngModel)]="selERfcValue" inputId="opt1"
+                       (onClick)="toogleExecRfc()"></p-radioButton>
+      </div>
+      <div class="ui-grid-col-3">
+        <p-radioButton name="execRfcGroup" value="No" label="No" [(ngModel)]="selERfcValue" inputId="opt2"
+                       (onClick)="toogleExecRfc()"></p-radioButton>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <!--Selected Value = {{selERfcValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
+  <div class="ui-grid-col-12">
+    <div style="margin-bottom:10px" *ngIf='showBussCenter'>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">
+          <label>Business Center Group : </label>
+        </div>
+        <div class="ui-grid-col-3">
+          <p-radioButton name="businessCenterGroup" value="Yes" label="Yes" [(ngModel)]="selBCValue"
+                         inputId="opt3"></p-radioButton>
+        </div>
+        <div class="ui-grid-col-3">
+          <p-radioButton name="businessCenterGroup" value="No" label="No" [(ngModel)]="selBCValue"
+                         inputId="opt4"></p-radioButton>
+        </div>
+      </div>
+    </div>
+    <div>
+    <textarea name="remarks" [rows]="5" [cols]="51" placeholder="Remarks"
+              autoResize="autoResize" pInputTextarea
+              style="margin-left: 5px;" [(ngModel)]="rfcRemarks"></textarea>
+    </div>
+  </div>
+</div>
+<!--Selected Value = {{selBCValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
+
+<div align="center">
+  <button (click)="updateReviewResultAndFinalDecision()" class="btn btn-success">Add</button>  &nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

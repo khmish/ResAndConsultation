@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-spec-dept-new-consultations',
+  templateUrl: './spec-dept-new-consultations.component.html',
+  styleUrls: ['./spec-dept-new-consultations.component.scss']
+})
+export class SpecDeptNewConsultationsComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

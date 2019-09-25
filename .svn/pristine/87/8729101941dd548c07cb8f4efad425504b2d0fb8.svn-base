@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { RfcReviewAfterGMReviewComponent } from './rfc-review-after-gmreview.component';
+
+describe('RfcReviewAfterGMReviewComponent', () => {
+  let component: RfcReviewAfterGMReviewComponent;
+  let fixture: ComponentFixture<RfcReviewAfterGMReviewComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ RfcReviewAfterGMReviewComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(RfcReviewAfterGMReviewComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

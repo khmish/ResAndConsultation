@@ -1,0 +1,18 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ButtonModule, PanelModule, SidebarModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ConsulGmNewRfcsRoutingModule} from './consul-gm-new-rfcs-routing.module';
+import {ConsulGmNewRfcsComponent} from './consul-gm-new-rfcs.component';
+import {ToastModule} from 'primeng/toast';
+import {AppModule} from '../../../../app.module';
+import {RemarksDetailsComponent} from '../../../../reusableComponents/remarks-details/remarks-details.component';
+import {DataViewModule} from 'primeng/dataview';
+
+@NgModule({
+  imports: [CommonModule, ConsulGmNewRfcsRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, DataViewModule, PanelModule, SidebarModule],
+  declarations: [ConsulGmNewRfcsComponent, RemarksDetailsComponent],
+  exports: [RemarksDetailsComponent]
+})
+export class ConsulGmNewRfcsModule {
+}

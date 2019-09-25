@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ReviewResultAndFinalDecisionComponent } from './review-result-and-final-decision.component';
+
+describe('ReviewResultAndFinalDecisionComponent', () => {
+  let component: ReviewResultAndFinalDecisionComponent;
+  let fixture: ComponentFixture<ReviewResultAndFinalDecisionComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ReviewResultAndFinalDecisionComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ReviewResultAndFinalDecisionComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,15 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {AccordionModule, ButtonModule, CardModule, FieldsetModule, PanelModule, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {RfcCommitteeDecisionsRoutingModule} from './rfc-committee-decisions-routing.module';
+import {RfcCommitteeDesisionsComponent} from './rfc-committee-desisions.component';
+import {RfcReviewAfterGmreviewModule} from '../deputyNewRfcs/rfc-review-after-gmreview/rfc-review-after-gmreview-module';
+
+@NgModule({
+  // tslint:disable-next-line:max-line-length
+  imports: [CommonModule, RfcCommitteeDecisionsRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, AccordionModule, FieldsetModule, PanelModule, CardModule, RfcReviewAfterGmreviewModule],
+  declarations: [RfcCommitteeDesisionsComponent]
+})
+export class RfcCommitteeDecisionsModule {}

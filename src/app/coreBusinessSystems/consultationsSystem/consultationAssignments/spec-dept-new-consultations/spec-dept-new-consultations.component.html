@@ -1,0 +1,113 @@
+<div style="margin: 5px" class="row">
+  <p-toast position="bottom-right"></p-toast>
+  <p-confirmDialog [style]="{width: '50%'}"></p-confirmDialog>
+  <div>
+    <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
+             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData"
+             (onRowSelect)="refreshTeams(selectedConsData)">
+      <ng-template pTemplate="caption">
+        <h3> {{ 'ConsulHeader' | translate}}</h3>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em"></th>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <a href="#" [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+            </a>
+          </td>
+          <td *ngFor="let col of columns">
+            <span class="ui-column-title">{{col.header}}</span>
+            {{(col.field === 'plannedStartDate') ? (rowData[col.field] | date: 'yyyy/MM/dd') : rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr style="background: #6495ed21">
+          <td [attr.colspan]="columns.length + 1">
+            <!--            <p-toolbar>-->
+            <div class="ui-toolbar-group-right">
+              <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
+              <button pButton *ngIf="rowData['constTeamType'] === null" class="btn" label="Team Type"
+                      (click)="assignConsultationTeamType(rowData)"></button>&nbsp;
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <br/>
+  <div *ngIf="parentPresent && showChild">
+    <p-panel>
+      <p-header>
+        <button pButton class="ui-button-success" [disabled]="teamsPresent" label="Create Teams"
+                (click)="createTeams()"></button>&nbsp;
+      </p-header>
+      <p-table #dt [columns]="teamsCols" [value]="allTeamsList" [responsive]="true" dataKey="actCode"
+               rowExpandMode="none" selectionMode="single" [(selection)]="selectedTeamsData" (onRowSelect)="enableTeamControls()">
+        <ng-template pTemplate="caption">
+          <p-toolbar>
+            <div class="ui-toolbar-group-right">
+              <button pButton type="button" icon="pi pi-pencil" class="ui-button-success" style="margin: 1px" [disabled]="!teamsPresent || disableTeamUpdateDelete" (click)="updateTeam(selectedTeamsData)"></button>
+              <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin: 1px" [disabled]="!teamsPresent || disableTeamUpdateDelete" (click)="deleteActivity(selectedTeamsData)"></button>
+            </div>
+          </p-toolbar>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let teamsCols of columns">
+              {{teamsCols.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let teamsCol of columns">
+              <span class="ui-column-title">{{teamsCol.header}}</span>
+              {{(teamsCol.field === 'plannedStartDate' || teamsCol.field === 'plannedEndDate') ? (rowData[teamsCol.field] | date: 'yyyy/MM/dd') : rowData[teamsCol.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <br/>
+      <p-table #dt [columns]="membersCols" [value]="allMembersList" [responsive]="true" dataKey="tableKey"
+               rowExpandMode="none" selectionMode="single" [(selection)]="selectedMembersData">
+        <ng-template pTemplate="caption">
+          <p-toolbar>
+            <div class="ui-toolbar-group-right">
+              <button pButton type="button" icon="pi pi-user-plus" class="ui-button-success" style="margin: 1px" [disabled]="disableMembers" (click)="addMembers(selectedMembersData)"></button>
+            </div>
+          </p-toolbar>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let membersCols of columns">
+              {{membersCols.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td *ngFor="let membersCol of columns">
+              <span class="ui-column-title">{{membersCol.header}}</span>
+              {{(membersCol.field === 'plannedStartDate' || membersCol.field === 'plannedEndDate') ? (rowData[membersCol.field] | date: 'yyyy/MM/dd') : rowData[membersCol.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+
+</div>
+
+
+<app-consultation-full-details
+  [consultationFullDetailsChild]="selectedConsulForFullDetails"></app-consultation-full-details>
+

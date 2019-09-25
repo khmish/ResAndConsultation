@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {ButtonModule, DialogService, ToolbarModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {GmReviewDeputyRejectRoutingModule} from './gm-review-deputy-reject-routing.module';
+import {GmReviewDeputyRejectComponent} from './gm-review-deputy-reject.component';
+
+@NgModule({
+  imports: [CommonModule, GmReviewDeputyRejectRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule],
+  declarations: [GmReviewDeputyRejectComponent]
+})
+export class GmReviewDeputyRejectModule {}
