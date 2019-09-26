@@ -1,4 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import {
+  Popup_uploadComponent
+} from './popup_upload/popup_upload.component';
+import {
+  HttpClientModule
+} from '@angular/common/http';
 import {
   NgModule
 } from '@angular/core';
@@ -9,7 +14,8 @@ import {
 import {
   ButtonModule,
   ToolbarModule,
-  DialogModule
+  DialogModule,
+  FileUploadModule
 } from 'primeng/primeng';
 import {
   TableModule
@@ -33,8 +39,13 @@ import {
 import {
   AcceptRejectReviewComponent
 } from '../../rfcsSubSystem/deputyNewRfcs/accept-reject-review/accept-reject-review.component';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  FormsModule
+} from '@angular/forms';
+import {
+  BrowserModule
+} from '@angular/platform-browser';
+
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
@@ -43,14 +54,18 @@ import { BrowserModule } from '@angular/platform-browser';
     ConsulDeputyNewConsultationsRoutingModule,
     ToolbarModule,
     TableModule,
-    ButtonModule, 
-    ToastModule, 
-    TranslateModule, 
+    ButtonModule,
+    ToastModule,
+    TranslateModule,
     SpecDeptNewConsultationsModule,
     DialogModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ],
-  declarations: [ConsulDeputyNewConsultationsComponent]
+  declarations: [ConsulDeputyNewConsultationsComponent, Popup_uploadComponent],
+  entryComponents: [
+    Popup_uploadComponent
+  ],
 })
 export class ConsulDeputyNewConsultationsModule {}

@@ -1,3 +1,4 @@
+import { Popup_uploadComponent } from './popup_upload/popup_upload.component';
 import {
   Component,
   OnInit,
@@ -192,7 +193,7 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
   acceptRejectTask3(acceptPara: boolean) {
 
     this.selectedConsApproval = {
-      constId: '300',//this.selRow,
+      constId: this.selRow,
       remark: this.remark,
       consulDeputyTeamsApproval: acceptPara,
       userId: sessionStorage.getItem('authenticatedUser')
@@ -203,10 +204,10 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
       // synchronous operation
       this.http.post<any>(this.acceptTask3Url, this.selectedConsApproval)
       .subscribe(
-        (data: HttpResponse<any>) => {
+        (data) => {
           // console.log("data "+data);
           
-          this.showSuccess(data.body.errorADescription);
+          this.showSuccess(data.errorADescription);
           this.ngOnInit();
         },
         (err: HttpErrorResponse) =>{
@@ -261,6 +262,20 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
 
   showError(errorMessage: string) {
     this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
+
+  showUploadPopup()
+  {
+    const ref = this.dialogService.open(Popup_uploadComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
 }
