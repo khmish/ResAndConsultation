@@ -1,39 +1,15 @@
-import {
-  Injectable
-} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 
-export class ConsultationDeputyReviewApproval{
-  constructor(
-    public constId: String ,
-    public consulDeputyTeamsApproval: boolean,
-    public remark: String,
-    public userId: String
-  ){}
-}
-export class ConsultationDeputyPrepareDecisions1Task06{
-  constructor(
-    public constId: String ,
-    public constAttachmentPath: String,
-    public scientificAttachmentPath: String,
-    public attachmentType: String
-  ){}
-}
-export class ConsultationDeputyPrepareDecisions1Task07{
-  constructor(
-    public constId: String ,
-    public diagnosticAttachmentPath: String,
-    public attachmentType: String
-  ){}
-}
 export class ConsultationFullDetailsResponseHttpBody {
   constructor(
     public constId: string,
-    public consultationGetFullDataHttpBody: Array < ConsultationGetFullDataHttpBody > ,
-    public activityAssignmentResponseHttpBodies: Array < ActivityAssignmentResponseHttpBody > ,
+    public consultationGetFullDataHttpBody: Array<ConsultationGetFullDataHttpBody>,
+    public activityAssignmentResponseHttpBodies: Array<ActivityAssignmentResponseHttpBody>,
     public errorMsg: ErrorMessage
-  ) {}
+  ) {
+  }
 }
 
 export class ConsultationGetFullDataHttpBody {
@@ -106,8 +82,9 @@ export class ActivityAssignmentResponseHttpBody {
     public activityTypeAName: string,
     public activityTypeEName: string,
     public errorMsg: ErrorMessage,
-    public assignmentWithRolesHttpBodies: Array < AssignmentWithRolesHttpBody >
-  ) {}
+    public assignmentWithRolesHttpBodies: Array<AssignmentWithRolesHttpBody>
+  ) {
+  }
 }
 
 export class AssignmentWithRolesHttpBody {
@@ -142,7 +119,8 @@ export class AssignmentWithRolesHttpBody {
     public teamRoleAName: string,
     public teamRoleEName: string,
     public teamRoleId: string
-  ) {}
+  ) {
+  }
 }
 
 export class ErrorMessage {
@@ -150,5 +128,6 @@ export class ErrorMessage {
     public errorCode: string,
     public errorADescription: string,
     public errorEDescription: string
-  ) {}
+  ) {
+  }
 }

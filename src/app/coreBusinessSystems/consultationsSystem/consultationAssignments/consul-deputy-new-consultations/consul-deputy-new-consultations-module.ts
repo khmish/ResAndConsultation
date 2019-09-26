@@ -1,6 +1,6 @@
 import {
-  Popup_uploadComponent
-} from './popup_upload/popup_upload.component';
+  Popup_upload_approval_assgin_teamComponent
+} from './popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
 import {
   HttpClientModule
 } from '@angular/common/http';
@@ -37,14 +37,12 @@ import {
   SpecDeptNewConsultationsModule
 } from '../spec-dept-new-consultations/spec-dept-new-consultations-module';
 import {
-  AcceptRejectReviewComponent
-} from '../../rfcsSubSystem/deputyNewRfcs/accept-reject-review/accept-reject-review.component';
-import {
   FormsModule
 } from '@angular/forms';
 import {
   BrowserModule
 } from '@angular/platform-browser';
+import { AcceptRejectReviewComponent } from './accept-reject-review/accept-reject-review.component';
 
 
 @NgModule({
@@ -63,9 +61,12 @@ import {
     FormsModule,
     FileUploadModule
   ],
-  declarations: [ConsulDeputyNewConsultationsComponent, Popup_uploadComponent],
+  declarations: [ConsulDeputyNewConsultationsComponent
+    , Popup_upload_approval_assgin_teamComponent
+  ,AcceptRejectReviewComponent],
   entryComponents: [
-    Popup_uploadComponent
+    Popup_upload_approval_assgin_teamComponent,
+    AcceptRejectReviewComponent
   ],
 })
 export class ConsulDeputyNewConsultationsModule {}

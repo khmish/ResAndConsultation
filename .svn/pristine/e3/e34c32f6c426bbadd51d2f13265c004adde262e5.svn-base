@@ -1,0 +1,47 @@
+<div style="margin: 5px" class="row ui-grid ui-grid-responsive">
+
+<!--  <div class="ui-grid-row" style="margin-left: 5px">-->
+<!--    &lt;!&ndash;    <label>Consultation Type : </label>&ndash;&gt;-->
+<!--    <div>-->
+<!--      <input type="text" name="emplCode" maxlength="15" size="20" placeholder="Employee Code" pInputText-->
+<!--             [(ngModel)]="emplCode">-->
+<!--    </div>-->
+<!--    &nbsp;&nbsp;&nbsp;-->
+<!--    <div class="ui-grid-col-3">-->
+<!--      <button pButton type="button" icon="pi pi-search" class="ui-button-success" style="margin: 1px"-->
+<!--              (click)="searchEmployee()"></button>-->
+<!--    </div>-->
+<!--    &nbsp;-->
+<!--  </div>-->
+  <div>
+<!--    <div class="ui-grid-col-10">-->
+<!--      <h2> {{ employeeFullName }} </h2>-->
+<!--    </div>-->
+    <br/>
+    &nbsp;<p-dropdown [options]="allTeamRoles" [(ngModel)]="selected != null ? selected : teamRoleId" placeholder="Select" dataKey="{{ this.teamRoleId }}"
+                      optionLabel="teamRoleAName" [showClear]="true" [style]="{'width':'345px'}"></p-dropdown>
+
+<!--    {{ selected != null ? selected.teamRoleId : this.teamRoleId}}-->
+
+  </div>
+  <div>
+    <div>
+      <br/>
+      &nbsp;<p-calendar [(ngModel)]="startDate" [minDate]="minDateValue" [readonlyInput]="true"
+                        placeholder="Start Date"></p-calendar>&nbsp;
+    </div>
+  </div>
+  <div>
+    <div>
+      <br/>
+      <p-calendar [(ngModel)]="endDate" [minDate]="startDate" [readonlyInput]="true"
+                  placeholder="End Date"></p-calendar>
+    </div>
+  </div>
+</div>
+
+
+<div align="center" style="margin-top: 35px">
+  <button (click)="updateMember()" class="btn btn-success" [disabled]="updateMemberOk">Assign</button>&nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

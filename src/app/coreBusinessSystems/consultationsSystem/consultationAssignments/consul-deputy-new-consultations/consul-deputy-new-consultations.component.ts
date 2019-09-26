@@ -1,4 +1,4 @@
-import { Popup_uploadComponent } from './popup_upload/popup_upload.component';
+import { Popup_upload_approval_assgin_teamComponent } from './popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
 import {
   Component,
   OnInit,
@@ -45,9 +45,7 @@ import {
 import {
   GetAllRfcDataBean
 } from '../../rfcsSubSystem/gmNewRfcs/viewallconsultation.component';
-import {
-  AcceptRejectReviewComponent
-} from '../../rfcsSubSystem/deputyNewRfcs/accept-reject-review/accept-reject-review.component';
+import { AcceptRejectReviewComponent } from './accept-reject-review/accept-reject-review.component';
 import {
   catchError
 } from 'rxjs/operators';
@@ -183,8 +181,16 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
   showDialog(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
-    console.log(this.selRow);
-    this.display = true;
+    const ref = this.dialogService.open(AcceptRejectReviewComponent, {
+      header: 'review',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
   }
   closeDialog() {
     this.display = false;
@@ -206,7 +212,7 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
       .subscribe(
         (data) => {
           // console.log("data "+data);
-          
+
           this.showSuccess(data.errorADescription);
           this.ngOnInit();
         },
@@ -216,10 +222,10 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
         }
       );
     } catch (error) {
-     
-      
+
+
     }
-    
+
     this.closeDialog();
 
   }
@@ -266,7 +272,7 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
 
   showUploadPopup()
   {
-    const ref = this.dialogService.open(Popup_uploadComponent, {
+    const ref = this.dialogService.open(Popup_upload_approval_assgin_teamComponent, {
       header: 'upload',
       width: '450px',
       contentStyle: {

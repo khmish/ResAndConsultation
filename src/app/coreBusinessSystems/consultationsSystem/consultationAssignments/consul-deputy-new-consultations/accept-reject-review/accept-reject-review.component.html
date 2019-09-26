@@ -1,0 +1,24 @@
+<p-header>
+  header
+</p-header>
+<div class=" container">
+  <div class="col-10">
+    <label for="">Remark</label>
+  </div>
+  <div class="col-10">
+    <textarea [(ngModel)]="remark" pInputTextarea placeholder="Remark" [rows]="6" [cols]="40"></textarea>
+  </div>
+</div>
+
+
+<p-footer>
+  <div class="container py-2  text-center">
+   
+      <button pButton type="button" class="ui-button-info" label="Accept" (click)="acceptRejectTask3(true)"></button>
+      <button pButton type="button" class="ui-button-danger" label="Reject"
+        (click)="acceptRejectTask3(false)"></button>
+      <button pButton type="button" class="ui-button-warning" (click)="closeDialog()" label="Cancel"></button>
+    
+    <br>
+  </div>
+</p-footer>
