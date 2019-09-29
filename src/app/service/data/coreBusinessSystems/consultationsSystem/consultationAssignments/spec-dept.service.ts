@@ -128,4 +128,10 @@ export class SpecDeptService {
       teamRoleId: teamRoleId1
     }, this.httpOptions);
   }
+
+  sendForApproval(constId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/sendForApprovalTask01', {
+      cId: constId1
+    }, this.httpOptions);
+  }
 }

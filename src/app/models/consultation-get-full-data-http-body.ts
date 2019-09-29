@@ -107,7 +107,7 @@ export class ActivityAssignmentResponseHttpBody {
     public activityTypeEName: string,
     public errorMsg: ErrorMessage,
     public assignmentWithRolesHttpBodies: Array < AssignmentWithRolesHttpBody >
-  ) {}
+  ) { }
 }
 
 export class AssignmentWithRolesHttpBody {

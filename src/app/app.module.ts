@@ -65,6 +65,7 @@ import { UpdateTeamComponent } from './coreBusinessSystems/consultationsSystem/c
 import { AddNewMemberComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/add-new-member/add-new-member.component';
 import { AddNewTeamComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/add-new-team/add-new-team.component';
 import { UpdateMembersComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/update-members/update-members.component';
+import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ipagmnew-consultations/consul-ipagmreview/consul-ipagmreview.component';
 
 @NgModule({
   imports: [
@@ -137,7 +138,8 @@ import { UpdateMembersComponent } from './coreBusinessSystems/consultationsSyste
     UpdateTeamComponent,
     AddNewMemberComponent,
     AddNewTeamComponent,
-    UpdateMembersComponent
+    UpdateMembersComponent,
+    ConsulIPAGMReviewComponent
   ],
   // tslint:disable-next-line:max-line-length
   providers: [AuthGuard, DashboardComponent, DialogService, UserPrivilagesHttpBodyService, SidebarComponent, UserAccessService,
@@ -150,7 +152,7 @@ import { UpdateMembersComponent } from './coreBusinessSystems/consultationsSyste
     GetdepartmentemployeesComponent, SpecemplrfcreviewComponent, RfcCommitteeManualApprovalComponent,
     ReviewAfterCommitteeRemarkComponent, DeputyRejectRemarkComponent, AcceptRejectReviewComponent,
     ReviewResultAndFinalDecisionRemarksComponent, AssignTeamTypeComponent, UpdateTeamComponent,
-    AddNewMemberComponent, AddNewTeamComponent, UpdateMembersComponent]
+    AddNewMemberComponent, AddNewTeamComponent, UpdateMembersComponent, ConsulIPAGMReviewComponent]
 })
 export class AppModule {
 

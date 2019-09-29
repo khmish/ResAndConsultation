@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DialogService, MessageService} from 'primeng/api';
 import {CommonMethods} from '../../../../commons/common-methods';
@@ -8,6 +8,8 @@ import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies
 import {UserAccessService} from '../../../../service/user-access.service';
 import {GenerateJSONService} from '../../../../service/data/generate-json.service';
 import {HttpResponse} from '@angular/common/http';
+import {UpdateMembersComponent} from '../spec-dept-new-consultations/update-members/update-members.component';
+import {ConsulIPAGMReviewComponent} from './consul-ipagmreview/consul-ipagmreview.component';
 
 @Component({
   selector: 'app-consul-ipagmnew-consultations',
@@ -81,6 +83,33 @@ export class ConsulIPAGMNewConsultationsComponent implements OnInit {
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
     console.log(this.selRow);
     this.selectedConsulForFullDetails = this.selRow;
+  }
 
+  sendForApproval(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selRow);
+    const ref = this.dialogService.open(ConsulIPAGMReviewComponent, {
+      header: 'Review',
+      width: '500px',
+      contentStyle: {
+        height: '15em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  refreshPage() {
+    this.dialogService.dialogComponentRef.destroy();
+  }
+
+  showSuccess(successMessage: string) {
+    this.messageService.add({severity: 'success', summary: 'Success Message', detail: successMessage});
+  }
+
+  showError(errorMessage: string) {
+    this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
   }
 }

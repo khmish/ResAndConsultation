@@ -570,4 +570,30 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
 
     ref.onClose.subscribe(res => this.refreshPage());
   }
+
+  sendForApproval(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selRow);
+    this.specDeptService.sendForApproval(this.selRow).pipe(
+      catchError(err => {
+        console.log('Handling error locally and rethrowing it...', err);
+        if (!err.message.includes('OK')) {
+          this.showError('Service is down');
+        } else {
+          this.showError(err.error.errorADescription);
+        }
+        return throwError(err.message);
+      })
+    ).subscribe((res: HttpResponse<any>) => {
+      console.log(res.body);
+      if (res.body.errorCode === '0') {
+        this.showSuccess('Consultation has been send for approval');
+        this.ngOnInit();
+      } else {
+        console.log(res.body.errorEDescription);
+        this.showError(res.body.errorEDescription);
+      }
+    });
+  }
 }

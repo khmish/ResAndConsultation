@@ -2,7 +2,7 @@
   <p-toast position="bottom-right"></p-toast>
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
-             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData">
+      rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData">
       <ng-template pTemplate="caption">
         <h3> {{ 'ConsulHeader' | translate}}</h3>
       </ng-template>
@@ -33,6 +33,11 @@
             <!--            <p-toolbar>-->
             <div class="ui-toolbar-group-right">
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Update02" (click)="update(rowData, 'Task_02')"
+                *ngIf="rowData.taskDefinitionKey == 'Task_02'"></button>&nbsp;
+              <button pButton class="btn" label="Update05" (click)="update(rowData, 'Task_05')"
+                *ngIf="rowData.taskDefinitionKey == 'Task_05'"></button>&nbsp;
+
             </div>
           </td>
         </tr>
@@ -41,5 +46,6 @@
   </div>
 </div>
 
-<app-consultation-full-details [consultationFullDetailsChild]="selectedConsulForFullDetails"></app-consultation-full-details>
+<app-consultation-full-details [consultationFullDetailsChild]="selectedConsulForFullDetails">
+</app-consultation-full-details>
 

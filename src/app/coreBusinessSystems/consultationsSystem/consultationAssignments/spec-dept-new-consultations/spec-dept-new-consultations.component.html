@@ -37,6 +37,7 @@
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
               <button pButton *ngIf="rowData['constTeamType'] === null" class="btn" label="Team Type"
                       (click)="assignConsultationTeamType(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Send for Approval" (click)="sendForApproval(rowData)"></button>&nbsp;
             </div>
           </td>
         </tr>

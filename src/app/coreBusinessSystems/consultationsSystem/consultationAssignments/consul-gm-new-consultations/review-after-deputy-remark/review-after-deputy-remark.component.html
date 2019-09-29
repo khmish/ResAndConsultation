@@ -1,0 +1,11 @@
+<div style="margin: 5px" class="row">
+  <div>
+  <textarea name="GMRemarksAfterDeputy" rows="5" cols="50" placeholder="Remarks"
+            pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="GMRemarksAfterDeputy"></textarea>
+  </div>
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</div>

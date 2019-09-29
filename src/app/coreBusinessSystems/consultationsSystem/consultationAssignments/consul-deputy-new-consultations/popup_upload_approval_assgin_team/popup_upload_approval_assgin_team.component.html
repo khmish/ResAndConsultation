@@ -1,9 +1,1 @@
-<p-fileUpload name="demo[]" url="D:\uploads\hasan.txt" (onUpload)="onUpload($event)"
-        multiple="multiple" accept="image/*" maxFileSize="1000000">
-    <ng-template pTemplate="content">
-        <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-        </ul>
-    </ng-template>
-</p-fileUpload>
-
+<p-fileUpload name="file" url="http://springdev.ipaedu.sa:8087/fileUpload"></p-fileUpload>

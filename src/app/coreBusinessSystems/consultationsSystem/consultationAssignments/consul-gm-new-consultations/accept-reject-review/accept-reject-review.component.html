@@ -1,0 +1,11 @@
+  <div>
+  <textarea name="GMRemarks" rows="5" cols="50" placeholder="Remarks"
+            pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="remark_comment"></textarea>
+  </div>
+
+  <div align="center">
+    <button (click)=onAccept() class="btn btn-success">Accept</button>&nbsp;
+    <button (click)=onReject() class="btn btn-danger">Reject</button>    &nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
