@@ -24,7 +24,7 @@ export class CommonMethods {
 
   public createJSONFromString(httpBody: Array<SystemFunctionDsQueryHttpBody>) {
 
-    console.log('Inside createJSONFromString ------------------> ');
+    // console.log('Inside createJSONFromString ------------------> ');
     this.systemFunctionDsQueryHttpBodies = httpBody;
 
     // tslint:disable-next-line:prefer-for-of
@@ -59,7 +59,7 @@ export class CommonMethods {
         // console.log('this.dsProcessFilterFunctionsSplittedArray ------------> ' + this.dsProcessFilterFunctionsSplittedArray);
         // tslint:disable-next-line:prefer-for-of no-shadowed-variable
         for (let i = 0; i < this.dsProcessFilterFunctionsSplittedArray.length; i++) {
-          console.log(this.dsProcessFilterFunctionsSplittedArray[i]);
+          // console.log(this.dsProcessFilterFunctionsSplittedArray[i]);
 
           this.daFinalFilterFunctions.set(this.dsProcessFilterFunctionsSplittedArray[i].includes('|') ?
             // tslint:disable-next-line:max-line-length

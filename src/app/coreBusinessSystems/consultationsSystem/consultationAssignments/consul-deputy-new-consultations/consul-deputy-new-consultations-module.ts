@@ -42,7 +42,7 @@ import {
 import {
   BrowserModule
 } from '@angular/platform-browser';
-import { AcceptRejectReviewComponent } from './accept-reject-review/accept-reject-review.component';
+import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-review.component';
 
 
 @NgModule({
@@ -63,10 +63,11 @@ import { AcceptRejectReviewComponent } from './accept-reject-review/accept-rejec
   ],
   declarations: [ConsulDeputyNewConsultationsComponent
     , Popup_upload_approval_assgin_teamComponent
-  ,AcceptRejectReviewComponent],
+    , AcceptRejectReviewComponent],
   entryComponents: [
     Popup_upload_approval_assgin_teamComponent,
     AcceptRejectReviewComponent
   ],
 })
-export class ConsulDeputyNewConsultationsModule {}
+export class ConsulDeputyNewConsultationsModule {
+}

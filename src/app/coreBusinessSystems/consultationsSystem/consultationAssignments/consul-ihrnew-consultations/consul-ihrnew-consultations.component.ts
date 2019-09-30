@@ -8,6 +8,7 @@ import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies
 import {UserAccessService} from '../../../../service/user-access.service';
 import {GenerateJSONService} from '../../../../service/data/generate-json.service';
 import {HttpResponse} from '@angular/common/http';
+import {UploadDocumentsComponent} from './upload-documents/upload-documents.component';
 
 @Component({
   selector: 'app-consul-ihrnew-consultations',
@@ -39,6 +40,7 @@ export class ConsulIHRNewConsultationsComponent implements OnInit {
   finalGeneratedJSON = new Map();
 
   selectedConsulForFullDetails: string;
+  teamType: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, public dialogService: DialogService,
@@ -84,4 +86,33 @@ export class ConsulIHRNewConsultationsComponent implements OnInit {
 
   }
 
+  uploadDocs(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    this.teamType = this.selectedConsData1 ? this.selectedConsData1.constTeamType : 'none';
+    console.log(this.selRow);
+    console.log(this.teamType);
+    const ref = this.dialogService.open(UploadDocumentsComponent, {
+      header: 'Upload Documents',
+      width: '500px',
+      contentStyle: {
+        height: '20em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  refreshPage() {
+    this.dialogService.dialogComponentRef.destroy();
+  }
+
+  showSuccess(successMessage: string) {
+    this.messageService.add({severity: 'success', summary: 'Success Message', detail: successMessage});
+  }
+
+  showError(errorMessage: string) {
+    this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
 }

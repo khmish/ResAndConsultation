@@ -17,7 +17,7 @@ import {
   CalendarModule,
   CardModule,
   DialogService,
-  FieldsetModule,
+  FieldsetModule, FileUploadModule,
   MenubarModule,
   MenuModule,
   MessageModule,
@@ -54,6 +54,7 @@ import {ReviewAfterCommitteeRemarkComponent} from './coreBusinessSystems/consult
 import {DeputyRejectRemarkComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/consul-gm-new-rfcs/deputy-reject-remark/deputy-reject-remark.component';
 // tslint:disable-next-line:max-line-length
 import {AcceptRejectReviewComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/deputyNewRfcs/accept-reject-review/accept-reject-review.component';
+
 // tslint:disable-next-line:max-line-length
 import {ReviewResultAndFinalDecisionRemarksComponent} from './coreBusinessSystems/consultationsSystem/rfcsSubSystem/gmNewRfcs/review-result-and-final-decision-remarks/review-result-and-final-decision-remarks.component';
 import { RfcFullDetailsComponent } from './reusableComponents/rfc-full-details/rfc-full-details.component';
@@ -61,11 +62,19 @@ import {DataViewModule} from 'primeng/dataview';
 import { ConsultationFullDetailsComponent } from './reusableComponents/consultation-full-details/consultation-full-details.component';
 // tslint:disable-next-line:max-line-length
 import {AssignTeamTypeComponent} from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/assign-team-type/assign-team-type.component';
+// tslint:disable-next-line:max-line-length
 import { UpdateTeamComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/update-team/update-team.component';
+// tslint:disable-next-line:max-line-length
 import { AddNewMemberComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/add-new-member/add-new-member.component';
+// tslint:disable-next-line:max-line-length
 import { AddNewTeamComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/add-new-team/add-new-team.component';
+// tslint:disable-next-line:max-line-length
 import { UpdateMembersComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/update-members/update-members.component';
+// tslint:disable-next-line:max-line-length
 import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ipagmnew-consultations/consul-ipagmreview/consul-ipagmreview.component';
+// tslint:disable-next-line:max-line-length
+import { UploadDocumentsComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ihrnew-consultations/upload-documents/upload-documents.component';
+import { BpmnWorkflowViewerComponent } from './reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 @NgModule({
   imports: [
@@ -121,7 +130,8 @@ import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsS
     FieldsetModule,
     CardModule,
     DataViewModule,
-    CalendarModule
+    CalendarModule,
+    FileUploadModule
   ],
   declarations: [AppComponent, StudyneedandbusscenterComponent,
     ConsultationComponent,
@@ -139,7 +149,10 @@ import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsS
     AddNewMemberComponent,
     AddNewTeamComponent,
     UpdateMembersComponent,
-    ConsulIPAGMReviewComponent
+    ConsulIPAGMReviewComponent,
+    UploadDocumentsComponent,
+    BpmnWorkflowViewerComponent
+
   ],
   // tslint:disable-next-line:max-line-length
   providers: [AuthGuard, DashboardComponent, DialogService, UserPrivilagesHttpBodyService, SidebarComponent, UserAccessService,
@@ -152,7 +165,8 @@ import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsS
     GetdepartmentemployeesComponent, SpecemplrfcreviewComponent, RfcCommitteeManualApprovalComponent,
     ReviewAfterCommitteeRemarkComponent, DeputyRejectRemarkComponent, AcceptRejectReviewComponent,
     ReviewResultAndFinalDecisionRemarksComponent, AssignTeamTypeComponent, UpdateTeamComponent,
-    AddNewMemberComponent, AddNewTeamComponent, UpdateMembersComponent, ConsulIPAGMReviewComponent]
+    AddNewMemberComponent, AddNewTeamComponent, UpdateMembersComponent, ConsulIPAGMReviewComponent,
+    UploadDocumentsComponent, BpmnWorkflowViewerComponent]
 })
 export class AppModule {
 

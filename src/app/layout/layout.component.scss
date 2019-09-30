@@ -13,7 +13,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
-  overflow: hidden;
+  overflow: inherit;
 }
 .collapsed {
   margin-left: 60px;

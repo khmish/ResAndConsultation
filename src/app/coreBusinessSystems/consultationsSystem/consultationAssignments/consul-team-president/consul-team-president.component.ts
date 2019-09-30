@@ -1,21 +1,19 @@
-import {Component, OnInit, Type} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DialogService, MessageService, SelectItem} from 'primeng/api';
 import {CommonMethods} from '../../../../commons/common-methods';
 import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies/user-privilages-http-body.service';
-import {UserAccessService} from '../../../../service/user-access.service';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {GenerateJSONService} from '../../../../service/data/generate-json.service';
 import {DatePipe} from '@angular/common';
+import {UserAccessService} from '../../../../service/user-access.service';
+import {GenerateJSONService} from '../../../../service/data/generate-json.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
-import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-review.component';
-import {ReviewAfterDeputyRemarkComponent} from './review-after-deputy-remark/review-after-deputy-remark.component';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 @Component({
-  selector: 'app-consul-gm-new-consultations',
-  templateUrl: './consul-gm-new-consultations.component.html',
-  styleUrls: ['./consul-gm-new-consultations.component.scss'],
+  selector: 'app-consul-team-president',
+  templateUrl: './consul-team-president.component.html',
+  styleUrls: ['./consul-team-president.component.scss'],
   animations: [
     trigger('rowExpansionTrigger', [
       state('void', style({
@@ -31,8 +29,7 @@ import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-w
   ],
   providers: [DialogService, MessageService, CommonMethods, DatePipe]
 })
-export class ConsulGmNewConsultationsComponent implements OnInit {
-
+export class ConsulTeamPresidentComponent implements OnInit {
   allConsultationsData: ConsultationGetFullDataHttpBody[];
   cols: any[];
   selectedConsData: ConsultationGetFullDataHttpBody = null;
@@ -51,12 +48,9 @@ export class ConsulGmNewConsultationsComponent implements OnInit {
 
   workflowId: string;
   taskId: string;
-
-  // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, public dialogService: DialogService,
               public userAccessService: UserAccessService, private commonMethod: CommonMethods,
-              private generateDataService: GenerateJSONService, private datePipe: DatePipe, private http: HttpClient) {
-  }
+              private generateDataService: GenerateJSONService, private datePipe: DatePipe, private http: HttpClient) { }
 
   ngOnInit() {
     this.allConsultationsData = [];
@@ -108,7 +102,6 @@ export class ConsulGmNewConsultationsComponent implements OnInit {
         });
       }
     });
-
     this.cols = [
       {field: 'constTitle', header: 'Title'},
       {field: 'constDescription', header: 'Description'},
@@ -120,7 +113,6 @@ export class ConsulGmNewConsultationsComponent implements OnInit {
     ];
     this.selectedConsulForFullDetails = null;
   }
-
 
   showConsultations(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
@@ -151,43 +143,6 @@ export class ConsulGmNewConsultationsComponent implements OnInit {
     });
     ref.onClose.subscribe(res => this.refreshPage());
   }
-
-  update(rowData: ConsultationGetFullDataHttpBody, tackType: string) {
-
-    this.selectedConsData = rowData;
-
-    // let typeComponent: any[] = [{
-    //     Component: AcceptRejectReviewComponent,
-    //     header: 'Consultation GM New Review'
-    //   },
-    //   {
-    //     Component: ReviewAfterDeputyRemarkComponent,
-    //     header: 'Consultation GM Review after Deputy remark'
-    //   }
-    // ];
-
-    if (tackType === 'Task_02') {
-      this.openDialog(AcceptRejectReviewComponent, 'Consultation GM New Review');
-    } else if (tackType === 'Task_05') {
-      this.openDialog(ReviewAfterDeputyRemarkComponent, 'Consultation GM Review after Deputy remark');
-    }
-
-  }
-
-  openDialog(component: Type<any>, header: string) {
-    const ref = this.dialogService.open(component, {
-      header: header,
-      width: '500px',
-      contentStyle: {
-        'max-height': '80%',
-        overflow: 'auto'
-      },
-      closable: false
-    });
-
-    ref.onClose.subscribe(res => this.refreshPage());
-  }
-
 
   showSuccess(successMessage: string) {
     this.messageService.add({

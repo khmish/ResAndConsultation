@@ -196,39 +196,39 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     this.display = false;
   }
 
-  acceptRejectTask3(acceptPara: boolean) {
+  // acceptRejectTask3(acceptPara: boolean) {
 
-    this.selectedConsApproval = {
-      constId: this.selRow,
-      remark: this.remark,
-      consulDeputyTeamsApproval: acceptPara,
-      userId: sessionStorage.getItem('authenticatedUser')
-    };
-    console.log(this.selectedConsApproval);
+  //   this.selectedConsApproval = {
+  //     constId: this.selRow,
+  //     remark: this.remark,
+  //     consulDeputyTeamsApproval: acceptPara,
+  //     userId: sessionStorage.getItem('authenticatedUser')
+  //   };
+  //   console.log(this.selectedConsApproval);
 
-    try {
-      // synchronous operation
-      this.http.post<any>(this.acceptTask3Url, this.selectedConsApproval)
-      .subscribe(
-        (data) => {
-          // console.log("data "+data);
+  //   try {
+  //     // synchronous operation
+  //     this.http.post<any>(this.acceptTask3Url, this.selectedConsApproval)
+  //     .subscribe(
+  //       (data) => {
+  //         // console.log("data "+data);
 
-          this.showSuccess(data.errorADescription);
-          this.ngOnInit();
-        },
-        (err: HttpErrorResponse) =>{
-          // console.log("err "+err.error.errorADescription);
-          this.showError(err.error.errorADescription);
-        }
-      );
-    } catch (error) {
+  //         this.showSuccess(data.errorADescription);
+  //         this.ngOnInit();
+  //       },
+  //       (err: HttpErrorResponse) =>{
+  //         // console.log("err "+err.error.errorADescription);
+  //         this.showError(err.error.errorADescription);
+  //       }
+  //     );
+  //   } catch (error) {
 
 
-    }
+  //   }
 
-    this.closeDialog();
+  //   this.closeDialog();
 
-  }
+  // }
 
   // acceptRejectTask6(acceptPara: boolean) {
   //   this.selectedConsDecisions6 = {

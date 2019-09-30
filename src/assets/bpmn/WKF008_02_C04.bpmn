@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1m6s9on" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+  <bpmn:collaboration id="Collaboration_1f04sst">
+    <bpmn:participant id="Participant_0yqf2m4" name="Consultation Bonus Calculation" processRef="WKF008_02P_C04" />
+  </bpmn:collaboration>
+  <bpmn:process id="WKF008_02P_C04" name="Consultation Bonus Calculation" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0uwljol">
+      <bpmn:lane id="Lane_12rfrel" name="Specialized Department Employee">
+        <bpmn:flowNodeRef>StartEvent_01</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_01C04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_02C04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_05C04</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0k9w9li</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_02nzw1u" name="Consultation General Manager">
+        <bpmn:flowNodeRef>Task_03C04</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0thrp6s" name="Consultation Deputy">
+        <bpmn:flowNodeRef>Task_04C04</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_01">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="cId" type="long" />
+          <camunda:formField id="DEPARTMENT_CODE" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0p5rb1h</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0p5rb1h" sourceRef="StartEvent_01" targetRef="Task_01C04" />
+    <bpmn:userTask id="Task_01C04" name="recompense Calculation" camunda:assignee="#{specEmployee}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="specEmployee" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0p5rb1h</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gnshgt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0gnshgt" sourceRef="Task_01C04" targetRef="Task_02C04" />
+    <bpmn:userTask id="Task_02C04" name="Record the financial linkage of the recompense" camunda:assignee="#{specEmployee}">
+      <bpmn:incoming>SequenceFlow_0gnshgt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1yg7q67</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1yg7q67" sourceRef="Task_02C04" targetRef="Task_03C04" />
+    <bpmn:userTask id="Task_03C04" name="Approve finencial record" camunda:candidateGroups="consultationGM">
+      <bpmn:incoming>SequenceFlow_1yg7q67</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0njl6jt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0njl6jt" sourceRef="Task_03C04" targetRef="Task_04C04" />
+    <bpmn:userTask id="Task_04C04" name="Approve finencial record" camunda:candidateGroups="consultationDeputy">
+      <bpmn:incoming>SequenceFlow_0njl6jt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1udi1sp</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1udi1sp" sourceRef="Task_04C04" targetRef="Task_05C04" />
+    <bpmn:userTask id="Task_05C04" name="Print recompense statment" camunda:assignee="#{specEmployee}">
+      <bpmn:incoming>SequenceFlow_1udi1sp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gmmdst</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0gmmdst" sourceRef="Task_05C04" targetRef="EndEvent_0k9w9li" />
+    <bpmn:endEvent id="EndEvent_0k9w9li">
+      <bpmn:incoming>SequenceFlow_0gmmdst</bpmn:incoming>
+      <bpmn:messageEventDefinition />
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1f04sst">
+      <bpmndi:BPMNShape id="Participant_0yqf2m4_di" bpmnElement="Participant_0yqf2m4">
+        <dc:Bounds x="191" y="201" width="1585" height="729" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_12rfrel_di" bpmnElement="Lane_12rfrel">
+        <dc:Bounds x="221" y="201" width="1555" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_02nzw1u_di" bpmnElement="Lane_02nzw1u">
+        <dc:Bounds x="221" y="451" width="1555" height="239" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0thrp6s_di" bpmnElement="Lane_0thrp6s">
+        <dc:Bounds x="221" y="690" width="1555" height="240" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1x89wrh_di" bpmnElement="StartEvent_01">
+        <dc:Bounds x="312" y="310" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0p5rb1h_di" bpmnElement="SequenceFlow_0p5rb1h">
+        <di:waypoint x="348" y="328" />
+        <di:waypoint x="483" y="328" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1h12jls_di" bpmnElement="Task_01C04">
+        <dc:Bounds x="483" y="288" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gnshgt_di" bpmnElement="SequenceFlow_0gnshgt">
+        <di:waypoint x="583" y="328" />
+        <di:waypoint x="746" y="328" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_13o3q2f_di" bpmnElement="Task_02C04">
+        <dc:Bounds x="746" y="288" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yg7q67_di" bpmnElement="SequenceFlow_1yg7q67">
+        <di:waypoint x="846" y="328" />
+        <di:waypoint x="877" y="328" />
+        <di:waypoint x="877" y="557" />
+        <di:waypoint x="908" y="557" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1tju29m_di" bpmnElement="Task_03C04">
+        <dc:Bounds x="908" y="517" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0njl6jt_di" bpmnElement="SequenceFlow_0njl6jt">
+        <di:waypoint x="1008" y="557" />
+        <di:waypoint x="1075" y="557" />
+        <di:waypoint x="1075" y="800" />
+        <di:waypoint x="1141" y="800" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0iqgnz1_di" bpmnElement="Task_04C04">
+        <dc:Bounds x="1141" y="760" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1udi1sp_di" bpmnElement="SequenceFlow_1udi1sp">
+        <di:waypoint x="1241" y="800" />
+        <di:waypoint x="1293" y="800" />
+        <di:waypoint x="1293" y="328" />
+        <di:waypoint x="1344" y="328" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0uypkwl_di" bpmnElement="Task_05C04">
+        <dc:Bounds x="1344" y="288" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gmmdst_di" bpmnElement="SequenceFlow_0gmmdst">
+        <di:waypoint x="1444" y="328" />
+        <di:waypoint x="1547" y="328" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1oh1eed_di" bpmnElement="EndEvent_0k9w9li">
+        <dc:Bounds x="1547" y="310" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

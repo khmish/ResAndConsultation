@@ -31,8 +31,14 @@ const routes: Routes = [
       { path: 'consulIPAGMNewConsultations', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ipagmnew-consultations/consul-ipagmnew-consultations-module').then(m => m.ConsulIpagmnewConsultationsModule)},
       // tslint:disable-next-line:max-line-length
       { path: 'consulIHRNewConsultations', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ihrnew-consultations/consul-ihrnew-consultations-module').then(m => m.ConsulIhrnewConsultationsModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'specializedEmployees', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/specialized-employees/specialized-employees-module').then(m => m.SpecializedEmployeesModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'printingGM', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/printing-gm/printing-gm-module').then(m => m.PrintingGmModule)},
+      // tslint:disable-next-line:max-line-length
+      { path: 'consulTeamPresident', loadChildren: () => import('../coreBusinessSystems/consultationsSystem/consultationAssignments/consul-team-president/consul-team-president-module').then(m => m.ConsulTeamPresidentModule)},
 
-      ]
+    ]
   }
 ];
 
