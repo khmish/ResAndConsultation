@@ -15,7 +15,7 @@ import {
   ButtonModule,
   ToolbarModule,
   DialogModule,
-  FileUploadModule
+  FileUploadModule, DropdownModule
 } from 'primeng/primeng';
 import {
   TableModule
@@ -59,7 +59,8 @@ import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-
     DialogModule,
     HttpClientModule,
     FormsModule,
-    FileUploadModule
+    FileUploadModule,
+    DropdownModule
   ],
   declarations: [ConsulDeputyNewConsultationsComponent
     , Popup_upload_approval_assgin_teamComponent

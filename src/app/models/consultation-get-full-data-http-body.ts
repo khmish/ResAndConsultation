@@ -17,7 +17,9 @@ export class ConsultationDeputyPrepareDecisions1Task06{
     public constId: String ,
     public constAttachmentPath: String,
     public scientificAttachmentPath: String,
-    public attachmentType: String
+    public scienAttachType: String,
+    public constAttachType: String
+
   ){}
 }
 export class ConsultationDeputyPrepareDecisions1Task07{

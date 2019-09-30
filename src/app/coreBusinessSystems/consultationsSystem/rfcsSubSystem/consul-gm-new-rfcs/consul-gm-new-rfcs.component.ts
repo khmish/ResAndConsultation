@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UserAccessService} from '../../../../service/user-access.service';
 import {NewConsulGmRfcServiceService} from '../../../../service/data/new-consul-gm-rfc-service.service';
 import {HttpResponse} from '@angular/common/http';
-import {DialogService, MessageService} from 'primeng/api';
+import {DialogService, MessageService, SelectItem} from 'primeng/api';
 import {ConsulGmRfcsReviewComponent} from './consul-gm-rfcs-review/consul-gm-rfcs-review.component';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {RfcFullDetailsComponent} from '../../../../reusableComponents/rfc-full-details/rfc-full-details.component';
@@ -12,6 +12,8 @@ import {ReviewAfterCommitteeRemarkComponent} from './review-after-committee-rema
 import {DeputyRejectRemarkComponent} from './deputy-reject-remark/deputy-reject-remark.component';
 import {CreateConsultationRecordService} from '../../../../service/data/create-consultation-record.service';
 import {CommonMethods} from '../../../../commons/common-methods';
+import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 export class GetConsulGmRfcDataBean {
   constructor(
@@ -90,6 +92,14 @@ export class ConsulGmNewRfcsComponent implements OnInit {
   selectedRfcForFullDetails: string;
 
   finalGeneratedJSON = new Map();
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
+
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, public userAccessService: UserAccessService, public consulGmRfcService: NewConsulGmRfcServiceService,
@@ -115,6 +125,33 @@ export class ConsulGmNewRfcsComponent implements OnInit {
       this.finalGeneratedJSON.get(3)).subscribe((res: HttpResponse<any>) => {
       this.allConsGMRfcs = res.body.dsQueryResult;
       console.log(this.allConsGMRfcs);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
 
@@ -125,6 +162,27 @@ export class ConsulGmNewRfcsComponent implements OnInit {
       {field: 'taskDefinitionAName', header: 'الحالة'}
     ];
     this.selectedRfcForFullDetails = null;
+  }
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedRfc1 = selCon;
+    this.workflowId = this.selectedRfc1 ? this.selectedRfc1.processDefinitionKey : 'none';
+    this.taskId = this.selectedRfc1 ? this.selectedRfc1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'إجراء طلبات الاستشارات',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
   updateConsulGmRfcReview(selCon: GetConsulGmRfcDataBean) {

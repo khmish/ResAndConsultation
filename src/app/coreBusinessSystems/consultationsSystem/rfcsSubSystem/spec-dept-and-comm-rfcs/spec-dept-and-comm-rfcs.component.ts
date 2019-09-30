@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogService, MessageService} from 'primeng/api';
+import {DialogService, MessageService, SelectItem} from 'primeng/api';
 import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies/user-privilages-http-body.service';
 import {ActivatedRoute} from '@angular/router';
 import {UserAccessService} from '../../../../service/user-access.service';
@@ -13,6 +13,8 @@ import {RfcCommitteeManualApprovalComponent} from './rfc-committee-manual-approv
 import {RfcCommitteeDecisionsService} from '../../../../service/data/rfc-committee-decisions.service';
 import {GetdepartmentemployeesComponent} from './getdepartmentemployees/getdepartmentemployees.component';
 import {SpecemplrfcreviewComponent} from './specemplrfcreview/specemplrfcreview.component';
+import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 export class GetSpecDeptAndCommRfcsDataBean {
   constructor(
@@ -95,6 +97,14 @@ export class SpecDeptAndCommRfcsComponent implements OnInit {
   departmentCode: string;
 
   finalGeneratedJSON = new Map();
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
+
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
 
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, public userAccessService: UserAccessService, public dialogService: DialogService,
@@ -122,6 +132,33 @@ export class SpecDeptAndCommRfcsComponent implements OnInit {
       console.log(res.body.dsQueryResult);
       this.allSpecDeptRfcs = res.body.dsQueryResult;
       console.log('res.body -------' + this.allSpecDeptRfcs);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
     this.cols = [
@@ -134,7 +171,27 @@ export class SpecDeptAndCommRfcsComponent implements OnInit {
     this.selectedRfcForFullDetails = null;
 
   }
-
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedRfc1 = selCon;
+    this.workflowId = this.selectedRfc1 ? this.selectedRfc1.processDefinitionKey : 'none';
+    this.taskId = this.selectedRfc1 ? this.selectedRfc1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'إجراء طلبات الاستشارات',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
   assignRfcToEmployee(selCon: GetSpecDeptAndCommRfcsDataBean) {
     this.selectedRfc1 = selCon;
     this.selRow = this.selectedRfc1 ? this.selectedRfc1.rfcId : 'none';

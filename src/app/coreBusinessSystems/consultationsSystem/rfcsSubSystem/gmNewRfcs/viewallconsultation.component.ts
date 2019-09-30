@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ViewallconsultationserviceService} from '../../../../service/data/viewallconsultationservice.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogService, MessageService} from 'primeng/api';
+import {DialogService, MessageService, SelectItem} from 'primeng/api';
 import {ConsultationComponent} from './addNewRfcGM/consultation.component';
 import {StudyneedandbusscenterComponent} from './studyneedandbusscenter/studyneedandbusscenter.component';
 import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies/user-privilages-http-body.service';
@@ -13,6 +13,8 @@ import {RfcFullDetailsComponent} from '../../../../reusableComponents/rfc-full-d
 // tslint:disable-next-line:max-line-length
 import {ReviewResultAndFinalDecisionRemarksComponent} from './review-result-and-final-decision-remarks/review-result-and-final-decision-remarks.component';
 import {CommonMethods} from '../../../../commons/common-methods';
+import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 export class GetAllRfcDataBean {
   constructor(
@@ -79,7 +81,14 @@ export class ViewallconsultationComponent implements OnInit, OnDestroy {
   finalGeneratedJSON = new Map();
 
   selectedRfcForFullDetails: string;
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
 
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
   // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, private allRfcClient: ViewallconsultationserviceService, public dialogService: DialogService, public userAccessService: UserAccessService,
               private gmCreateRecordService: CreateConsultationRecordService,
@@ -110,6 +119,33 @@ export class ViewallconsultationComponent implements OnInit, OnDestroy {
       console.log(res.body.dsQueryResult);
       this.allConsultations = res.body.dsQueryResult;
       console.log('res.body -------' + this.allConsultations);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
 
@@ -142,6 +178,27 @@ export class ViewallconsultationComponent implements OnInit, OnDestroy {
       closable: false
     });
 
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsultation1 = selCon;
+    this.workflowId = this.selectedConsultation1 ? this.selectedConsultation1.processDefinitionKey : 'none';
+    this.taskId = this.selectedConsultation1 ? this.selectedConsultation1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'إجراء طلبات الاستشارات',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
     ref.onClose.subscribe(res => this.refreshPage());
   }
 

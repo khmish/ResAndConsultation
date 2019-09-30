@@ -41,5 +41,11 @@
   "Repeat Password": "Repeat Password",
   "Register": "Register",
   "Log in": "Log in",
-  "ConsulHeader": "قائمة الاستشارات الجديدة "
+  "ConsulHeader": "قائمة الاستشارات الجديدة ",
+  "Details": "Details...",
+  "Process": "Process",
+  "Approve": "Approve",
+  "Assign": "Assign",
+  "CComiteeM":"Enter Committee Decision",
+  "CComiteeA":"Process Committee Decision"
 }

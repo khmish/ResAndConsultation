@@ -47,11 +47,8 @@
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
-              <button pButton class="btn" label="Update02" (click)="update(rowData, 'Task_02')"
-                *ngIf="rowData.taskDefinitionKey == 'Task_02'"></button>&nbsp;
-              <button pButton class="btn" label="Update05" (click)="update(rowData, 'Task_05')"
-                *ngIf="rowData.taskDefinitionKey == 'Task_05'"></button>&nbsp;
-
+              <button pButton class="btn" label="Update02" (click)="update(rowData, 'Task_02')" *ngIf="rowData.taskDefinitionKey == 'Task_02'"></button>&nbsp;
+              <button pButton class="btn" label="Update05" (click)="update(rowData, 'Task_05')" *ngIf="rowData.taskDefinitionKey == 'Task_05'"></button>
             </div>
           </td>
         </tr>

@@ -2,7 +2,8 @@
   <p-toast position="bottom-right"></p-toast>
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
-             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData">
+             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData"  [paginator]="true"
+             [rows]="6">
       <ng-template pTemplate="caption">
         <h3> {{ 'ConsulHeader' | translate}}</h3>
       </ng-template>
@@ -13,17 +14,30 @@
             {{col.header}}
           </th>
         </tr>
+        <tr>
+          <th style="width: 3em;"></th>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'constTitle'" pInputText type="text"
+                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            <input *ngSwitchCase="'constDescription'" pInputText type="text"
+                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
+                        [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+            <p-dropdown *ngSwitchCase="'processDefinitionAName'" [options]="processDefinitionFilter"
+                        [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+          </th>
+        </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-        <tr [pSelectableRow]="rowData">
-          <td>
-            <a href="#" [pRowToggler]="rowData">
-              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
-            </a>
+      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-i="rowIndex">
+        <tr [pSelectableRow]="rowData" [pRowToggler]="rowData">
+          <td style="background-color: #ace1ac">
+            {{i + 1}}
           </td>
           <td *ngFor="let col of columns">
             <span class="ui-column-title">{{col.header}}</span>
-            {{rowData[col.field]}}
+            {{(col.field === 'plannedStartDate' || col.field === 'plannedEndDate') ? (rowData[col.field] | date: 'yyyy/MM/dd') : rowData[col.field]}}
           </td>
         </tr>
       </ng-template>
@@ -32,6 +46,7 @@
           <td [attr.colspan]="columns.length + 1">
             <!--            <p-toolbar>-->
             <div class="ui-toolbar-group-right">
+              <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Send For Approval" (click)="sendForApproval(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
             </div>

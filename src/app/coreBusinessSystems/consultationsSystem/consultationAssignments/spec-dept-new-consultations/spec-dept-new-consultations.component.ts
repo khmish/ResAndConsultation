@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {ConfirmationService, DialogService, MessageService} from 'primeng/api';
+import {ConfirmationService, DialogService, MessageService, SelectItem} from 'primeng/api';
 import {CommonMethods} from '../../../../commons/common-methods';
 import {DatePipe} from '@angular/common';
 import {
@@ -23,6 +23,7 @@ import {UpdateTeamComponent} from './update-team/update-team.component';
 import {AddNewMemberComponent} from './add-new-member/add-new-member.component';
 import {AddNewTeamComponent} from './add-new-team/add-new-team.component';
 import {UpdateMembersComponent} from './update-members/update-members.component';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 @Component({
   selector: 'app-spec-dept-new-consultations',
@@ -81,6 +82,14 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
   disableMembers: boolean;
   disableMemUD: boolean;
 
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
+
   // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, public dialogService: DialogService,
               public userAccessService: UserAccessService, private commonMethod: CommonMethods,
@@ -114,13 +123,45 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
       console.log(res.body.dsQueryResult);
       this.allConsultationsData = res.body.dsQueryResult;
       console.log('res.body -------' + this.allConsultationsData);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // this.taskDefinitionFilter.push({label: 'All', value: null});
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
     this.cols = [
       {field: 'constTitle', header: 'Title'},
       {field: 'constDescription', header: 'Description'},
       {field: 'plannedStartDate', header: 'Start Date'},
-      {field: 'taskDefinitionAName', header: 'الحالة'}
+      {field: 'plannedEndDate', header: 'End Date'},
+      {field: 'taskDefinitionAName', header: 'الحالة'},
+      {field: 'processDefinitionAName', header: 'Process Name'}
+
     ];
 
     this.selectedConsulForFullDetails = null;
@@ -133,7 +174,27 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
     this.selectedConsulForFullDetails = this.selRow;
 
   }
-
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.workflowId = this.selectedConsData1 ? this.selectedConsData1.processDefinitionKey : 'none';
+    this.taskId = this.selectedConsData1 ? this.selectedConsData1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'Workflow and Task Details',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
   assignConsultationTeamType(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
@@ -164,6 +225,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
 
   refreshTeams(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
+    this.taskId = this.selectedConsData1 ? this.selectedConsData1.taskDefinitionKey : null;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
     this.teamType = this.selectedConsData1 ? this.selectedConsData1.constTeamType : null;
     console.log(this.teamType);

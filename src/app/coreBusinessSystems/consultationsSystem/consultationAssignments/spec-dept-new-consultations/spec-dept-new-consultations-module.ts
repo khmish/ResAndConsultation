@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ButtonModule, CardModule, ConfirmDialogModule, FieldsetModule, PanelModule, ToolbarModule} from 'primeng/primeng';
+import {ButtonModule, CardModule, ConfirmDialogModule, DropdownModule, FieldsetModule, PanelModule, ToolbarModule} from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {SpecDeptNewConsultationsRoutingModule} from './spec-dept-new-consultations-routing.module';
@@ -13,7 +13,7 @@ import {ConsultationFullDetailsComponent} from '../../../../reusableComponents/c
 @NgModule({
   // tslint:disable-next-line:max-line-length
   imports: [CommonModule, SpecDeptNewConsultationsRoutingModule, ToolbarModule, TableModule, ButtonModule, ToastModule, TranslateModule, PanelModule,
-    FieldsetModule, CardModule, DataViewModule, ConfirmDialogModule],
+    FieldsetModule, CardModule, DataViewModule, ConfirmDialogModule, DropdownModule],
   exports: [
     ConsultationFullDetailsComponent
   ],

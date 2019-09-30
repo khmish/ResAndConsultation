@@ -9,7 +9,8 @@
   <br/>
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultations" [responsive]="true" dataKey="rfcId"
-             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsultation">
+             rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsultation" [paginator]="true"
+             [rows]="6">
       <ng-template pTemplate="caption">
       <h3> {{ 'ConsulHeader' | translate}}</h3>
       </ng-template>
@@ -19,23 +20,31 @@
           <th *ngFor="let col of columns">
             {{col.header}}
           </th>
-          <!--          <th style="width: 7em"></th>-->
+        </tr>
+        <tr>
+          <th style="width: 3em;"></th>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'rfcTitle'" pInputText type="text"
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
+            <input *ngSwitchCase="'fieldArabicDescription'" pInputText type="text"
+                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            <input *ngSwitchCase="'orgArabicName'" pInputText type="text"
+                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+            <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
+                        [style]="{'width':'100%'}"
+                        (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+          </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-        <tr [pSelectableRow]="rowData">
-          <td>
-            <a href="#" [pRowToggler]="rowData">
-              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
-            </a>
+      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-i="rowIndex">
+        <tr [pSelectableRow]="rowData" [pRowToggler]="rowData">
+          <td style="background-color: #ace1ac">
+            {{i + 1}}
           </td>
           <td *ngFor="let col of columns">
             <span class="ui-column-title">{{col.header}}</span>
             {{rowData[col.field]}}
           </td>
-          <!--          <td>-->
-          <!--            <button pButton class="btn" label="Update" (click)="updateNeedStudyAndBussCenter(rowData)"></button>-->
-          <!--          </td>-->
         </tr>
       </ng-template>
       <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
@@ -43,15 +52,18 @@
           <td [attr.colspan]="columns.length + 1">
 <!--            <p-toolbar>-->
               <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_01'">
-                <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>&nbsp;
-                <button pButton class="btn" label="Update" (click)="updateNeedStudyAndBussCenter(rowData)"></button>
+                <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
+                <button pButton class="btn" label="{{ 'Details' | translate}}" (click)="showRemarks(rowData)"></button>&nbsp;
+                <button pButton class="btn" label="{{ 'Process' | translate}}" (click)="updateNeedStudyAndBussCenter(rowData)"></button>
               </div>
               <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_08'">
-                <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>&nbsp;            &nbsp;
-                <button pButton class="btn" label="Update" (click)="reviewAndTakeFinalDecision(rowData)"></button>
+                <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
+                <button pButton class="btn" label="{{ 'Details' | translate}}" (click)="showRemarks(rowData)"></button>&nbsp;            &nbsp;
+                <button pButton class="btn" label="{{ 'Approve' | translate}}" (click)="reviewAndTakeFinalDecision(rowData)"></button>
               </div>
               <div class="ui-toolbar-group-right" *ngIf="rowData.taskDefinitionKey === 'Task_10'">&nbsp;
-                <button pButton class="btn" label="Remarks" (click)="showRemarks(rowData)"></button>                &nbsp;
+                <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
+                <button pButton class="btn" label="{{ 'Details' | translate}}" (click)="showRemarks(rowData)"></button>                &nbsp;
                 <button pButton class="btn" label="Create Record" (click)="createConsultationRecordFinal(rowData)"></button>
               </div>
 <!--            </p-toolbar>-->
@@ -76,13 +88,6 @@
           </td>
         </tr>
       </ng-template>
-<!--      <ng-template pTemplate="summary">-->
-<!--        There are {{allConsultations?.length}} consultations-->
-<!--        <div style="text-align: left">-->
-<!--          Selected-->
-<!--          Consultation: {{selectedConsultation ? selectedConsultation.rfcDescription + ' - ' + selectedConsultation.orgContactName : 'none'}}-->
-<!--        </div>-->
-<!--      </ng-template>-->
     </p-table>
   </div>
 </div>

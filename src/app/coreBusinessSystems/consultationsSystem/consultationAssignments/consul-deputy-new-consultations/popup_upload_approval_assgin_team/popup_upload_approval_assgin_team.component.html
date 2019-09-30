@@ -1,1 +1,19 @@
-<p-fileUpload name="file" url="http://springdev.ipaedu.sa:8087/fileUpload"></p-fileUpload> 
+
+
+<div style="margin: 5px; padding: 10px;" class="row ui-grid ui-grid-responsive">
+    <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onConsDecisionUpload($event)" [auto]="true"
+                  chooseLabel="Select Consultation Decision File"
+                  accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' 
+                  maxFileSize="1000000"></p-fileUpload>
+    <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onScientificFileUpload($event)" [auto]="true"
+                  chooseLabel="Select Scientific Type File"
+                  accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' 
+                  maxFileSize="1000000"></p-fileUpload>
+
+  </div>
+  <p-messages [(value)]="msgs"></p-messages>
+  
+  <div align="center" style="margin-top: 35px">
+    <button (click)="uploadDocs()" class="btn btn-success" [disabled]="!allOk">Upload</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>

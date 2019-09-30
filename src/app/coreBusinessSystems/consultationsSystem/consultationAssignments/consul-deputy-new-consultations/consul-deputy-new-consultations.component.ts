@@ -1,4 +1,5 @@
-import { Popup_upload_approval_assgin_teamComponent } from './popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
+// tslint:disable-next-line:max-line-length
+import {Popup_upload_approval_assgin_teamComponent} from './popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
 import {
   Component,
   OnInit,
@@ -14,7 +15,7 @@ import {
 } from '@angular/animations';
 import {
   DialogService,
-  MessageService
+  MessageService, SelectItem
 } from 'primeng/api';
 import {
   CommonMethods
@@ -45,13 +46,14 @@ import {
 import {
   GetAllRfcDataBean
 } from '../../rfcsSubSystem/gmNewRfcs/viewallconsultation.component';
-import { AcceptRejectReviewComponent } from './accept-reject-review/accept-reject-review.component';
+import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-review.component';
 import {
   catchError
 } from 'rxjs/operators';
 import {
   error
 } from 'util';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 @Component({
   selector: 'app-consul-deputy-new-consultations',
@@ -88,21 +90,29 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
   selectedConsDecisions7: ConsultationDeputyPrepareDecisions1Task07;
 
   selRow: string;
-  systemFunctionDsQueryHttpBodies: Array < SystemFunctionDsQueryHttpBody > ;
+  systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
   finalGeneratedJSON = new Map();
 
   selectedConsulForFullDetails: string;
   display: boolean;
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
 
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
   acceptTask3Url = 'http://springdev.ipaedu.sa:8082/consultationDeputyReviewApprovalTask03';
   acceptTask6Url = 'http://springdev.ipaedu.sa:8082/consultationDeputyPrepareDecisions1Task06';
   acceptTask7Url = 'http://springdev.ipaedu.sa:8082/consultationDeputyPrepareDecisions1Task07';
 
   // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, public dialogService: DialogService,
-    public userAccessService: UserAccessService, private commonMethod: CommonMethods,
-    private generateDataService: GenerateJSONService, private datePipe: DatePipe,
-    private http: HttpClient) {}
+              public userAccessService: UserAccessService, private commonMethod: CommonMethods,
+              private generateDataService: GenerateJSONService, private datePipe: DatePipe,
+              private http: HttpClient) {
+  }
 
 
   ngOnInit() {
@@ -119,28 +129,48 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     this.generateDataService.sendJSONAndGetAllData(this.finalGeneratedJSON.get(0),
       this.finalGeneratedJSON.get(1),
       this.finalGeneratedJSON.get(2),
-      this.finalGeneratedJSON.get(3)).subscribe((res: HttpResponse < any > ) => {
+      this.finalGeneratedJSON.get(3)).subscribe((res: HttpResponse<any>) => {
       console.log(res.body.dsQueryResult);
       this.allConsultationsData = res.body.dsQueryResult;
       console.log('res.body -------' + this.allConsultationsData);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // this.taskDefinitionFilter.push({label: 'All', value: null});
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
-    this.cols = [{
-        field: 'constTitle',
-        header: 'Title'
-      },
-      {
-        field: 'constDescription',
-        header: 'Description'
-      },
-      {
-        field: 'plannedStartDate',
-        header: 'Start Date'
-      },
-      {
-        field: 'taskDefinitionAName',
-        header: 'الحالة'
-      }
+    this.cols = [
+      {field: 'constTitle', header: 'Title'},
+      {field: 'constDescription', header: 'Description'},
+      {field: 'plannedStartDate', header: 'Start Date'},
+      {field: 'plannedEndDate', header: 'End Date'},
+      {field: 'taskDefinitionAName', header: 'الحالة'},
+      {field: 'processDefinitionAName', header: 'Process Name'}
+
     ];
 
     this.selectedConsulForFullDetails = null;
@@ -155,6 +185,27 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     this.selectedConsulForFullDetails = this.selRow;
 
 
+  }
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.workflowId = this.selectedConsData1 ? this.selectedConsData1.processDefinitionKey : 'none';
+    this.taskId = this.selectedConsData1 ? this.selectedConsData1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'Workflow and Task Details',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
   }
   // updateRfcReviewDeputy(selCon: ConsultationGetFullDataHttpBody) {
   //   this.selectedConsData = selCon;
@@ -192,6 +243,7 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
 
     ref.onClose.subscribe(res => this.refreshPage());
   }
+
   closeDialog() {
     this.display = false;
   }
@@ -270,8 +322,9 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
   }
 
-  showUploadPopup()
-  {
+  showUploadPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
     const ref = this.dialogService.open(Popup_upload_approval_assgin_teamComponent, {
       header: 'upload',
       width: '450px',

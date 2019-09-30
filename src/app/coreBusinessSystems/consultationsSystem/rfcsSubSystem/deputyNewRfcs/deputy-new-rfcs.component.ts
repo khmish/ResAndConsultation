@@ -4,12 +4,14 @@ import {ActivatedRoute} from '@angular/router';
 import {UserAccessService} from '../../../../service/user-access.service';
 import {DeputyNewrfcService} from '../../../../service/data/deputy-newrfc.service';
 import {HttpResponse} from '@angular/common/http';
-import {DialogService, MessageService} from 'primeng/api';
+import {DialogService, MessageService, SelectItem} from 'primeng/api';
 // tslint:disable-next-line:max-line-length
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {NewRfcsDeputyReviewComponent} from './new-rfcs-deputy-review/new-rfcs-deputy-review.component';
 import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-review.component';
 import {CommonMethods} from '../../../../commons/common-methods';
+import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 export class GetDeputyRfcDataBean {
   constructor(
@@ -95,6 +97,14 @@ export class DeputyNewRfcsComponent implements OnInit {
   remarksVisible;
 
   selectedRfcForFullDetails: string;
+  taskDefinitionFilter: SelectItem[];
+  processDefinitionFilter: SelectItem[];
+
+  taskDefinitionFilterSplittedArray: string[];
+  processDefinitionFilterSplittedArray: string[];
+
+  workflowId: string;
+  taskId: string;
 
   ngOnInit() {
     this.systemFunctionDsQueryHttpBodies = this.userAccessService.getSystemFunctionDsQueryHttpBody();
@@ -113,6 +123,33 @@ export class DeputyNewRfcsComponent implements OnInit {
       this.finalGeneratedJSON.get(3)).subscribe((res: HttpResponse<any>) => {
       this.allDeputyRfcs = res.body.dsQueryResult;
       console.log(this.allDeputyRfcs);
+      this.taskDefinitionFilterSplittedArray = res.body.aTaskDefinitionList.toString().split(',');
+      this.processDefinitionFilterSplittedArray = res.body.aProcessDefinitionList.toString().split(',');
+
+      this.taskDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.taskDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.taskDefinitionFilter.push({
+          label: this.taskDefinitionFilterSplittedArray[i],
+          value: this.taskDefinitionFilterSplittedArray[i]
+        });
+      }
+
+      this.processDefinitionFilter = [
+        {label: 'All', value: null}
+      ];
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.processDefinitionFilterSplittedArray.length; i++) {
+        // tslint:disable-next-line:max-line-length
+        this.processDefinitionFilter.push({
+          label: this.processDefinitionFilterSplittedArray[i],
+          value: this.processDefinitionFilterSplittedArray[i]
+        });
+      }
     });
 
 
@@ -125,7 +162,27 @@ export class DeputyNewRfcsComponent implements OnInit {
 
     this.selectedRfcForFullDetails = null;
   }
-
+  showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedRfc1 = selCon;
+    this.workflowId = this.selectedRfc1 ? this.selectedRfc1.processDefinitionKey : 'none';
+    this.taskId = this.selectedRfc1 ? this.selectedRfc1.taskDefinitionKey : 'none';
+    console.log(this.workflowId);
+    console.log(this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'إجراء طلبات الاستشارات',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
   updateRfcReviewDeputy(selCon: GetDeputyRfcDataBean) {
     this.selectedRfc1 = selCon;
     this.selRow = this.selectedRfc1 ? this.selectedRfc1.rfcId : 'none';

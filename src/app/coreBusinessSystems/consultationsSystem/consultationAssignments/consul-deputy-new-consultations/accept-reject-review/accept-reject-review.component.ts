@@ -41,7 +41,8 @@ export class AcceptRejectReviewComponent implements OnInit {
       .subscribe(
         (data) => {
           // console.log("data "+data);
-
+          this.viewAllCon.refreshPage();
+          this.viewAllCon.ngOnInit();
           this.showSuccess(data.errorADescription);
           this.ngOnInit();
         },
@@ -65,5 +66,9 @@ export class AcceptRejectReviewComponent implements OnInit {
 
   showError(errorMessage: string) {
     this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
+
+  onReset() {
+    this.viewAllCon.refreshPage();
   }
 }
