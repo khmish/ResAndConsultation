@@ -17,19 +17,21 @@
   </div>
   <br/>
   <!--Selected Value = {{selERfcValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
-  <div class="ui-grid-col-12">
+  <div>
     <div style="margin-bottom:10px" *ngIf='showBussCenter'>
-      <div class="ui-grid-row">
+      <div class="ui-grid-col-12">
         <div class="ui-grid-col-6">
-          <label>Business Center Group : </label>
+          <label>Business Center : </label>
         </div>
-        <div class="ui-grid-col-3">
-          <p-radioButton name="businessCenterGroup" value="Yes" label="Yes" [(ngModel)]="selBCValue"
-                         inputId="opt3"></p-radioButton>
-        </div>
-        <div class="ui-grid-col-3">
-          <p-radioButton name="businessCenterGroup" value="No" label="No" [(ngModel)]="selBCValue"
-                         inputId="opt4"></p-radioButton>
+        <div class="ui-grid-col-6">
+          <div>
+            <p-radioButton name="businessCenterGroup" value="Yes" label="Yes" [(ngModel)]="selBCValue"
+                           inputId="opt3"></p-radioButton>
+          </div>
+          <div style="margin-bottom: 20px; margin-top: 10px;">
+            <p-radioButton name="businessCenterGroup" value="No" label="No" [(ngModel)]="selBCValue"
+                           inputId="opt4"></p-radioButton>
+          </div>
         </div>
       </div>
     </div>

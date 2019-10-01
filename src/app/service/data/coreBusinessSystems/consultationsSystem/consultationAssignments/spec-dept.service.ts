@@ -134,4 +134,19 @@ export class SpecDeptService {
       cId: constId1
     }, this.httpOptions);
   }
+
+  reviewAndSendToCommittee(constId1: string, remark1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task02ReviewAndSendToComittee', {
+      constId: constId1,
+      remark: remark1
+    }, this.httpOptions);
+  }
+
+  reviewAndTakeDecisionByCommittee(constId1: string, remark1: string, committeeApproval1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task03ProcessCommitteeDecision', {
+      constId: constId1,
+      committeeResult: remark1,
+      committeeApproval: committeeApproval1
+    }, this.httpOptions);
+  }
 }

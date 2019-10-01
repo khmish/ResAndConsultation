@@ -24,6 +24,8 @@ import {AddNewMemberComponent} from './add-new-member/add-new-member.component';
 import {AddNewTeamComponent} from './add-new-team/add-new-team.component';
 import {UpdateMembersComponent} from './update-members/update-members.component';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {ReviewAndSendToCommitteeComponent} from './review-and-send-to-committee/review-and-send-to-committee.component';
+import {ReviewAndTakeDecisionByCommitteeComponent} from './review-and-take-decision-by-committee/review-and-take-decision-by-committee.component';
 
 @Component({
   selector: 'app-spec-dept-new-consultations',
@@ -53,8 +55,9 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
   selRow: string;
   selTeamRow: string;
   selMemberRow: string;
+  selRowForReview: string;
 
-  systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
+    systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
   finalGeneratedJSON = new Map();
 
   selectedConsulForFullDetails: string;
@@ -71,7 +74,6 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
   teamType: string;
 
   showChild: boolean;
-
 
   selectedTeamsData: ActivityAssignmentResponseHttpBody;
   selectedTeamsData1: ActivityAssignmentResponseHttpBody;
@@ -552,7 +554,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
       header: 'Add New Member',
       width: '500px',
       contentStyle: {
-        height: '25em', overflow: 'visible'
+        height: '20em', overflow: 'visible'
       },
       closable: false
     });
@@ -657,5 +659,41 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
         this.showError(res.body.errorEDescription);
       }
     });
+  }
+
+  hideChildren() {
+    this.showChild = false;
+  }
+
+  reviewAndSendToCommitte(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(ReviewAndSendToCommitteeComponent, {
+      header: 'Review And Send To Committe',
+      width: '500px',
+      contentStyle: {
+        height: '15em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  reviewAndTakeDecisionByCommitte(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(ReviewAndTakeDecisionByCommitteeComponent, {
+      header: 'Review And Take Decision By Committe',
+      width: '500px',
+      contentStyle: {
+        height: '20em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 }

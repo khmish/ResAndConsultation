@@ -1,24 +1,37 @@
-<!--<div style="margin: 5px" class="row ui-grid ui-grid-responsive"-->
-<!--     *ngFor="let item of timesToLoop(teamType === 0 ? 2 : 1); let i = index;">-->
-<!--  <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onUpload($event)" [auto]="true"-->
-<!--                accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl'-->
-<!--                chooseLabel="{{i === 0 ? (teamType === 0 ? 'Select Consultation Decision File' : 'Diagnostic Team File') : i === 1 ? 'Select Scientific Type File' : 'Choose'}}"-->
-<!--                maxFileSize="1000000"></p-fileUpload>-->
-<!--</div>-->
+<div style="margin: 5px; padding: 10px;" class="row ui-grid ui-grid-row ui-grid-responsive">
+  <div class="ui-grid-col-9">
+    <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onConsDecisionUpload($event)" [auto]="true"
+                  chooseLabel="Select Consultation Decision File"
+                  accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 0"
+                  maxFileSize="1000000" class="customUploadCSS"></p-fileUpload>
+  </div>
+  &nbsp;&nbsp;&nbsp;
+  <div class="ui-grid-col-1">
+    <i class="pi pi-check" *ngIf='consFileUploadSuccess' style="font-size: 3em"></i>
+  </div>
+  &nbsp;
+  <div class="ui-grid-col-9">
+    <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onScientificFileUpload($event)" [auto]="true"
+                  chooseLabel="Select Scientific Type File"
+                  accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 0"
+                  maxFileSize="1000000" class="customUploadCSS"></p-fileUpload>
+  </div>
+  &nbsp;&nbsp;&nbsp;
+  <div class="ui-grid-col-1">
+    <i class="pi pi-check" *ngIf='sciFileUploadSuccess' style="font-size: 3em"></i>
+  </div>
 
-<div style="margin: 5px; padding: 10px;" class="row ui-grid ui-grid-responsive">
-  <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onConsDecisionUpload($event)" [auto]="true"
-                chooseLabel="Select Consultation Decision File"
-                accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 0"
-                maxFileSize="1000000"></p-fileUpload>
-  <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onScientificFileUpload($event)" [auto]="true"
-                chooseLabel="Select Scientific Type File"
-                accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 0"
-                maxFileSize="1000000"></p-fileUpload>
-  <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onDiagnosticFileUpload($event)" [auto]="true"
-                chooseLabel="Select Diagnostic Team File"
-                accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 1"
-                maxFileSize="1000000"></p-fileUpload>
+  <div class="ui-grid-col-9">
+    <p-fileUpload #fubauto mode="basic" name="file" (onUpload)="onDiagnosticFileUpload($event)" [auto]="true"
+                  chooseLabel="Select Diagnostic Team File"
+                  accept=".jpeg,.jpg,.gif,.png,.pdf,*" [url]='serverUrl' *ngIf="teamType === 1"
+                  maxFileSize="1000000" class="customUploadCSS"></p-fileUpload>
+  </div>
+  &nbsp;&nbsp;&nbsp;
+  <div class="ui-grid-col-1">
+    <i class="pi pi-check" *ngIf='diagFileUploadSuccess' style="font-size: 3em"></i>
+  </div>
+
 </div>
 <p-messages [(value)]="msgs"></p-messages>
 

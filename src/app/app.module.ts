@@ -75,6 +75,12 @@ import { ConsulIPAGMReviewComponent } from './coreBusinessSystems/consultationsS
 // tslint:disable-next-line:max-line-length
 import { UploadDocumentsComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ihrnew-consultations/upload-documents/upload-documents.component';
 import { BpmnWorkflowViewerComponent } from './reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+// tslint:disable-next-line:max-line-length
+import { PopupUploadPlanComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-team-president/popup-upload-plan/popup-upload-plan.component';
+// tslint:disable-next-line:max-line-length
+import { ReviewAndSendToCommitteeComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/review-and-send-to-committee/review-and-send-to-committee.component';
+import { ReviewAndTakeDecisionByCommitteeComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/spec-dept-new-consultations/review-and-take-decision-by-committee/review-and-take-decision-by-committee.component';
+
 
 @NgModule({
   imports: [
@@ -151,8 +157,10 @@ import { BpmnWorkflowViewerComponent } from './reusableComponents/bpmn-workflow-
     UpdateMembersComponent,
     ConsulIPAGMReviewComponent,
     UploadDocumentsComponent,
-    BpmnWorkflowViewerComponent
-
+    BpmnWorkflowViewerComponent,
+    PopupUploadPlanComponent,
+    ReviewAndSendToCommitteeComponent,
+    ReviewAndTakeDecisionByCommitteeComponent
   ],
   // tslint:disable-next-line:max-line-length
   providers: [AuthGuard, DashboardComponent, DialogService, UserPrivilagesHttpBodyService, SidebarComponent, UserAccessService,
@@ -166,7 +174,8 @@ import { BpmnWorkflowViewerComponent } from './reusableComponents/bpmn-workflow-
     ReviewAfterCommitteeRemarkComponent, DeputyRejectRemarkComponent, AcceptRejectReviewComponent,
     ReviewResultAndFinalDecisionRemarksComponent, AssignTeamTypeComponent, UpdateTeamComponent,
     AddNewMemberComponent, AddNewTeamComponent, UpdateMembersComponent, ConsulIPAGMReviewComponent,
-    UploadDocumentsComponent, BpmnWorkflowViewerComponent]
+    UploadDocumentsComponent, BpmnWorkflowViewerComponent, PopupUploadPlanComponent, ReviewAndSendToCommitteeComponent,
+    ReviewAndTakeDecisionByCommitteeComponent]
 })
 export class AppModule {
 

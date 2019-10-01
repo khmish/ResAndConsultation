@@ -18,9 +18,9 @@
           <th style="width: 3em;"></th>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
             <input *ngSwitchCase="'constTitle'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <input *ngSwitchCase="'constDescription'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
                         [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -52,7 +52,7 @@
               <!-- <button pButton class="btn" label="Update123" (click)="showDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_06'"></button> -->
               <button pButton class="btn" label="Update task 3" (click)="showDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_03'"></button>&nbsp;
             </div>
-            
+
 
           </td>
         </tr>

@@ -47,5 +47,6 @@
   "Approve": "Approve",
   "Assign": "Assign",
   "CComiteeM":"Enter Committee Decision",
-  "CComiteeA":"Process Committee Decision"
+  "CComiteeA":"Process Committee Decision",
+  "AttachPlan": "Attach Plan"
 }

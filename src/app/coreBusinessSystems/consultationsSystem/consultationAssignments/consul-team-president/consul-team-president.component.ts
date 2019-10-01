@@ -9,6 +9,9 @@ import {GenerateJSONService} from '../../../../service/data/generate-json.servic
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {ConsulTeamPresedentService} from '../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/consul-team-presedent.service';
+import {Popup_upload_approval_assgin_teamComponent} from '../consul-deputy-new-consultations/popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
+import {PopupUploadPlanComponent} from './popup-upload-plan/popup-upload-plan.component';
 
 @Component({
   selector: 'app-consul-team-president',
@@ -48,9 +51,12 @@ export class ConsulTeamPresidentComponent implements OnInit {
 
   workflowId: string;
   taskId: string;
+
   constructor(private messageService: MessageService, public dialogService: DialogService,
               public userAccessService: UserAccessService, private commonMethod: CommonMethods,
-              private generateDataService: GenerateJSONService, private datePipe: DatePipe, private http: HttpClient) { }
+              private generateDataService: GenerateJSONService, private datePipe: DatePipe, private http: HttpClient,
+              private consultTeamPresServ: ConsulTeamPresedentService) {
+  }
 
   ngOnInit() {
     this.allConsultationsData = [];
@@ -158,6 +164,21 @@ export class ConsulTeamPresidentComponent implements OnInit {
       summary: 'Error Message',
       detail: errorMessage
     });
+  }
+
+  showUploadPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupUploadPlanComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
   refreshPage() {

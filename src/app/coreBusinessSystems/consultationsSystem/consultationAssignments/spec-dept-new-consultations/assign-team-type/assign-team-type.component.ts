@@ -71,7 +71,7 @@ export class AssignTeamTypeComponent implements OnInit {
         console.log(res.body.errorCode);
         if (res.body.errorCode === '0') {
           this.viewAllConsul.dialogService.dialogComponentRef.destroy();
-          this.viewAllConsul.reloadActivities();
+          this.viewAllConsul.ngOnInit();
           this.viewAllConsul.showSuccess('TeamType assigned Successfully');
         } else {
           console.log(res.body.errorEDescription);

@@ -17,19 +17,21 @@
   </div>
   <br/>
   <!--Selected Value = {{selSGValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
-  <div class="ui-grid-col-12">
+  <div>
     <div style="margin-bottom:10px" *ngIf='showBussCenter'>
-      <div class="ui-grid-row">
+      <div class="ui-grid-col-12">
         <div class="ui-grid-col-6">
           <label>Send To : </label>
         </div>
-        <div class="ui-grid-col-3">
-          <p-radioButton name="forwardToGroup" value="Yes" label="Business Center" [(ngModel)]="selBCValue"
-                         inputId="opt3"></p-radioButton>
-        </div>
-        <div class="ui-grid-col-3">
-          <p-radioButton name="forwardToGroup" value="No" label="Consultation Deputy" [(ngModel)]="selBCValue"
-                         inputId="opt4"></p-radioButton>
+        <div class="ui-grid-col-6">
+          <div>
+            <p-radioButton name="forwardToGroup" value="Yes" label="Business Center" [(ngModel)]="selBCValue"
+                           inputId="opt3"></p-radioButton>
+          </div>
+          <div style="margin-bottom: 20px; margin-top: 10px;">
+            <p-radioButton name="forwardToGroup" value="No" label="Consultation Deputy" [(ngModel)]="selBCValue"
+                           inputId="opt4"></p-radioButton>
+          </div>
         </div>
       </div>
     </div>
@@ -39,6 +41,6 @@
 
 <div align="center">
   <button (click)=updateNeedStudyAndBussCenter() class="btn btn-success">Add</button>
-    &nbsp;
+  &nbsp;
   <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
 </div>

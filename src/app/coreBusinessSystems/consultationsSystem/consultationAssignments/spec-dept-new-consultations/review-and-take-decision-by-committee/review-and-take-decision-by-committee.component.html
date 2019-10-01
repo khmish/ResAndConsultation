@@ -1,0 +1,32 @@
+<div class="ui-grid-row" style="margin-bottom:10px; height: 25px;">
+  <div>
+  <textarea name="reviewAndTakeDecisionCommitteeRemark" [rows]="5" [cols]="50" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="reviewAndTakeDecisionCommitteeRemark"></textarea>
+  </div>
+  <div>
+    <div style="margin-bottom:10px">
+      <div class="ui-grid-col-12">
+        <div class="ui-grid-col-6">
+          <label>Approval : </label>
+        </div>
+        <div class="ui-grid-col-6">
+          <div>
+            <p-radioButton name="committeeApprovalGroup" value="Yes" label="Yes" [(ngModel)]="selCAValue"
+                           inputId="opt3"></p-radioButton>
+          </div>
+          <div style="margin-bottom: 20px; margin-top: 10px;">
+            <p-radioButton name="committeeApprovalGroup" value="No" label="No" [(ngModel)]="selCAValue"
+                           inputId="opt4"></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div align="center">
+    <button (click)=onSubmit() class="btn btn-success">Add</button>&nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
+</div>
+
+

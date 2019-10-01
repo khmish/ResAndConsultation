@@ -18,9 +18,9 @@
           <th style="width: 3em;"></th>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
             <input *ngSwitchCase="'constTitle'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <input *ngSwitchCase="'constDescription'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
                         [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -46,7 +46,8 @@
           <td [attr.colspan]="columns.length + 1">
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
-              <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>
+              <button pButton class="btn" label="{{ 'AttachPlan' | translate}}" (click)="showUploadPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_01C02'"></button>&nbsp;
             </div>
           </td>
         </tr>

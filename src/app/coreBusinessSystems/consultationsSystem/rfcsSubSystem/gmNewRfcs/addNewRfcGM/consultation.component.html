@@ -5,7 +5,7 @@
       <!--    <label>Organisation Name (Ar) : </label>-->
       <div style="margin-left: 5px;">
         <p-autoComplete [(ngModel)]="organization" [suggestions]="filteredOrganizationSingle"
-                        (completeMethod)="filteredOrganizationsSingle($event)" field="arabicName" [size]="40"
+                        (completeMethod)="filteredOrganizationsSingle($event)" field="arabicName" [size]="46"
                         placeholder="Organization Name (Ar)" [minLength]="1"
                         (onSelect)="getSelectedOrg()" formControlName="orgListAr"></p-autoComplete>
       </div>
@@ -22,7 +22,7 @@
     <div class="ui-grid-row">
       <!--    <label>Organisation Name (En) : </label>-->
       <div><input type="text" name="orgNameEn" maxlength="25" size="40" placeholder="Organisation Name (En)" pInputText
-                  [(ngModel)]="orgNameEn" formControlName="orgNameEnV"></div>
+                  [(ngModel)]="orgNameEn" formControlName="orgNameEnV" style="font-size: medium"></div>
       &nbsp;
       <div class="ui-grid-col-3">
         <div *ngIf="submitted && f.orgNameEnV.errors" style="display: compact;
@@ -38,7 +38,7 @@
     <div class="ui-grid-row">
       <!--    <label>Img Name : </label>-->
       <div><input type="text" name="contactName" maxlength="25" size="40" placeholder="Contact Name" pInputText
-                  [(ngModel)]="contactName" formControlName="contactNameV"></div>
+                  [(ngModel)]="contactName" formControlName="contactNameV" style="font-size: medium"></div>
       &nbsp;
       <div class="ui-grid-col-3">
         <div *ngIf="submitted && f.contactNameV.errors" style="display: compact;
@@ -54,7 +54,7 @@
     <div class="ui-grid-row">
       <!--    <label>Current Job : </label>-->
       <div><input type="text" name="curJob" maxlength="25" size="40" placeholder="Current Job" pInputText
-                  [(ngModel)]="currJob" formControlName="curJobV"></div>
+                  [(ngModel)]="currJob" formControlName="curJobV" style="font-size: medium"></div>
       &nbsp;
       <div class="ui-grid-col-3">
         <div *ngIf="submitted && f.curJobV.errors" style="display: compact;
@@ -70,7 +70,7 @@
     <div class="ui-grid-row">
       <!--    <label>Current Phone : </label>-->
       <div><input type="text" name="curPhone" maxlength="10" size="40" placeholder="Current Phone" pInputText
-                  [(ngModel)]="currPhone" formControlName="curPhoneV"></div>
+                  [(ngModel)]="currPhone" formControlName="curPhoneV" style="font-size: medium"></div>
       &nbsp;
       <div class="ui-grid-col-3">
         <div *ngIf="submitted && f.curPhoneV.errors" style="display: compact;
@@ -86,7 +86,7 @@
     <div class="ui-grid-row">
       <!--    <label>Current Email : </label>-->
       <div><input type="text" name="curEmail" maxlength="30" size="40" placeholder="Current Email" pInputText
-                  [(ngModel)]="currEmail" formControlName="curEmailV"></div>
+                  [(ngModel)]="currEmail" formControlName="curEmailV" style="font-size: medium"></div>
       &nbsp;
       <div class="ui-grid-col-3">
         <div *ngIf="submitted && f.curEmailV.errors" style="display: compact;
@@ -106,7 +106,7 @@
       <div>
         <p-dropdown [options]="allRfcItems" [(ngModel)]="selected" placeholder="Select"
                     optionLabel="arabic_description"
-                    [showClear]="true" [style]="{'width':'310px'}"
+                    [showClear]="true" [style]="{'width':'352px'}"
                     formControlName="selectedV"></p-dropdown>
         <!--            {{selected ? selected.code : 'none'}}-->
       </div>
@@ -127,7 +127,7 @@
       <div>
         <input type="text" name="consultationTitle" maxlength="25" size="40" placeholder="Consultation Title"
                pInputText
-               [(ngModel)]="consultationTitle" formControlName="consultationTitleV">
+               [(ngModel)]="consultationTitle" formControlName="consultationTitleV" style="font-size: medium">
       </div>
       &nbsp;
       <div class="ui-grid-col-3">
@@ -146,7 +146,7 @@
       <div>
       <textarea name="consultationDesc" [rows]="5" [cols]="41" placeholder="Consultation Description"
                 autoResize="autoResize" pInputTextarea
-                style="margin-left: 5px;" [(ngModel)]="consultationDesc" formControlName="consultationDescV"></textarea>
+                style="margin-left: 7px; font-size: medium" [(ngModel)]="consultationDesc" formControlName="consultationDescV"></textarea>
       </div>
       &nbsp;&nbsp;&nbsp;
       <div class="ui-grid-col-3">

@@ -38,6 +38,12 @@ export class AddNewMemberComponent implements OnInit {
     this.emplCode = null;
     this.employeeFullName = null;
 
+    this.startDate = new Date(this.viewAllConsul.selectedTeamsData.plannedStartDate);
+    this.endDate = new Date(this.viewAllConsul.selectedTeamsData.plannedEndDate);
+
+    console.log(this.startDate);
+    console.log(this.endDate);
+
     this.specDeptService.loadTeamRoles(this.viewAllConsul.selRow, this.viewAllConsul.selTeamRow).pipe(
       catchError(err => {
         console.log('Handling error locally and rethrowing it...', err);

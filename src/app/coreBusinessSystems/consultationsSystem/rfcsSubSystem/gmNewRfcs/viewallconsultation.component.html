@@ -27,9 +27,9 @@
             <input *ngSwitchCase="'rfcTitle'" pInputText type="text"
                    (input)="dt.filter($event.target.value, col.field, 'contains')">
             <input *ngSwitchCase="'fieldArabicDescription'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <input *ngSwitchCase="'orgArabicName'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
                         [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>

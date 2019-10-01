@@ -19,9 +19,9 @@
           <th style="width: 3em;"></th>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
             <input *ngSwitchCase="'constTitle'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')" (keydown)="hideChildren()">
             <input *ngSwitchCase="'constDescription'" pInputText type="text"
-                   (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                   (input)="dt.filter($event.target.value, col.field, 'contains')">
             <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
                         [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -49,9 +49,11 @@
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Review And Send To Committe" *ngIf="rowData.taskDefinitionKey == 'Task_02C02'" (click)="reviewAndSendToCommitte(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Review And Take Decision" *ngIf="rowData.taskDefinitionKey == 'Task_03C02'" (click)="reviewAndTakeDecisionByCommitte(rowData)"></button>&nbsp;
               <button pButton *ngIf="rowData['constTeamType'] === null" class="btn" label="Team Type"
                       (click)="assignConsultationTeamType(rowData)"></button>&nbsp;
-              <button pButton class="btn" label="Send for Approval" (click)="sendForApproval(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Send for Approval" *ngIf="rowData.taskDefinitionKey == 'Task_01'" (click)="sendForApproval(rowData)"></button>&nbsp;
             </div>
           </td>
         </tr>
@@ -78,13 +80,17 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
+            <th style="width: 3em"></th>
             <th *ngFor="let teamsCols of columns">
               {{teamsCols.header}}
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns"  let-i="rowIndex">
           <tr [pSelectableRow]="rowData">
+            <td style="background-color: #ace1ac">
+              {{i + 1}}
+            </td>
             <td *ngFor="let teamsCol of columns">
               <span class="ui-column-title">{{teamsCol.header}}</span>
               {{(teamsCol.field === 'plannedStartDate' || teamsCol.field === 'plannedEndDate') ? (rowData[teamsCol.field] | date: 'yyyy/MM/dd') : rowData[teamsCol.field]}}
@@ -106,13 +112,17 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
+            <th style="width: 3em"></th>
             <th *ngFor="let membersCols of columns">
               {{membersCols.header}}
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-i="rowIndex">
           <tr [pSelectableRow]="rowData">
+            <td style="background-color: #ace1ac">
+              {{i + 1}}
+            </td>
             <td *ngFor="let membersCol of columns">
               <span class="ui-column-title">{{membersCol.header}}</span>
               {{(membersCol.field === 'plannedStartDate' || membersCol.field === 'plannedEndDate') ? (rowData[membersCol.field] | date: 'yyyy/MM/dd') : rowData[membersCol.field]}}

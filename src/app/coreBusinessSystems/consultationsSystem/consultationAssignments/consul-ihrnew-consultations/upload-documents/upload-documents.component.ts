@@ -31,6 +31,11 @@ export class UploadDocumentsComponent implements OnInit {
 
   msgs: Message[] = [];
 
+
+  consFileUploadSuccess: boolean;
+  sciFileUploadSuccess: boolean;
+  diagFileUploadSuccess: boolean;
+
   constructor(private viewAllCons: ConsulIHRNewConsultationsComponent, private consulIhrService: ConsulIhrnewService) {
   }
 
@@ -46,6 +51,9 @@ export class UploadDocumentsComponent implements OnInit {
     this.sciFileType = null;
     this.diagFileName = null;
     this.diagFileType = null;
+    this.consFileUploadSuccess = false;
+    this.sciFileUploadSuccess = false;
+    this.diagFileUploadSuccess = false;
   }
 
   uploadDocs() {
@@ -108,7 +116,8 @@ export class UploadDocumentsComponent implements OnInit {
       console.log(JSON.stringify(event.originalEvent.body.fileType));
       this.consFileName = JSON.stringify(event.originalEvent.body.fileName);
       this.consFileType = JSON.stringify(event.originalEvent.body.fileType);
-      this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Decision File Uploaded Successfully'});
+      this.consFileUploadSuccess = true;
+      // this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Decision File Uploaded Successfully'});
       this.consFileOk = true;
       if (this.consFileOk && this.sciFileOk) {
         this.allOk = true;
@@ -116,6 +125,7 @@ export class UploadDocumentsComponent implements OnInit {
         this.allOk = false;
       }
     } else {
+      this.consFileUploadSuccess = false;
       this.consFileOk = false;
       if (this.consFileOk && this.sciFileOk) {
         this.allOk = true;
@@ -136,7 +146,8 @@ export class UploadDocumentsComponent implements OnInit {
       console.log(JSON.stringify(event.originalEvent.body.fileType));
       this.sciFileName = JSON.stringify(event.originalEvent.body.fileName);
       this.sciFileType = JSON.stringify(event.originalEvent.body.fileType);
-      this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Scientific File Uploaded Successfully'});
+      // this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Scientific File Uploaded Successfully'});
+      this.sciFileUploadSuccess = true;
       this.sciFileOk = true;
       if (this.consFileOk && this.sciFileOk) {
         this.allOk = true;
@@ -144,6 +155,7 @@ export class UploadDocumentsComponent implements OnInit {
         this.allOk = false;
       }
     } else {
+      this.sciFileUploadSuccess = false;
       this.sciFileOk = false;
       if (this.consFileOk && this.sciFileOk) {
         this.allOk = true;
@@ -165,8 +177,10 @@ export class UploadDocumentsComponent implements OnInit {
       this.diagFileName = JSON.stringify(event.originalEvent.body.fileName);
       this.diagFileType = JSON.stringify(event.originalEvent.body.fileType);
       this.allOk = true;
-      this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Diagnostic File Uploaded Successfully'});
+      this.diagFileUploadSuccess = true;
+      // this.msgs.push({severity: 'success', summary: 'Success Message', detail: 'Diagnostic File Uploaded Successfully'});
     } else {
+      this.diagFileUploadSuccess = false;
       this.allOk = false;
       this.msgs.push({severity: 'error', summary: 'Error Message', detail: 'Diagnostic File Upload Failed'});
     }
