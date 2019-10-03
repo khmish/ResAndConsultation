@@ -48,6 +48,7 @@
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Send For Approval" (click)="sendForApproval(rowData)"></button>&nbsp;
+              <button pButton class="btn" pTooltip="Notify" *ngIf="rowData.taskDefinitionKey == 'Task_10C03'" (click)="notifyOrganization(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
             </div>
           </td>

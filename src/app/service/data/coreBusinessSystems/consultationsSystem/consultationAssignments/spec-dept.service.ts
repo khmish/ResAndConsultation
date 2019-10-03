@@ -149,4 +149,93 @@ export class SpecDeptService {
       committeeApproval: committeeApproval1
     }, this.httpOptions);
   }
+
+  c2Task08SendForProofreading(constId1: string,
+                              remarks1: string,
+                              userId1: string,
+                              reviewer1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task08SendForProofreading', {
+      constId: constId1,
+      remarks: remarks1,
+      userId: userId1,
+      reviewer: reviewer1
+    }, this.httpOptions);
+  }
+
+  reviewConsultationReport(constId1: string,
+                           remarks1: string,
+                           userId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task05SpecDeptMgrReviewHttpBody', {
+      constId: constId1,
+      remarks: remarks1,
+      userId: userId1
+    }, this.httpOptions);
+  }
+
+  reviewProofReading(constId1: string,
+                     proofReadingRemarksExists1: string,
+                     proofReadingSimpleRemarks1: string,
+                     remarks1: string,
+                     reviewer1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task10ReviewProofReadingReport', {
+      constId: constId1,
+      proofReadingRemarksExists: proofReadingRemarksExists1,
+      proofReadingSimpleRemarks: proofReadingSimpleRemarks1,
+      remarks: remarks1,
+      reviewer: reviewer1
+    }, this.httpOptions);
+  }
+
+
+  submitConsultationForDesign(constId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task13SubmiteForDesign', {
+      constId: constId1
+    }, this.httpOptions);
+  }
+
+  sendToDesigner(constId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c3Task06SecDeptMGRSendToDesigner', {
+      constId: constId1
+    }, this.httpOptions);
+  }
+
+  assignCordinator(constId1: string, coordinatorId1: string, remarks1: '') {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c3Task01SendForCoordinator', {
+      constId: constId1,
+      coordinatorId: coordinatorId1,
+      remarks: remarks1
+    }, this.httpOptions);
+  }
+
+  sendToDesignerAfterDeputyReview(constId1: string,
+                                  remarks1: string,
+                                  userId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c3Task09SpecDeptMgrSendToDesigner', {
+      constId: constId1,
+      remarks: remarks1,
+      userId: userId1
+    }, this.httpOptions);
+  }
+
+  reviewDesignedReport(constId1: string,
+                       approved: boolean,
+                       remarks1: string,
+                       userId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task05SpecDeptMgrReviewHttpBody', {
+      constId: constId1,
+      specDeptMgrDesignApproved: approved,
+      remarks: remarks1,
+      userId: userId1
+    }, this.httpOptions);
+  }
+
+  c3Task12SendForRecompanseCalc(constId1: string,
+                                specEmployee1: string,
+                                userId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c3Task12SendForRecompanseCalc', {
+      constId: constId1,
+      specEmployee: specEmployee1,
+      userId: userId1
+    }, this.httpOptions);
+  }
 }

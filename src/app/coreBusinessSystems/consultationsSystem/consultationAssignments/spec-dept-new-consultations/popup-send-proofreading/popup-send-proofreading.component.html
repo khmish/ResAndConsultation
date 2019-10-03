@@ -1,0 +1,27 @@
+<div style="margin: 5px" class="row ui-grid ui-grid-responsive">
+  <div class="ui-grid-row" style="margin-left: 5px">
+    <!--    <label>Consultation Type : </label>-->
+    <div>
+      <input type="text" name="emplCode" maxlength="15" size="20" placeholder="Employee Code" pInputText
+             [(ngModel)]="emplCode">
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="ui-grid-col-3">
+      <button pButton type="button" icon="pi pi-search" class="ui-button-success" style="margin: 1px"
+              (click)="searchEmployee()"></button>
+    </div>
+    &nbsp;
+    <div class="ui-grid-col-9">
+      <span style="margin-left: 5px; font-size: 25px"> {{ employeeFullName }} </span>
+    </div>
+  </div>
+  <div>
+    <textarea name="deputyRemarks" [rows]="5" [cols]="50" placeholder="Remarks"
+              autoResize="autoResize" pInputTextarea
+              style="margin-left: 5px;" [(ngModel)]="specDeptMgrRemarks"></textarea>
+  </div>
+</div>
+<div align="center" style="margin-top: 35px">
+  <button (click)="sendProofReading()" class="btn btn-success" [disabled]="!sendOk">Send</button>&nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

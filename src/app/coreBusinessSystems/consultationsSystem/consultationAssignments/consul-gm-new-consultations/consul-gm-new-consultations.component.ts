@@ -11,6 +11,10 @@ import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-g
 import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-review.component';
 import {ReviewAfterDeputyRemarkComponent} from './review-after-deputy-remark/review-after-deputy-remark.component';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {PopupUploadPlanComponent} from '../consul-team-president/popup-upload-plan/popup-upload-plan.component';
+import {PopupGmApproveDesignComponent} from './popup-gm-approve-design/popup-gm-approve-design.component';
+import {PopupGmRevDesignComponent} from './popup-gm-rev-design/popup-gm-rev-design.component';
+import {PopupCgmApproveFinancialRecComponent} from './popup-cgm-approve-financial-rec/popup-cgm-approve-financial-rec.component';
 
 @Component({
   selector: 'app-consul-gm-new-consultations',
@@ -207,6 +211,49 @@ export class ConsulGmNewConsultationsComponent implements OnInit {
 
   refreshPage() {
     this.dialogService.dialogComponentRef.destroy();
+  }
+  showApproveDesignPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupGmApproveDesignComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showApproveDeputyDesignPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupGmRevDesignComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+  showApprovefinRecPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupCgmApproveFinancialRecComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
 }

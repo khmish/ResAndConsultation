@@ -45,7 +45,8 @@ export class DeputyReviewAfterGmCommitteReviewService {
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask07', {
       rfcId: rfcId1,
       deputyApproved: deputyApproved1,
-      remarks: remarks1
+      remarks: remarks1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 }

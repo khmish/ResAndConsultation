@@ -20,4 +20,10 @@ export class ConsulIPAGMService {
       consulIPAGmRemarks: consulIPAGmRemarks1
     }, this.httpOptions);
   }
+
+  notifyOrganization(constId1: string) {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c3Task10NotifyOrganization', {
+      constId: constId1
+    }, this.httpOptions);
+  }
 }

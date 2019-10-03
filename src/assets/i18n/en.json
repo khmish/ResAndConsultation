@@ -48,5 +48,11 @@
   "Assign": "Assign",
   "CComiteeM":"Enter Committee Decision",
   "CComiteeA":"Process Committee Decision",
-  "AttachPlan": "Attach Plan"
+  "AttachPlan": "Attach Plan",
+  "AttachConsulReport": "Attach Consultation Report",
+  "AttachSciRevReport": "Attach scientific review report",
+  "AttachSciCorReport": "Attach Corrected Report",
+  "SendProofReader": "Send For Proofreading",
+  "SendProofReaderCorr": "Send Proofreading corrections",
+  "SendForRecomponseCalc": "Send For recompense calculation"
 }

@@ -1,7 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {DialogService, DynamicDialogConfig, MessageService} from 'primeng/api';
 import {RfcFullDetailsServiceService} from '../../service/data/rfc-full-details-service.service';
 import {HttpResponse} from '@angular/common/http';
+import {ConsultationGetFullDataHttpBody} from '../../models/consultation-get-full-data-http-body';
+import {BpmnWorkflowViewerComponent} from '../bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 
 export class RfcFullDetailsBody {
   constructor(
@@ -40,7 +42,10 @@ export class GetFullRfcDetailsDataBean {
     public processDefinitionEName: string,
     public taskDefinitionKey: string,
     public taskDefinitionAName: string,
-    public taskDefinitionEName: string
+    public taskDefinitionEName: string,
+    public consultationComiteeResult: string,
+    public specialisedDepartment: string,
+    public specDeptSuggestion: string
   ) {
   }
 }
@@ -63,7 +68,14 @@ export class RemarkHttpBodies {
     public remarkDescription: string,
     public remarkUserId: string,
     public remarkUserName: string,
-    public remarkDate: string) {
+    public remarkDate: string,
+    public processDefinitionKey: string,
+    public processDefinitionAName: string,
+    public processDefinitionEName: string,
+    public taskDefinitionKey: string,
+    public taskDefinitionAName: string,
+    public taskDefinitionENamestring: string
+  ) {
   }
 }
 
@@ -126,7 +138,8 @@ export class ErrorMessage {
 @Component({
   selector: 'app-rfc-full-details',
   templateUrl: './rfc-full-details.component.html',
-  styleUrls: ['./rfc-full-details.component.scss']
+  styleUrls: ['./rfc-full-details.component.scss'],
+  providers: [DialogService]
 })
 export class RfcFullDetailsComponent implements OnInit, OnChanges {
 
@@ -151,13 +164,33 @@ export class RfcFullDetailsComponent implements OnInit, OnChanges {
   cols: any[];
   rfcIdRemark: string;
   @Input() remarkDetailsChild: string;
+  selectedRemarkRow: RemarkHttpBodies;
 
-  constructor(private messageService: MessageService, private rfcFullDetailsService: RfcFullDetailsServiceService) {
+
+  orgName: string;
+  rfcTitle: string;
+  rfcDescription: string;
+  fieldArabicDescription: string;
+  specialisedDepartment: string;
+  orgContactName: string;
+  orgContactJob: string;
+  orgContactPhone: string;
+  orgContactEmail: string;
+  specDeptSuggestion: string;
+  consultationComiteeResult: string;
+
+  workflowId: string;
+  taskId: string;
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private messageService: MessageService, private rfcFullDetailsService: RfcFullDetailsServiceService, public config: DynamicDialogConfig,
+              public dialogService: DialogService) {
   }
 
   ngOnInit() {
-    console.log('this.rfcFullDetailsChild.rfcId' + this.rfcFullDetailsChild);
-    this.rfcIdFullDetails = this.rfcFullDetailsChild;
+    console.log('this.rfcId ---------------------------' + this.config.data.rfcId);
+    // console.log('this.rfcFullDetailsChild.rfcId' + this.rfcFullDetailsChild);
+    this.rfcIdFullDetails = this.config.data.rfcId;
     console.log('this.rfcId : ' + this.rfcIdFullDetails);
     if (this.rfcIdFullDetails !== null) {
       this.rfcFullDetailsService.getFullRfcDetails(this.rfcIdFullDetails).subscribe((res: HttpResponse<any>) => {
@@ -173,6 +206,20 @@ export class RfcFullDetailsComponent implements OnInit, OnChanges {
         console.log('res --------> ' + this.meetingElementBody);
         console.log('res --------> ' + this.remarkBody);
 
+        this.orgName = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.orgArabicName : null;
+        this.rfcTitle = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.rfcTitle : null;
+        this.rfcDescription = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.rfcDescription : null;
+        this.fieldArabicDescription = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.fieldArabicDescription : null;
+        this.specialisedDepartment = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.specialisedDepartment : null;
+
+        this.orgContactName = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.orgContactName : null;
+        this.orgContactJob = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.orgContactJob : null;
+        this.orgContactPhone = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.orgContactPhone : null;
+        this.orgContactEmail = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.orgContactEmail : null;
+
+        this.specDeptSuggestion = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.specDeptSuggestion : null;
+        this.consultationComiteeResult = this.rfcFullDetailsBody != null ? this.rfcFullDetailsBody.consultationComiteeResult : null;
+
         if (this.meetingElementBody.errorMessage.errorCode === '0') {
           this.meetingElementDetails = this.meetingElementBody.meetingElementDetails;
           console.log(this.meetingElementDetails);
@@ -185,7 +232,10 @@ export class RfcFullDetailsComponent implements OnInit, OnChanges {
 
         if (this.remarkBody.errorMessage.errorCode === '0') {
           this.remarkDetails = this.remarkBody.remarkHttpBodies;
-
+          this.cols = [
+            {field: 'remarkDate', header: 'Date'},
+            {field: 'remarkDescription', header: 'Description'}
+          ];
         } else {
           console.log(this.remarkBody.errorMessage.errorEDescription);
           this.showError(this.remarkBody.errorMessage.errorEDescription);
@@ -208,5 +258,27 @@ export class RfcFullDetailsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Changed----------------> ' + changes.toString());
     this.ngOnInit();
+  }
+
+  showBpmnWorkflow(selCon: RemarkHttpBodies) {
+    this.selectedRemarkRow = selCon;
+    this.workflowId = this.selectedRemarkRow ? this.selectedRemarkRow.processDefinitionKey : 'none';
+    this.taskId = this.selectedRemarkRow ? this.selectedRemarkRow.taskDefinitionKey : 'none';
+    console.log('this.workflowId -------------> ' + this.workflowId);
+    console.log('this.taskId -------------> ' + this.taskId);
+    const myData = {
+      processDefinitionKey: this.workflowId,
+      taskDefinitionKey: this.taskId
+    };
+    const ref = this.dialogService.open(BpmnWorkflowViewerComponent, {
+      data: myData,
+      header: 'Workflow and Task Details',
+      width: '50%',
+      contentStyle: {
+        height: '600px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.dialogService.dialogComponentRef.destroy());
   }
 }

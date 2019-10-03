@@ -1,0 +1,11 @@
+<div>
+  <textarea name="remarks" [rows]="5" [cols]="51" placeholder="Remarks"
+            autoResize="autoResize" pInputTextarea
+            style="margin-left: 5px;" [(ngModel)]="remarks"></textarea>
+</div>
+
+<div align="center">
+  <button (click)=onAccept() class="btn btn-success">Accept</button>&nbsp;
+  <button (click)=onReject() class="btn btn-danger">Reject</button>    &nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

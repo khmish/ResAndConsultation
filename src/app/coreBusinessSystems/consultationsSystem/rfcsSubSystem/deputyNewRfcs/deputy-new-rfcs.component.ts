@@ -12,6 +12,7 @@ import {AcceptRejectReviewComponent} from './accept-reject-review/accept-reject-
 import {CommonMethods} from '../../../../commons/common-methods';
 import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {RfcFullDetailsComponent} from '../../../../reusableComponents/rfc-full-details/rfc-full-details.component';
 
 export class GetDeputyRfcDataBean {
   constructor(
@@ -234,7 +235,19 @@ export class DeputyNewRfcsComponent implements OnInit {
     console.log(this.selRow);
     // this.remarksVisible = true;
     // this.selectedRfcForRemark = this.selRow;
-    this.selectedRfcForFullDetails = this.selRow;
-
+    // this.selectedRfcForFullDetails = this.selRow;
+    const myData = {
+      rfcId: this.selRow
+    };
+    const ref = this.dialogService.open(RfcFullDetailsComponent, {
+      data: myData,
+      header: 'Rfc Full Details',
+      width: '50%',
+      contentStyle: {
+        height: '700px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 }

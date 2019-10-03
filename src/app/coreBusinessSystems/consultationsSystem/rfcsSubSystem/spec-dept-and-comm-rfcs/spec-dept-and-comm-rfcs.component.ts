@@ -119,7 +119,7 @@ export class SpecDeptAndCommRfcsComponent implements OnInit {
 
     this.finalGeneratedJSON = this.commonMethod.createJSONFromString(this.systemFunctionDsQueryHttpBodies);
 
-    console.log('this.finalGeneratedJSON ------------------>  ' + this.finalGeneratedJSON.size)
+    console.log('this.finalGeneratedJSON ------------------>  ' + this.finalGeneratedJSON.size);
 
     for (let i = 0; i < this.finalGeneratedJSON.size; i++) {
       console.log('this.finalGeneratedJSON : ' + i + '-' + this.finalGeneratedJSON.get(i));
@@ -224,7 +224,20 @@ export class SpecDeptAndCommRfcsComponent implements OnInit {
     this.selectedRfc1 = selCon;
     this.selRow = this.selectedRfc1 ? this.selectedRfc1.rfcId : 'none';
     console.log(this.selRow);
-    this.selectedRfcForFullDetails = this.selRow;
+    // this.selectedRfcForFullDetails = this.selRow;
+    const myData = {
+      rfcId: this.selRow
+    };
+    const ref = this.dialogService.open(RfcFullDetailsComponent, {
+      data: myData,
+      header: 'Rfc Full Details',
+      width: '50%',
+      contentStyle: {
+        height: '700px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
 
   }
 

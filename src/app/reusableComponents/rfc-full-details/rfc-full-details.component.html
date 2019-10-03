@@ -1,64 +1,171 @@
-<div *ngIf="rfcFullDetailsChild">
+<div>
   <!--  <h1> {{ rfcId }}</h1>-->
   <p-toast position="bottom-right"></p-toast>
-
-  <p-panel header="Rfc Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-    <div>
-      <div>Title : {{rfcFullDetailsBody.rfcTitle}} </div>
-      <div>Field : {{rfcFullDetailsBody.fieldCode}} </div>
-      <div>Arabic Name : {{rfcFullDetailsBody.orgArabicName}} </div>
-      <div>Contact Name : {{rfcFullDetailsBody.orgContactName}} </div>
-      <div>Phone : {{rfcFullDetailsBody.orgContactPhone}} </div>
-      <div>Email : {{rfcFullDetailsBody.orgContactEmail}} </div>
-      <div>Job : {{rfcFullDetailsBody.orgContactJob}} </div>
-    </div>
-  </p-panel>
-
-  <p-panel header="Meetings History" [toggleable]="true">
-    <ul *ngFor="let meetingElementDetails of meetingElementDetails">
-      <p-fieldset collapsed="collapsed" legend="{{meetingElementDetails.meetingSubject}}" [toggleable]="true"
-                  styleClass="myFieldset">
-        <div style="margin-left: 50px;">
-          <p-card class="ui-card-title"><label>Meeting Status : </label> {{meetingElementDetails.meetingElementAStatus}}
-          </p-card>
-          <br/>
-          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingDate !== null"><label>Meeting
-            Date
-            : </label> {{meetingElementDetails.meetingHttpBody.meetingDate}}</p-card>
-          <br/>
-          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingSTime !== null"><label>Meeting
-            Start Time
-            : </label> {{meetingElementDetails.meetingHttpBody.meetingSTime }}</p-card>
-          <br/>
-          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingETime !== null"><label>Meeting
-            End Time
-            : </label> {{meetingElementDetails.meetingHttpBody.meetingETime}}</p-card>
-          <br>
-          <p-fieldset collapsed="collapsed" *ngIf="meetingElementDetails.recommendationHttpBodies.length !== 0"
-                      legend="Recomendations" [toggleable]="true">
-            <p-card class="ui-card-title" styleClass="recStyle"
-                    *ngFor="let recommendationHttpBodies of meetingElementDetails.recommendationHttpBodies">
-              {{recommendationHttpBodies.recText}}
-            </p-card>
-          </p-fieldset>
+  <p-scrollPanel [style]="{width: '100%', height: '700px'}">
+    <p-tabView orientation="top">
+      <p-tabPanel header="General Info" leftIcon="pi pi-calendar" tooltip="General Info">
+        <div class="form-group row">
+          <label for="1" class="col-sm-2 col-form-label">Organization :</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="1" readonly value="{{orgName}}"
+                   style="background-color: White; border: none">
+          </div>
         </div>
-      </p-fieldset>
-    </ul>
-  </p-panel>
-
-  <p-panel header="Remark Details Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-    <p-dataView #dv [value]="remarkDetails" [paginator]="true" [rows]="4" paginatorPosition="both">
-      <ng-template let-remark pTemplate="listItem">
-        <div style="padding:.5em" class="ui-g-12 ui-md-3">
-          <p-panel [header]="remark.remarkId" [style]="{'text-align':'center'}">
-            <!--        <img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">-->
-            <div>Details : {{remark.remarkDescription}} </div>
-            <div>User Id : {{remark.remarkUserId}} </div>
-            <div>Name : {{remark.remarkUserName}} </div>
-            <div>Date : {{remark.remarkDate}} </div>
-          </p-panel>
+        <div class="form-group row">
+          <label for="2" class="col-sm-2 col-form-label">Rfc Title :</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="2" readonly value="{{rfcTitle}}"
+                   style="background-color: White; border: none">
+          </div>
         </div>
-      </ng-template>
-    </p-dataView>
-  </p-panel>
+        <div class="form-group row">
+          <label for="3" class="col-sm-2 col-form-label">Rfc Description :</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="3" readonly value="{{rfcDescription}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="4" class="col-sm-2 col-form-label">Field Description (Ar) :</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="4" readonly value="{{fieldArabicDescription}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="5" class="col-sm-2 col-form-label">Specialised Department :</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="5" readonly value="{{specialisedDepartment}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Contact Info" rightIcon="pi pi-inbox" tooltip="Contact Information">
+        <div class="form-group row">
+          <label for="6" class="col-sm-2 col-form-label">Contact Name :</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="6" readonly value="{{orgContactName}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="7" class="col-sm-2 col-form-label">Contact Job :</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="7" readonly value="{{orgContactJob}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="8" class="col-sm-2 col-form-label">Contact Phone :</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="8" readonly value="{{orgContactPhone}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="9" class="col-sm-2 col-form-label">Contact Email :</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="9" readonly value="{{orgContactEmail}}"
+                   style="background-color: White; border: none">
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Remarks Details" leftIcon="pi pi-user" rightIcon="pi pi-star" tooltip="Remarks">
+        <p-table #dt [columns]="cols" [value]="remarkDetails" [responsive]="true" dataKey="remarkId"
+                 rowExpandMode="single" selectionMode="single" [(selection)]="selectedRemarkRow" [paginator]="true"
+                 [rows]="15">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+<!--              <th style="width: 3em"></th>-->
+              <th style="width: 10em">Employee Image</th>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+              <th style="width: 8em">Workflow</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-i="rowIndex">
+            <tr [pSelectableRow]="rowData" [pRowToggler]="rowData">
+<!--              <td style="background-color: #ace1ac">-->
+<!--                {{i + 1}}-->
+<!--              </td>-->
+              <td align="center">
+                <img src='././assets/images/logo.png' width="50px" height="50px" [title]=rowData.remarkUserName>
+              </td>
+              <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                {{col.field === 'remarkDate' ? (rowData[col.field] | date: 'yyyy/MM/dd HH:MM:SS') : rowData[col.field]}}
+              </td>
+              <td align="center">
+                <i class="pi pi-eye" style="font-size: 2em" (click)="showBpmnWorkflow(rowData)"></i>
+              </td>
+            </tr>
+          </ng-template>
+<!--          <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">-->
+<!--            <tr style="background: #6495ed21">-->
+<!--              <td [attr.colspan]="columns.length + 2">-->
+
+<!--              </td>-->
+<!--            </tr>-->
+<!--          </ng-template>-->
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+    <br/>
+    <p-panel header="Specialized Department Suggestion" [toggleable]="false">
+      <label>{{specDeptSuggestion}}</label>
+    </p-panel>
+    <br/>
+    <p-panel header="Consultation Commitee Result" [toggleable]="false">
+      <label>{{consultationComiteeResult}}</label>
+    </p-panel>
+  </p-scrollPanel>
+
+  <!--  <p-panel header="Meetings History" [toggleable]="true">-->
+  <!--    <ul *ngFor="let meetingElementDetails of meetingElementDetails">-->
+  <!--      <p-fieldset collapsed="collapsed" legend="{{meetingElementDetails.meetingSubject}}" [toggleable]="true"-->
+  <!--                  styleClass="myFieldset">-->
+  <!--        <div style="margin-left: 50px;">-->
+  <!--          <p-card class="ui-card-title"><label>Meeting Status : </label> {{meetingElementDetails.meetingElementAStatus}}-->
+  <!--          </p-card>-->
+  <!--          <br/>-->
+  <!--          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingDate !== null"><label>Meeting-->
+  <!--            Date-->
+  <!--            : </label> {{meetingElementDetails.meetingHttpBody.meetingDate}}</p-card>-->
+  <!--          <br/>-->
+  <!--          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingSTime !== null"><label>Meeting-->
+  <!--            Start Time-->
+  <!--            : </label> {{meetingElementDetails.meetingHttpBody.meetingSTime }}</p-card>-->
+  <!--          <br/>-->
+  <!--          <p-card class="ui-card-title" *ngIf="meetingElementDetails.meetingHttpBody.meetingETime !== null"><label>Meeting-->
+  <!--            End Time-->
+  <!--            : </label> {{meetingElementDetails.meetingHttpBody.meetingETime}}</p-card>-->
+  <!--          <br>-->
+  <!--          <p-fieldset collapsed="collapsed" *ngIf="meetingElementDetails.recommendationHttpBodies.length !== 0"-->
+  <!--                      legend="Recomendations" [toggleable]="true">-->
+  <!--            <p-card class="ui-card-title" styleClass="recStyle"-->
+  <!--                    *ngFor="let recommendationHttpBodies of meetingElementDetails.recommendationHttpBodies">-->
+  <!--              {{recommendationHttpBodies.recText}}-->
+  <!--            </p-card>-->
+  <!--          </p-fieldset>-->
+  <!--        </div>-->
+  <!--      </p-fieldset>-->
+  <!--    </ul>-->
+  <!--  </p-panel>-->
+
+  <!--  <p-panel header="Remark Details Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">-->
+  <!--    <p-dataView #dv [value]="remarkDetails" [paginator]="true" [rows]="4" paginatorPosition="both">-->
+  <!--      <ng-template let-remark pTemplate="listItem">-->
+  <!--        <div style="padding:.5em" class="ui-g-12 ui-md-3">-->
+  <!--          <p-panel [header]="remark.remarkId" [style]="{'text-align':'center'}">-->
+  <!--            &lt;!&ndash;        <img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">&ndash;&gt;-->
+  <!--            <div>Details : {{remark.remarkDescription}} </div>-->
+  <!--            <div>User Id : {{remark.remarkUserId}} </div>-->
+  <!--            <div>Name : {{remark.remarkUserName}} </div>-->
+  <!--            <div>Date : {{remark.remarkDate}} </div>-->
+  <!--          </p-panel>-->
+  <!--        </div>-->
+  <!--      </ng-template>-->
+  <!--    </p-dataView>-->
+  <!--  </p-panel>-->
 </div>

@@ -47,7 +47,11 @@
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>
-              <button pButton class="btn" label="{{ 'AttachPlan' | translate}}" (click)="showUploadPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_01C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'AttachPlan' | translate}}" (click)="showUploadPlanPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_01C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'AttachConsulReport' | translate}}" (click)="showUploadConsReportPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_04C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'AttachSciRevReport' | translate}}" (click)="showUploadScienReportPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_06C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'AttachSciCorReport' | translate}}" (click)="showUploadSciCorrRepPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_07C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'SendProofReaderCorr' | translate}}" (click)="showUploadSciCorrRepPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_12C02'"></button>&nbsp;
             </div>
           </td>
         </tr>

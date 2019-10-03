@@ -49,6 +49,9 @@
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Update02" (click)="update(rowData, 'Task_02')" *ngIf="rowData.taskDefinitionKey == 'Task_02'"></button>&nbsp;
               <button pButton class="btn" label="Update05" (click)="update(rowData, 'Task_05')" *ngIf="rowData.taskDefinitionKey == 'Task_05'"></button>
+              <button pButton class="btn" label="Approve Design" (click)="showApproveDesignPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_05C03'"></button>
+              <button pButton class="btn" label="Approve Design" (click)="showApproveDeputyDesignPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_08C03'"></button>
+              <button pButton class="btn" label="Approve Financial Record" (click)="showApprovefinRecPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_03C04'"></button>
             </div>
           </td>
         </tr>

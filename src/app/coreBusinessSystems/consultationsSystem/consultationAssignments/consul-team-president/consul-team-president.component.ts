@@ -9,9 +9,13 @@ import {GenerateJSONService} from '../../../../service/data/generate-json.servic
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+// tslint:disable-next-line:max-line-length
 import {ConsulTeamPresedentService} from '../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/consul-team-presedent.service';
-import {Popup_upload_approval_assgin_teamComponent} from '../consul-deputy-new-consultations/popup_upload_approval_assgin_team/popup_upload_approval_assgin_team.component';
 import {PopupUploadPlanComponent} from './popup-upload-plan/popup-upload-plan.component';
+import {PopupUploadConsulReportComponent} from './popup-upload-consul-report/popup-upload-consul-report.component';
+import {PopupScientificReviewResultComponent} from './popup-scientific-review-result/popup-scientific-review-result.component';
+import {PopupSciReviewCorrectionComponent} from './popup-sci-review-correction/popup-sci-review-correction.component';
+import {PopupProofreadingCorrectsComponent} from './popup-proofreading-corrects/popup-proofreading-corrects.component';
 
 @Component({
   selector: 'app-consul-team-president',
@@ -166,10 +170,70 @@ export class ConsulTeamPresidentComponent implements OnInit {
     });
   }
 
-  showUploadPopup(selCon: ConsultationGetFullDataHttpBody) {
+  showUploadPlanPopup(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
     const ref = this.dialogService.open(PopupUploadPlanComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showUploadConsReportPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupUploadConsulReportComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showUploadScienReportPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupScientificReviewResultComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showUploadSciCorrRepPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupSciReviewCorrectionComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showUploadProofCorrRepPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupProofreadingCorrectsComponent, {
       header: 'upload',
       width: '450px',
       contentStyle: {

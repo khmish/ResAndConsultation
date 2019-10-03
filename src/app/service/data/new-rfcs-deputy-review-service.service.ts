@@ -18,7 +18,8 @@ export class NewRfcsDeputyReviewServiceService {
                         remarks1: string) {
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask02', {
       rfcId: rfcId1,
-      remarks: remarks1
+      remarks: remarks1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, this.httpOptions);
   }
 }

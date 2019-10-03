@@ -1,0 +1,17 @@
+<div style="margin: 5px; padding: 10px;" class="row ui-grid ui-grid-row ui-grid-responsive">
+  <div class=" container">
+    <div class="col-10">
+      <label for="">Remark</label>
+    </div>
+    <div class="col-10">
+      <textarea [(ngModel)]="remark" pInputTextarea placeholder="Remark" [rows]="6" [cols]="40"></textarea>
+    </div>
+  </div>
+</div>
+
+<p-messages [(value)]="msgs"></p-messages>
+
+<div align="center" style="margin-top: 35px">
+  <button (click)="reviewDeputyDesign()" class="btn btn-success">Review</button>&nbsp;
+  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+</div>

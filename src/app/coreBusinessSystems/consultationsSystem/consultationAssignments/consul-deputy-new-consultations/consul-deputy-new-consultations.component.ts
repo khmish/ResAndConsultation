@@ -54,6 +54,9 @@ import {
   error
 } from 'util';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {PopupGmApproveDesignComponent} from '../consul-gm-new-consultations/popup-gm-approve-design/popup-gm-approve-design.component';
+import {ConsulDeputyApproveDesignComponent} from './consul-deputy-approve-design/consul-deputy-approve-design.component';
+import {PopupCdeputyApproveFinancialRecComponent} from './popup-cdeputy-approve-financial-rec/popup-cdeputy-approve-financial-rec.component';
 
 @Component({
   selector: 'app-consul-deputy-new-consultations',
@@ -326,6 +329,35 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
     const ref = this.dialogService.open(Popup_upload_approval_assgin_teamComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+  showApproveDesignPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(ConsulDeputyApproveDesignComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showApproveFinRecPopup(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupCdeputyApproveFinancialRecComponent, {
       header: 'upload',
       width: '450px',
       contentStyle: {

@@ -46,6 +46,7 @@
           <td [attr.colspan]="columns.length + 1">
             <div class="ui-toolbar-group-right">
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
+              <button pButton class="btn" pTooltip="Review" *ngIf="rowData.taskDefinitionKey == 'Task_11C03'" (click)="reviewReport(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
             </div>
           </td>

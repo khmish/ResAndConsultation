@@ -45,7 +45,8 @@ export class SpecEmplNewrfcsService {
 
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask04', {
       rfcId: rfcId1,
-      specDeptSuggestion: specDeptRfcSuggestion1
+      specDeptSuggestion: specDeptRfcSuggestion1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 }

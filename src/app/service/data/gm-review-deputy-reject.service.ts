@@ -44,7 +44,8 @@ export class GmReviewDeputyRejectService {
 
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask09', {
       rfcId: rfcId1,
-      remark: remarks
+      remark: remarks,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 }

@@ -45,7 +45,8 @@ export class ReviewResultAndFinalDecisionService {
       rfcId: rfcId1,
       execRfc: execRfc1,
       businessCenter: businessCenter1,
-      remarks: remarks1
+      remarks: remarks1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, this.httpOptions);
   }
 }

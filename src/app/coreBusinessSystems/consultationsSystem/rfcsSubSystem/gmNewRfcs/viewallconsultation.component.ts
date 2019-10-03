@@ -252,8 +252,21 @@ export class ViewallconsultationComponent implements OnInit, OnDestroy {
     console.log(this.selRow);
     // this.remarksVisible = true;
     // this.selectedRfcForRemark = this.selRow;
-    this.selectedRfcForFullDetails = this.selRow;
+    // this.selectedRfcForFullDetails = this.selRow;
 
+    const myData = {
+      rfcId: this.selRow
+    };
+    const ref = this.dialogService.open(RfcFullDetailsComponent, {
+      data: myData,
+      header: 'Rfc Full Details',
+      width: '50%',
+      contentStyle: {
+        height: '700px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
   createConsultationRecordFinal(selCon: GetAllRfcDataBean) {

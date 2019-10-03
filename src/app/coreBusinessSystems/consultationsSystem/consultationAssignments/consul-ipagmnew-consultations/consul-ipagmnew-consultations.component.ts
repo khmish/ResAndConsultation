@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogService, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, DialogService, MessageService, SelectItem} from 'primeng/api';
 import {CommonMethods} from '../../../../commons/common-methods';
 import {DatePipe} from '@angular/common';
-import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {ConsultationGetFullDataHttpBody, ErrorMessage} from '../../../../models/consultation-get-full-data-http-body';
 import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies/user-privilages-http-body.service';
 import {UserAccessService} from '../../../../service/user-access.service';
 import {GenerateJSONService} from '../../../../service/data/generate-json.service';
 import {HttpResponse} from '@angular/common/http';
-import {UpdateMembersComponent} from '../spec-dept-new-consultations/update-members/update-members.component';
 import {ConsulIPAGMReviewComponent} from './consul-ipagmreview/consul-ipagmreview.component';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {ConsulIPAGMService} from '../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ipagm.service';
 
 @Component({
   selector: 'app-consul-ipagmnew-consultations',
@@ -29,7 +31,7 @@ import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-w
       transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
     ])
   ],
-  providers: [DialogService, MessageService, CommonMethods, DatePipe]
+  providers: [DialogService, MessageService, CommonMethods, DatePipe, ConfirmationService]
 })
 export class ConsulIPAGMNewConsultationsComponent implements OnInit {
 
@@ -50,10 +52,12 @@ export class ConsulIPAGMNewConsultationsComponent implements OnInit {
 
   workflowId: string;
   taskId: string;
+
   // tslint:disable-next-line:max-line-length
   constructor(private messageService: MessageService, public dialogService: DialogService,
               public userAccessService: UserAccessService, private commonMethod: CommonMethods,
-              private generateDataService: GenerateJSONService, private datePipe: DatePipe) {
+              private generateDataService: GenerateJSONService, private datePipe: DatePipe,
+              private confirmationService: ConfirmationService, private ipaGMService: ConsulIPAGMService) {
   }
 
   ngOnInit() {
@@ -124,6 +128,7 @@ export class ConsulIPAGMNewConsultationsComponent implements OnInit {
     console.log(this.selRow);
     this.selectedConsulForFullDetails = this.selRow;
   }
+
   showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.workflowId = this.selectedConsData1 ? this.selectedConsData1.processDefinitionKey : 'none';
@@ -145,6 +150,7 @@ export class ConsulIPAGMNewConsultationsComponent implements OnInit {
     });
     ref.onClose.subscribe(res => this.refreshPage());
   }
+
   sendForApproval(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
@@ -171,5 +177,41 @@ export class ConsulIPAGMNewConsultationsComponent implements OnInit {
 
   showError(errorMessage: string) {
     this.messageService.add({severity: 'error', summary: 'Error Message', detail: errorMessage});
+  }
+
+  notifyOrganization(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selRow);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to notify the organization?',
+      header: 'Notify Organization',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.ipaGMService.notifyOrganization(this.selRow).pipe(
+          catchError(err => {
+            console.log('Handling error locally and rethrowing it...', err);
+            if (!err.message.includes('OK')) {
+              this.showError('Service is down');
+            } else {
+              this.showError(err.error.errorADescription);
+            }
+            return throwError(err.message);
+          })
+        ).subscribe((res: HttpResponse<ErrorMessage>) => {
+          console.log('res.body ------------> ' + res);
+          console.log(res.body.errorCode);
+          if (res.body.errorCode === '0') {
+            this.showSuccess('Organization Notified Successfully');
+          } else {
+            console.log(res.body.errorEDescription);
+            this.showError(res.body.errorEDescription);
+          }
+        });
+      },
+      reject: () => {
+        this.showError('Deleted Canceled');
+      }
+    });
   }
 }

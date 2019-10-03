@@ -25,7 +25,16 @@ import {AddNewTeamComponent} from './add-new-team/add-new-team.component';
 import {UpdateMembersComponent} from './update-members/update-members.component';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
 import {ReviewAndSendToCommitteeComponent} from './review-and-send-to-committee/review-and-send-to-committee.component';
+// tslint:disable-next-line:max-line-length
 import {ReviewAndTakeDecisionByCommitteeComponent} from './review-and-take-decision-by-committee/review-and-take-decision-by-committee.component';
+import {ReviewConsultationReportComponent} from './review-consultation-report/review-consultation-report.component';
+import {ReviewProofReadingComponent} from './review-proof-reading/review-proof-reading.component';
+// tslint:disable-next-line:max-line-length
+import {PopupSendProofreadingComponent} from './popup-send-proofreading/popup-send-proofreading.component';
+import {AssignReportCordinatorComponent} from './assign-report-cordinator/assign-report-cordinator.component';
+import {ReviewDesignedReportComponent} from './review-designed-report/review-designed-report.component';
+import {SendToDesignerAfterDeputyReviewComponent} from './send-to-designer-after-deputy-review/send-to-designer-after-deputy-review.component';
+import {PopupGmSendRecompCalcComponent} from './popup-gm-send-recomp-calc/popup-gm-send-recomp-calc.component';
 
 @Component({
   selector: 'app-spec-dept-new-consultations',
@@ -57,7 +66,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
   selMemberRow: string;
   selRowForReview: string;
 
-    systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
+  systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
   finalGeneratedJSON = new Map();
 
   selectedConsulForFullDetails: string;
@@ -176,6 +185,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
     this.selectedConsulForFullDetails = this.selRow;
 
   }
+
   showBpmnWorkflow(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.workflowId = this.selectedConsData1 ? this.selectedConsData1.processDefinitionKey : 'none';
@@ -197,6 +207,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
     });
     ref.onClose.subscribe(res => this.refreshPage());
   }
+
   assignConsultationTeamType(selCon: ConsultationGetFullDataHttpBody) {
     this.selectedConsData1 = selCon;
     this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
@@ -687,6 +698,161 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
     console.log(this.selectedConsData1.taskDefinitionKey);
     const ref = this.dialogService.open(ReviewAndTakeDecisionByCommitteeComponent, {
       header: 'Review And Take Decision By Committe',
+      width: '500px',
+      contentStyle: {
+        height: '20em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showSendProofReading(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupSendProofreadingComponent, {
+      header: 'Send Proof Reading',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  reviewConsultationReport(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(ReviewConsultationReportComponent, {
+      header: 'Review Consultation Report',
+      width: '500px',
+      contentStyle: {
+        height: '15em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  reviewProofReading(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(ReviewProofReadingComponent, {
+      header: 'Review Prof Reading',
+      width: '500px',
+      contentStyle: {
+        height: '25em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  submitConsultationForDesign(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    this.specDeptService.submitConsultationForDesign(this.selRowForReview).subscribe((res: HttpResponse<any>) => {
+      console.log(res.body.errorCode);
+      if (res.body.errorCode === '0') {
+        this.ngOnInit();
+        this.showSuccess('Consultation send to Design successfully');
+      } else {
+        console.log(res.body.errorEDescription);
+        this.showError(res.body.errorEDescription);
+      }
+    }, error => {
+      this.showError('Service is down');
+    });
+
+    this.ngOnInit();
+  }
+
+  paginate(event) {
+    console.log('event -----------> ' + event);
+    this.showChild = false;
+  }
+
+  assignCordinator(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(AssignReportCordinatorComponent, {
+      header: 'Assign Cordinator',
+      width: '500px',
+      contentStyle: {
+        height: '20em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  reviewDesignedReport(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(ReviewDesignedReportComponent, {
+      header: 'Review Designed Report',
+      width: '500px',
+      contentStyle: {
+        height: '25em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  sendToDesigner(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    this.specDeptService.sendToDesigner(this.selRowForReview).subscribe((res: HttpResponse<any>) => {
+      console.log(res.body.errorCode);
+      if (res.body.errorCode === '0') {
+        this.ngOnInit();
+        this.showSuccess('Consultation send to designer successfully');
+      } else {
+        console.log(res.body.errorEDescription);
+        this.showError(res.body.errorEDescription);
+      }
+    }, error => {
+      this.showError('Service is down');
+    });
+
+    this.ngOnInit();
+  }
+
+  sendToDesignerAfterDeputyReview(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(SendToDesignerAfterDeputyReviewComponent, {
+      header: 'Send To Designer',
+      width: '500px',
+      contentStyle: {
+        height: '20em', overflow: 'visible'
+      },
+      closable: false
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+  sendForRecomponseCalc(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRowForReview = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selectedConsData1.taskDefinitionKey);
+    const ref = this.dialogService.open(PopupGmSendRecompCalcComponent, {
+      header: 'Send To Designer',
       width: '500px',
       contentStyle: {
         height: '20em', overflow: 'visible'

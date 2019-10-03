@@ -21,7 +21,8 @@ export class StudyneedandbusscenterstudyService {
     return this.http.post('http://springdev.ipaedu.sa:8082/updateNeedStudyAndBussCenter', {
       rfcId: rfcId1,
       needStudy: needStudy1,
-      businessCenter: businessCenter1
+      businessCenter: businessCenter1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, this.httpOptions);
   }
 }

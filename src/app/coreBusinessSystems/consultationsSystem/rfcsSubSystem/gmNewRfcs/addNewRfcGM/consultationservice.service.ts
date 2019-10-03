@@ -36,7 +36,8 @@ export class ConsultationserviceService {
       orgContactName: contactName,
       orgContactJob: currJob,
       orgContactPhone: currPhone,
-      orgContactEmail: currEmail
+      orgContactEmail: currEmail,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
     // this.allConList.getAllRfConsultations();
   }

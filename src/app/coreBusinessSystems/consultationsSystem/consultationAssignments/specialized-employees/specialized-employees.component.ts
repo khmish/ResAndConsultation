@@ -9,6 +9,13 @@ import {GenerateJSONService} from '../../../../service/data/generate-json.servic
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {PopupSendProofreadingComponent} from '../spec-dept-new-consultations/popup-send-proofreading/popup-send-proofreading.component';
+import {PopupProofreadingReportComponent} from './popup-proofreading-report/popup-proofreading-report.component';
+import {PopupProofreadingCorrectComponent} from './popup-proofreading-correct/popup-proofreading-correct.component';
+import {PopupCoordinateConsRepComponent} from './popup-coordinate-cons-rep/popup-coordinate-cons-rep.component';
+import {PopupDesignConsRepComponent} from './popup-design-cons-rep/popup-design-cons-rep.component';
+import {PopupCalcRecompenseComponent} from './popup-calc-recompense/popup-calc-recompense.component';
+import {PopupFinacialLinkageComponent} from './popup-finacial-linkage/popup-finacial-linkage.component';
 
 @Component({
   selector: 'app-specialized-employees',
@@ -164,6 +171,90 @@ export class SpecializedEmployeesComponent implements OnInit {
 
   refreshPage() {
     this.dialogService.dialogComponentRef.destroy();
+  }
+
+  showSendProofReading(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupProofreadingReportComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  showSendProofReadingCorrect(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupProofreadingCorrectComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  sendCoordRepToDesigner(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupCoordinateConsRepComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  sendDesignedRep(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupDesignConsRepComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+  sendCalcRecompense(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupCalcRecompenseComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
+
+  sendfinLink(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(PopupFinacialLinkageComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
   }
 
 }

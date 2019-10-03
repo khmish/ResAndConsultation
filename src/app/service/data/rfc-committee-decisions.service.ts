@@ -54,7 +54,8 @@ export class RfcCommitteeDecisionsService {
 
     return this.http.post('http://springdev.ipaedu.sa:8082/rfcManualProcessTask05', {
       rfcId: rfcId1,
-      rfcMeetingResult: rfcMeetingResult1
+      rfcMeetingResult: rfcMeetingResult1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 }

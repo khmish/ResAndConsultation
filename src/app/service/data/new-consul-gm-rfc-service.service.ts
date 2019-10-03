@@ -50,7 +50,8 @@ export class NewConsulGmRfcServiceService {
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask03', {
       rfcId: rfcId1,
       departmentCode: deptCode,
-      remark: remarks
+      remark: remarks,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 

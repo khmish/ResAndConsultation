@@ -4,7 +4,7 @@
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
              rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData"
-             (onRowSelect)="refreshTeams(selectedConsData)" [paginator]="true"  [rows]="6">
+             (onRowSelect)="refreshTeams(selectedConsData)" [paginator]="true"  [rows]="6" (onPage)="paginate($event)">
       <ng-template pTemplate="caption">
         <h3> {{ 'ConsulHeader' | translate}}</h3>
       </ng-template>
@@ -24,7 +24,7 @@
                    (input)="dt.filter($event.target.value, col.field, 'contains')">
             <p-dropdown *ngSwitchCase="'taskDefinitionAName'" [options]="taskDefinitionFilter"
                         [style]="{'width':'100%'}"
-                        (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                        (onChange)="dt.filter($event.value, col.field, 'equals')" (onClick)="hideChildren()"></p-dropdown>
             <p-dropdown *ngSwitchCase="'processDefinitionAName'" [options]="processDefinitionFilter"
                         [style]="{'width':'100%'}"
                         (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -51,9 +51,20 @@
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Review And Send To Committe" *ngIf="rowData.taskDefinitionKey == 'Task_02C02'" (click)="reviewAndSendToCommitte(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Review And Take Decision" *ngIf="rowData.taskDefinitionKey == 'Task_03C02'" (click)="reviewAndTakeDecisionByCommitte(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Review Consultion Report" *ngIf="rowData.taskDefinitionKey == 'Task_05C02'" (click)="reviewConsultationReport(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Review Proof Reading" *ngIf="rowData.taskDefinitionKey == 'Task_10C02'" (click)="reviewProofReading(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Submit for Design" *ngIf="rowData.taskDefinitionKey == 'Task_13C02'" (click)="submitConsultationForDesign(rowData)"></button>&nbsp;
+
+              <button pButton class="btn" label="Assign Cordinator" *ngIf="rowData.taskDefinitionKey == 'Task_01C03'" (click)="assignCordinator(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Review Report" *ngIf="rowData.taskDefinitionKey == 'Task_04C03'" (click)="reviewDesignedReport(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Send To Designer" *ngIf="rowData.taskDefinitionKey == 'Task_06C03'" (click)="sendToDesigner(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Send After Deputy Review" *ngIf="rowData.taskDefinitionKey == 'Task_09C03'" (click)="sendToDesignerAfterDeputyReview(rowData)"></button>&nbsp;
+
               <button pButton *ngIf="rowData['constTeamType'] === null" class="btn" label="Team Type"
                       (click)="assignConsultationTeamType(rowData)"></button>&nbsp;
-              <button pButton class="btn" label="Send for Approval" *ngIf="rowData.taskDefinitionKey == 'Task_01'" (click)="sendForApproval(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Send for Approval" *ngIf="rowData.taskDefinitionKey == 'Task_01'" (click)="sendForApproval(rowData)"></button>
+              <button pButton class="btn" label="{{ 'SendProofReader' | translate}}" (click)="showSendProofReading(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_08C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'SendForRecomponseCalc' | translate}}" (click)="sendForRecomponseCalc(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_12C03'"></button>&nbsp;
             </div>
           </td>
         </tr>

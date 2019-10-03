@@ -1,14 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogService, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, DialogService, MessageService, SelectItem} from 'primeng/api';
 import {CommonMethods} from '../../../../commons/common-methods';
 import {SystemFunctionDsQueryHttpBody} from '../../../../service/data/httpBodies/user-privilages-http-body.service';
 import {DatePipe} from '@angular/common';
 import {UserAccessService} from '../../../../service/user-access.service';
 import {GenerateJSONService} from '../../../../service/data/generate-json.service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {ConsultationGetFullDataHttpBody} from '../../../../models/consultation-get-full-data-http-body';
+import {ConsultationGetFullDataHttpBody, ErrorMessage} from '../../../../models/consultation-get-full-data-http-body';
 import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-workflow-viewer/bpmn-workflow-viewer.component';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {PrintingGMService} from '../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/printing-gm.service';
 
 @Component({
   selector: 'app-printing-gm',
@@ -48,9 +51,13 @@ export class PrintingGMComponent implements OnInit {
 
   workflowId: string;
   taskId: string;
+
   constructor(private messageService: MessageService, public dialogService: DialogService,
               public userAccessService: UserAccessService, private commonMethod: CommonMethods,
-              private generateDataService: GenerateJSONService, private datePipe: DatePipe, private http: HttpClient) { }
+              private generateDataService: GenerateJSONService, private datePipe: DatePipe,
+              private http: HttpClient, private confirmationService: ConfirmationService,
+              private printingService: PrintingGMService) {
+  }
 
   ngOnInit() {
     this.allConsultationsData = [];
@@ -164,4 +171,39 @@ export class PrintingGMComponent implements OnInit {
     this.dialogService.dialogComponentRef.destroy();
   }
 
+  reviewReport(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    console.log(this.selRow);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to review the report?',
+      header: 'Review Report',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.printingService.reviewReport(this.selRow).pipe(
+          catchError(err => {
+            console.log('Handling error locally and rethrowing it...', err);
+            if (!err.message.includes('OK')) {
+              this.showError('Service is down');
+            } else {
+              this.showError(err.error.errorADescription);
+            }
+            return throwError(err.message);
+          })
+        ).subscribe((res: HttpResponse<ErrorMessage>) => {
+          console.log('res.body ------------> ' + res);
+          console.log(res.body.errorCode);
+          if (res.body.errorCode === '0') {
+            this.showSuccess('Reviewed Successfully');
+          } else {
+            console.log(res.body.errorEDescription);
+            this.showError(res.body.errorEDescription);
+          }
+        });
+      },
+      reject: () => {
+        this.showError('Deleted Canceled');
+      }
+    });
+  }
 }

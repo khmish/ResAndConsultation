@@ -10,7 +10,7 @@
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultations" [responsive]="true" dataKey="rfcId"
              rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsultation" [paginator]="true"
-             [rows]="6">
+             [rows]="15">
       <ng-template pTemplate="caption">
       <h3> {{ 'ConsulHeader' | translate}}</h3>
       </ng-template>
@@ -92,7 +92,7 @@
   </div>
 </div>
 
-<app-rfc-full-details [rfcFullDetailsChild]="selectedRfcForFullDetails"></app-rfc-full-details>
+<!--<app-rfc-full-details [rfcFullDetailsChild]="selectedRfcForFullDetails"></app-rfc-full-details>-->
 
 <!--<p-sidebar  [(visible)]="remarksVisible" position="right" [baseZIndex]="10000" [style]="{width:'30em'}">-->
 <!--&lt;!&ndash;  <div class="col-sm-12">&ndash;&gt;-->

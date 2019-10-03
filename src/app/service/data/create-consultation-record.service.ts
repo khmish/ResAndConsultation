@@ -41,6 +41,7 @@ export class CreateConsultationRecordService {
   createConsultationRecord(rfcId1: string) {
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask10', {
       rfcId: rfcId1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, this.httpOptions);
   }
 }

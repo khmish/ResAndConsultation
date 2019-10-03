@@ -256,7 +256,19 @@ export class ConsulGmNewRfcsComponent implements OnInit {
     this.selectedRfc1 = selCon;
     this.selRow = this.selectedRfc1 ? this.selectedRfc1.rfcId : 'none';
     console.log(this.selRow);
-    this.selectedRfcForFullDetails = this.selRow;
+    const myData = {
+      rfcId: this.selRow
+    };
+    const ref = this.dialogService.open(RfcFullDetailsComponent, {
+      data: myData,
+      header: 'Rfc Full Details',
+      width: '50%',
+      contentStyle: {
+        height: '700px', overflow: 'hidden'
+      },
+      closable: true
+    });
+    ref.onClose.subscribe(res => this.refreshPage());
 
   }
 }

@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
-import {SystemFunctionDsQueryHttpBody} from '../service/data/httpBodies/user-privilages-http-body.service';
+import {
+  EmployeeInfosResponseHttpBody,
+  SystemFunctionDsQueryHttpBody,
+  UserPrivilagesHttpBody
+} from '../service/data/httpBodies/user-privilages-http-body.service';
+import {UserAccessService} from '../service/user-access.service';
 
 @Injectable()
 export class CommonMethods {
-  constructor() {
+  constructor(public userAccessService: UserAccessService) {
   }
 
   systemFunctionDsQueryHttpBodies: Array<SystemFunctionDsQueryHttpBody>;
+  employeeInfosResponseHttpBody: EmployeeInfosResponseHttpBody;
 
   dsId: string;
   dsProcessVariables: string;
@@ -26,6 +32,9 @@ export class CommonMethods {
 
     // console.log('Inside createJSONFromString ------------------> ');
     this.systemFunctionDsQueryHttpBodies = httpBody;
+    this.employeeInfosResponseHttpBody = this.userAccessService.getUserPrivilagesHttpBody().employeeInfosResponseHttpBody;
+
+    console.log('this.employeeInfosResponseHttpBody -----' + this.employeeInfosResponseHttpBody);
 
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.systemFunctionDsQueryHttpBodies.length; i++) {
@@ -47,7 +56,8 @@ export class CommonMethods {
         // tslint:disable-next-line:prefer-for-of no-shadowed-variable
         for (let i = 0; i < this.dsProcessVariablesSplitedArray.length; i++) {
           // console.log(this.dsProcessVariablesSplitedArray[i]);
-          this.daFinalVariables.set(this.dsProcessVariablesSplitedArray[i], '0201610');
+          this.daFinalVariables.set(this.dsProcessVariablesSplitedArray[i],
+            this.dsProcessVariablesSplitedArray[i] === 'DEPARTMENT_CODE' ? this.employeeInfosResponseHttpBody.depatmentCode : null);
         }
       }
 

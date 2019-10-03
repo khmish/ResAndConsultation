@@ -48,5 +48,11 @@
   "Assign": "تكليف",
   "CComiteeM":"إدخال قرار اللجنة",
   "CComiteeA":"إرسال قرار اللجنة",
-  "AttachPlan": "إرفاق الخطة"
+  "AttachPlan": "إرفاق الخطة",
+  "AttachConsulReport": "إرفاق تقرير الاستشارة",
+  "AttachSciRevReport": "إرفاق تقرير المراجعة العلمية",
+  "AttachSciCorReport": "رفاق التقرير بعد المراجعة",
+  "SendProofReader": "إرسال للتدقيق الغوي",
+  "SendProofReaderCorr": "إرسال مراجعة التدقيق الغوي",
+  "SendForRecomponseCalc": "إرسال لاحتساب المكافأة"
 }

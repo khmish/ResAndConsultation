@@ -58,7 +58,8 @@ export class SpecDeptNewrfcsService {
 
     return this.http.post('http://springdev.ipaedu.sa:8082/assignToSpecializedEmployeeTask04', {
       rfcId: rfcId1,
-      employeeCode: employeeCode1
+      employeeCode: employeeCode1,
+      userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }
 
