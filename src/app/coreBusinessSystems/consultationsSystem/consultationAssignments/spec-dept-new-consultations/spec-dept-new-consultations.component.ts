@@ -747,7 +747,7 @@ export class SpecDeptNewConsultationsComponent implements OnInit {
       header: 'Review Prof Reading',
       width: '500px',
       contentStyle: {
-        height: '25em', overflow: 'visible'
+        height: '30em', overflow: 'visible'
       },
       closable: false
     });

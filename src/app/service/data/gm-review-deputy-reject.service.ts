@@ -36,7 +36,7 @@ export class GmReviewDeputyRejectService {
     }, httpOptions);
   }
 
-  updateGmRfcReviewDeputyReject(rfcId1: string, remarks: string) {
+  updateGmRfcReviewDeputyReject(rfcId1: string, remarks1: string) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
       observe: 'response' as 'response'
@@ -44,7 +44,7 @@ export class GmReviewDeputyRejectService {
 
     return this.http.post('http://springdev.ipaedu.sa:8082/updateTask09', {
       rfcId: rfcId1,
-      remark: remarks,
+      remarks: remarks1,
       userId: sessionStorage.getItem('authenticatedUser')
     }, httpOptions);
   }

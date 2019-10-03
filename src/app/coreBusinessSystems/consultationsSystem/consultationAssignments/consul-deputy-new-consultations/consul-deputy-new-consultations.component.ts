@@ -57,6 +57,7 @@ import {BpmnWorkflowViewerComponent} from '../../../../reusableComponents/bpmn-w
 import {PopupGmApproveDesignComponent} from '../consul-gm-new-consultations/popup-gm-approve-design/popup-gm-approve-design.component';
 import {ConsulDeputyApproveDesignComponent} from './consul-deputy-approve-design/consul-deputy-approve-design.component';
 import {PopupCdeputyApproveFinancialRecComponent} from './popup-cdeputy-approve-financial-rec/popup-cdeputy-approve-financial-rec.component';
+import {AttachDiagTeamDesicionComponent} from './attach-diag-team-desicion/attach-diag-team-desicion.component';
 
 @Component({
   selector: 'app-consul-deputy-new-consultations',
@@ -369,4 +370,18 @@ export class ConsulDeputyNewConsultationsComponent implements OnInit {
     ref.onClose.subscribe(res => this.refreshPage());
   }
 
+  showUploadDialog(selCon: ConsultationGetFullDataHttpBody) {
+    this.selectedConsData1 = selCon;
+    this.selRow = this.selectedConsData1 ? this.selectedConsData1.constId : 'none';
+    const ref = this.dialogService.open(AttachDiagTeamDesicionComponent, {
+      header: 'upload',
+      width: '450px',
+      contentStyle: {
+        'max-height': '80%', overflow: 'auto'
+      },
+      closable: true
+    });
+
+    ref.onClose.subscribe(res => this.refreshPage());
+  }
 }

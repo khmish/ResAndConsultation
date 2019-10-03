@@ -128,6 +128,8 @@ import {PopupFinacialLinkageComponent} from './coreBusinessSystems/consultations
 import {PopupCgmApproveFinancialRecComponent} from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-gm-new-consultations/popup-cgm-approve-financial-rec/popup-cgm-approve-financial-rec.component';
 // tslint:disable-next-line:max-line-length
 import {PopupCdeputyApproveFinancialRecComponent} from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-deputy-new-consultations/popup-cdeputy-approve-financial-rec/popup-cdeputy-approve-financial-rec.component';
+// tslint:disable-next-line:max-line-length
+import { AttachDiagTeamDesicionComponent } from './coreBusinessSystems/consultationsSystem/consultationAssignments/consul-deputy-new-consultations/attach-diag-team-desicion/attach-diag-team-desicion.component';
 
 @NgModule({
   imports: [
@@ -234,7 +236,8 @@ import {PopupCdeputyApproveFinancialRecComponent} from './coreBusinessSystems/co
     PopupFinacialLinkageComponent,
     PopupCgmApproveFinancialRecComponent,
     PopupCdeputyApproveFinancialRecComponent,
-    RfcFullDetailsComponent
+    RfcFullDetailsComponent,
+    AttachDiagTeamDesicionComponent
   ],
   // tslint:disable-next-line:max-line-length
   providers: [AuthGuard, DashboardComponent, DialogService, UserPrivilagesHttpBodyService, SidebarComponent, UserAccessService,
@@ -255,7 +258,8 @@ import {PopupCdeputyApproveFinancialRecComponent} from './coreBusinessSystems/co
     PopupProofreadingReportComponent, AssignReportCordinatorComponent, ReviewDesignedReportComponent,
     SendToDesignerAfterDeputyReviewComponent, PopupProofreadingReportComponent, PopupDesignConsRepComponent, PopupGmRevDesignComponent,
     PopupGmSendRecompCalcComponent, PopupCalcRecompenseComponent, PopupFinacialLinkageComponent, PopupCgmApproveFinancialRecComponent,
-    PopupCdeputyApproveFinancialRecComponent, RfcFullDetailsComponent]
+    PopupCdeputyApproveFinancialRecComponent, RfcFullDetailsComponent, PopupCoordinateConsRepComponent,
+    AttachDiagTeamDesicionComponent ]
 
 })
 export class AppModule {

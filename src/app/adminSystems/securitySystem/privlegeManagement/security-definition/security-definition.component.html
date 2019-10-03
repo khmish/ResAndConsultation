@@ -1,1 +1,294 @@
-<p>security-definition works!</p>
+
+<div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-table  [columns]="cols" dataKey="sysCategoryId" editMode="row" [value]="posts" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}} 
+            </th>
+            <th> الحالة</th>
+            <th style="width:10em"> </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData  let-editing="editing" let-ri="rowIndex">
+    
+        <tr [pEditableRow]="rowData">
+                
+                       
+                    
+            <td >
+                    
+                    {{rowData.sysCategoryId}}
+            </td >
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.sysCategoryAName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.sysCategoryAName}}
+                            </ng-template>
+                        </p-cellEditor>
+                   
+            </td>
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.sysCategoryEName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.sysCategoryEName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    
+            </td>
+            <td height="30" >
+                <p *ngIf="rowData.deleted =='N'">نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+            </td>
+             
+            <td><!--<button pButton type="button"  icon="pi pi-info"   (click)="handleClick(rowData.sysCategoryId)"></button>-->
+            <i class="pi pi-info" (click)="handleClick(rowData.sysCategoryId)"></i>  
+            <i class="pi pi-ban" (click)="deleteCategories(rowData.sysCategoryId)"></i>
+            <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
+            <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="updateCategories(rowData.sysCategoryId,rowData.sysCategoryAName,rowData.sysCategoryEName,1)"></button>
+            <button *ngIf="editing" pButton pCancelEditableRow  type="button" (click)="getCategories()" icon="pi pi-times" class="ui-button-danger" ></button>
+            </td>
+            
+            
+
+        </tr>
+    </ng-template>
+    
+
+
+
+</p-table>
+
+
+        </div>
+        
+<div  >
+<p-table  [columns]="cols2" dataKey="systemCode" [value]="postitem?.systemHttpBodies" editMode="row" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th> </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-columns="columns">
+    
+        <tr [pEditableRow]="rowData">
+                
+                       
+                    
+            <td >
+                    
+                    {{rowData.systemCode}}
+            </td >
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.systemAName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.systemAName}}
+                            </ng-template>
+                        </p-cellEditor>
+                   
+            </td>
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.systemEName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.systemEName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    
+            </td>
+             <td >
+                <p *ngIf="rowData.deleted =='N'" >نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+            </td>
+            <td > <i class="pi pi-info" (click)="clickSubSystemID(rowData.systemCode)"></i>
+                <i class="pi pi-ban" (click)="deleteclickSubSystemID(rowData.systemCode)"></i>
+                <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
+                <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" 
+                (click)="updateclickSubSystemID(rowData.systemCode,rowData.systemAName,rowData.systemEName,rowData.sysCategoryId,1)"></button>
+                <button *ngIf="editing" pButton pCancelEditableRow  type="button"  icon="pi pi-times" class="ui-button-danger" ></button>
+             </td>
+        </tr>
+    </ng-template>
+    
+
+
+
+</p-table>
+
+
+</div>
+
+
+
+<div [hidden]="!shown">
+<p-table [columns]="cols3" [value]="postSubSystems?.subSystemHttpBodies" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th> الحالة</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    
+        <tr [pEditableRow]="rowData">
+                
+                       
+                    
+            <td >
+                    
+                    {{rowData.subSystemId}}
+            </td >
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.subSystemAName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.subSystemAName}}
+                            </ng-template>
+                        </p-cellEditor>
+                   
+            </td>
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.subSystemEName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.subSystemEName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    
+            </td>
+            <td >
+                <p *ngIf="rowData.deleted =='N'">نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+            </td>
+            <td> <i class="pi pi-info" (click)="clickSubSystemRoles(rowData.subSystemId)"></i></td>
+            
+        </tr>
+    </ng-template>
+    
+</p-table>
+
+
+        </div>
+
+        <div >
+<p-table [columns]="cols4" [value]="postSubSystemsRoles?.systemRoleHttpBodyList" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th> الحالة</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    
+        <tr>
+            <td *ngFor="let col of columns">
+                {{rowData[col?.field]}}
+            </td>
+            <td >
+                <p *ngIf="rowData.deleted =='N'">نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+            </td>
+            <td><i class="pi pi-info" (click)="clickSystemFunctionsRoles(rowData.systemRoleCode)"></i></td>
+        </tr>
+    </ng-template>
+    
+</p-table>
+
+
+        </div>
+        
+
+                <div >
+<p-table [columns]="cols5" [value]="postSystemFunctionsRoles?.systemFunctionHttpBodies" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th> الحالة</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    
+        <tr>
+            <td *ngFor="let col of columns">
+                {{rowData[col?.field]}}
+            </td>
+            <td >
+                <p *ngIf="rowData.deleted =='N'">نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+            </td>
+            <td> <i class="pi pi-info" (click)="clickFunctionsDsForFunction(rowData.systemFunctionId)"></i></td>
+        </tr>
+    </ng-template>
+    
+</p-table>
+
+
+        </div>
+
+
+         <div  >
+<p-table [columns]="cols6" [value]="postFunctionsDsForFunctions?.systemFunctionDSHttpBodies" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th> الحالة</th>
+            <th style="width:8em"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    
+        <tr>
+            <td *ngFor="let col of columns">
+                {{rowData[col?.field]}}
+            </td>
+            <p *ngIf="rowData.deleted =='N'">نشط
+                </p>
+                <p *ngIf="rowData.deleted =='Y'">غير نشط
+                </p>
+              
+            <td><i class="pi pi-info" (click)="clickFunctionsDsForFunction(rowData.systemFunctionId)"></i></td>
+        </tr>
+    </ng-template>
+    
+</p-table>
+
+
+        </div>
+        

@@ -2,44 +2,44 @@
   <!--  <h1> {{ rfcId }}</h1>-->
   <p-toast position="bottom-right"></p-toast>
 
-  <p-panel header="Rfc Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-    <div>
-      <div>Title : {{consulFullDetailsBody.constId}} </div>
-      <div>Description : {{consulFullDetailsBody.constDescription}} </div>
-      <div>Start Date : {{consulFullDetailsBody.actualStartDate}} </div>
-      <div>End Date : {{consulFullDetailsBody.actualEndDate}} </div>
-      <div>Phone : {{consulFullDetailsBody.orgContactPhone}} </div>
-      <div>Email : {{consulFullDetailsBody.orgContactEmail}} </div>
-      <div>Job : {{consulFullDetailsBody.orgContactJob}} </div>
-    </div>
-  </p-panel>
+<!--  <p-panel header="Rfc Details" [toggleable]="true" [style]="{'margin-bottom':'20px'}">-->
+<!--    <div>-->
+<!--      <div>Title : {{consulFullDetailsBody.constId}} </div>-->
+<!--      <div>Description : {{consulFullDetailsBody.constDescription}} </div>-->
+<!--      <div>Start Date : {{consulFullDetailsBody.actualStartDate}} </div>-->
+<!--      <div>End Date : {{consulFullDetailsBody.actualEndDate}} </div>-->
+<!--      <div>Phone : {{consulFullDetailsBody.orgContactPhone}} </div>-->
+<!--      <div>Email : {{consulFullDetailsBody.orgContactEmail}} </div>-->
+<!--      <div>Job : {{consulFullDetailsBody.orgContactJob}} </div>-->
+<!--    </div>-->
+<!--  </p-panel>-->
 
-  <p-panel header="Assignments" [toggleable]="true">
-    <ul *ngFor="let activityAssignmentResponseHttpBodies of activityAssignmentResponseHttpBodies">
-      <p-fieldset collapsed="collapsed" legend="{{activityAssignmentResponseHttpBodies.actArabicName}}" [toggleable]="true"
-                  styleClass="myFieldset">
-        <div style="margin-left: 50px;">
-          <p-card class="ui-card-title"><label>Status : </label> {{activityAssignmentResponseHttpBodies.activityStatusAName}}
-          </p-card>
-          <br/>
-          <p-card class="ui-card-title"><label>Remarks
-            : </label> {{activityAssignmentResponseHttpBodies.actRemarks}}</p-card>
-          <br/>
-          <p-card class="ui-card-title"><label>Start Date
-            : </label> {{activityAssignmentResponseHttpBodies.actualStartDate }}</p-card>
-          <br/>
-          <p-card class="ui-card-title"><label>End Date
-            : </label> {{activityAssignmentResponseHttpBodies.actualEndDate}}</p-card>
-          <br>
-          <p-fieldset collapsed="collapsed" *ngIf="activityAssignmentResponseHttpBodies.assignmentWithRolesHttpBodies.length !== 0"
-                      legend="Roles" [toggleable]="true">
-            <p-card class="ui-card-title" styleClass="recStyle"
-                    *ngFor="let assignmentWithRolesHttpBodies of activityAssignmentResponseHttpBodies.assignmentWithRolesHttpBodies">
-              {{assignmentWithRolesHttpBodies.assignmentStatusAName}}
-            </p-card>
-          </p-fieldset>
-        </div>
-      </p-fieldset>
-    </ul>
-  </p-panel>
+<!--  <p-panel header="Assignments" [toggleable]="true">-->
+<!--    <ul *ngFor="let activityAssignmentResponseHttpBodies of activityAssignmentResponseHttpBodies">-->
+<!--      <p-fieldset collapsed="collapsed" legend="{{activityAssignmentResponseHttpBodies.actArabicName}}" [toggleable]="true"-->
+<!--                  styleClass="myFieldset">-->
+<!--        <div style="margin-left: 50px;">-->
+<!--          <p-card class="ui-card-title"><label>Status : </label> {{activityAssignmentResponseHttpBodies.activityStatusAName}}-->
+<!--          </p-card>-->
+<!--          <br/>-->
+<!--          <p-card class="ui-card-title"><label>Remarks-->
+<!--            : </label> {{activityAssignmentResponseHttpBodies.actRemarks}}</p-card>-->
+<!--          <br/>-->
+<!--          <p-card class="ui-card-title"><label>Start Date-->
+<!--            : </label> {{activityAssignmentResponseHttpBodies.actualStartDate }}</p-card>-->
+<!--          <br/>-->
+<!--          <p-card class="ui-card-title"><label>End Date-->
+<!--            : </label> {{activityAssignmentResponseHttpBodies.actualEndDate}}</p-card>-->
+<!--          <br>-->
+<!--          <p-fieldset collapsed="collapsed" *ngIf="activityAssignmentResponseHttpBodies.assignmentWithRolesHttpBodies.length !== 0"-->
+<!--                      legend="Roles" [toggleable]="true">-->
+<!--            <p-card class="ui-card-title" styleClass="recStyle"-->
+<!--                    *ngFor="let assignmentWithRolesHttpBodies of activityAssignmentResponseHttpBodies.assignmentWithRolesHttpBodies">-->
+<!--              {{assignmentWithRolesHttpBodies.assignmentStatusAName}}-->
+<!--            </p-card>-->
+<!--          </p-fieldset>-->
+<!--        </div>-->
+<!--      </p-fieldset>-->
+<!--    </ul>-->
+<!--  </p-panel>-->
 </div>

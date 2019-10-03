@@ -19,6 +19,7 @@ export class PopupSendProofreadingComponent implements OnInit {
   employeeFullName: string;
   sendOk: boolean;
   specDeptMgrRemarks: string;
+  userId: string;
   constructor(private viewAllConsul: SpecDeptNewConsultationsComponent, private speDeptService: SpecDeptService) { }
 
   ngOnInit() {
@@ -26,6 +27,7 @@ export class PopupSendProofreadingComponent implements OnInit {
     this.employeeFullName = null;
     this.sendOk = false;
     this.specDeptMgrRemarks = null;
+    this.userId = sessionStorage.getItem('authenticatedUser');
   }
 
   onReset() {
@@ -66,7 +68,7 @@ export class PopupSendProofreadingComponent implements OnInit {
   sendProofReading() {
     if (this.sendOk) {
       // tslint:disable-next-line:max-line-length
-      this.speDeptService.c2Task08SendForProofreading(this.viewAllConsul.selRow, this.specDeptMgrRemarks, '4360916', this.emplCode).pipe(
+      this.speDeptService.c2Task08SendForProofreading(this.viewAllConsul.selRow, this.specDeptMgrRemarks, this.userId, this.emplCode).pipe(
         catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           if (!err.message.includes('OK')) {

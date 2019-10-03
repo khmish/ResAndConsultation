@@ -1,5 +1,6 @@
 <div style="margin: 5px" class="row">
   <p-toast position="bottom-right"></p-toast>
+  <p-confirmDialog [style]="{width: '30%'}"></p-confirmDialog>
   <div>
     <p-table #dt [columns]="cols" [value]="allConsultationsData" [responsive]="true" dataKey="constId"
              rowExpandMode="single" selectionMode="single" [(selection)]="selectedConsData" [paginator]="true"
@@ -45,8 +46,8 @@
         <tr style="background: #d9e4d9">
           <td [attr.colspan]="columns.length + 1">
             <div class="ui-toolbar-group-right">
-              <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
-              <button pButton class="btn" pTooltip="Review" *ngIf="rowData.taskDefinitionKey == 'Task_11C03'" (click)="reviewReport(rowData)"></button>&nbsp;
+              <button pButton icon="pi pi-eye" pTooltip="View Workflow"  (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
+              <button pButton class="btn" label="Printed" pTooltip="Review" *ngIf="rowData.taskDefinitionKey == 'Task_11C03'" (click)="reviewReport(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
             </div>
           </td>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {ButtonModule, DropdownModule, ToolbarModule} from 'primeng/primeng';
+import {ButtonModule, ConfirmDialogModule, DropdownModule, ToolbarModule} from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {TranslateModule} from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import {SpecDeptNewConsultationsModule} from '../spec-dept-new-consultations/spe
 @NgModule({
   // tslint:disable-next-line:max-line-length
   imports: [FormsModule, CommonModule, ToolbarModule, TableModule, ButtonModule, ToastModule, TranslateModule,
-    DialogModule, InputTextareaModule, DropdownModule, PrintingGmRoutingModule, SpecDeptNewConsultationsModule],
+    DialogModule, InputTextareaModule, DropdownModule, PrintingGmRoutingModule, SpecDeptNewConsultationsModule, ConfirmDialogModule],
   declarations: [PrintingGMComponent],
   entryComponents: []
 

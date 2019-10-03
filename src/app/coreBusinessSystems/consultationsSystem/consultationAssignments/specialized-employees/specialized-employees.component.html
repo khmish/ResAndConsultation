@@ -48,7 +48,7 @@
               <button pButton icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
               <button pButton class="btn" label="{{ 'SendProofReader' | translate}}" (click)="showSendProofReading(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_09C02'"></button>&nbsp;
-              <button pButton class="btn" label="{{ 'SendProofReaderCorr' | translate}}" (click)="showSendProofReadingCorrect(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_09C02'"></button>&nbsp;
+              <button pButton class="btn" label="{{ 'SendProofReaderCorr' | translate}}" (click)="showSendProofReadingCorrect(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_11C02'"></button>&nbsp;
               <button pButton class="btn" label="Upload Coordinated Report" (click)="sendCoordRepToDesigner(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_02C03'"></button>&nbsp;
               <button pButton class="btn" label="Upload Designed Report" (click)="sendDesignedRep(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_03C03'"></button>&nbsp;
               <button pButton class="btn" label="Upload Recompense Calculation" (click)="sendCalcRecompense(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_01C04'"></button>&nbsp;

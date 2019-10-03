@@ -6,6 +6,7 @@ import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
 import {Message} from 'primeng/api';
+import {ConsulDeputyNewConsultationsComponent} from '../consul-deputy-new-consultations.component';
 
 @Component({
   selector: 'app-consul-deputy-approve-design',
@@ -18,7 +19,7 @@ export class ConsulDeputyApproveDesignComponent implements OnInit {
   userId: string;
   msgs: Message[] = [];
 
-  constructor(private viewAllCon: ConsulGmNewConsultationsComponent, private consulDeputyService: ConsulDeputyService ) { }
+  constructor(private viewAllCon: ConsulDeputyNewConsultationsComponent, private consulDeputyService: ConsulDeputyService ) { }
 
   ngOnInit() {
     this.remark = '';

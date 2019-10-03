@@ -47,14 +47,12 @@
             <div class="ui-toolbar-group-right">
               <button pButton class="btn" icon="pi pi-eye" pTooltip="View Workflow" (click)="showBpmnWorkflow(rowData)"></button>&nbsp;
               <button pButton class="btn" label="Remarks" (click)="showConsultations(rowData)"></button>&nbsp;
-              <button pButton class="btn" label="Update task 7" (click)="showDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_07'"></button>&nbsp;
-              <button pButton class="btn" label="Update task 6" (click)="showUploadPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_06'"></button>&nbsp;
-              <button pButton class="btn" label="Update task 3" (click)="showDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_03'"></button>&nbsp;
+              <button pButton class="btn" label="Attache Decisions" (click)="showUploadDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_07'"></button>&nbsp;
+              <button pButton class="btn" label="Attache Decisions" (click)="showUploadPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_06'"></button>&nbsp;
+              <button pButton class="btn" label="Approve teams" (click)="showDialog(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_03'"></button>&nbsp;
               <button pButton class="btn" label="Approve Design" (click)="showApproveDesignPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_07C03'"></button>&nbsp;
               <button pButton class="btn" label="Approve Financial Record" (click)="showApproveFinRecPopup(rowData)" *ngIf="rowData.taskDefinitionKey == 'Task_04C04'"></button>&nbsp;
             </div>
-
-
           </td>
         </tr>
       </ng-template>

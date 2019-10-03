@@ -1,14 +1,15 @@
-import { ConsulIhrnewService } from './../../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ihrnew.service';
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import {ConsulIhrnewService} from './../../../../../service/data/coreBusinessSystems/consultationsSystem/consultationAssignments/consul-ihrnew.service';
+import {Component, OnInit} from '@angular/core';
+import {MessageService} from 'primeng/api';
 import {Message} from 'primeng/api';
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { ConsulDeputyNewConsultationsComponent } from '../consul-deputy-new-consultations.component';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { ConsultationDeputyPrepareDecisions1Task06 } from './../../../../../models/consultation-get-full-data-http-body';
+import {HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse} from '@angular/common/http';
+import {ConsulDeputyNewConsultationsComponent} from '../consul-deputy-new-consultations.component';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {ConsultationDeputyPrepareDecisions1Task06} from './../../../../../models/consultation-get-full-data-http-body';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'app-popup_upload_approval_assgin_team',
   templateUrl: './popup_upload_approval_assgin_team.component.html',
   styleUrls: ['./popup_upload_approval_assgin_team.component.css']
@@ -35,12 +36,12 @@ export class Popup_upload_approval_assgin_teamComponent implements OnInit {
 
   msgs: Message[] = [];
 
-    constructor(private messageService: MessageService,
-      private http: HttpClient,
-      private viewAllCons:ConsulDeputyNewConsultationsComponent
-      ) {}
+  constructor(private messageService: MessageService,
+              private http: HttpClient,
+              private viewAllCons: ConsulDeputyNewConsultationsComponent
+  ) {
+  }
 
-   
 
   ngOnInit() {
     this.allOk = false;
@@ -57,34 +58,34 @@ export class Popup_upload_approval_assgin_teamComponent implements OnInit {
   }
 
   uploadDocs() {
-    
 
-    this.modelTask6={
-      constId:this.viewAllCons.selRow,
-      constAttachmentPath : this.consFileName,
-      scientificAttachmentPath : this.sciFileName,
-      scienAttachType : this.sciFileType,
-      constAttachType:this.consFileType
+
+    this.modelTask6 = {
+      constId: this.viewAllCons.selRow,
+      constAttachmentPath: this.consFileName,
+      scientificAttachmentPath: this.sciFileName,
+      scienAttachType: this.sciFileType,
+      constAttachType: this.consFileType
 
     };
     this.http.post<any>(this.task6Url, this.modelTask6)
-    .subscribe((res) => {
-        console.log(res.body);
-        if (res.body.errorCode === '0') {
-          this.viewAllCons.refreshPage();
-          this.viewAllCons.ngOnInit();
-          this.showSuccess('Reviewed Successfully');
-        } else {
-          
-        }
-      },
-      (err: HttpErrorResponse) =>{
-        console.log(err.error.errorADescription);
+      .subscribe((res) => {
+          console.log(res.body);
+          if (res.body.errorCode === '0') {
+            this.viewAllCons.refreshPage();
+            this.viewAllCons.ngOnInit();
+            this.showSuccess('Reviewed Successfully');
+          } else {
+
+          }
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err.error.errorADescription);
           this.showError(err.error.errorADescription);
-       
-      });
-    
-    
+
+        });
+
+
   }
 
   timesToLoop(n: number): any[] {

@@ -41,10 +41,12 @@
               style="margin-left: 5px;" [(ngModel)]="rfcRemarks"></textarea>
     </div>
   </div>
+
+  <div align="center">
+    <button (click)="updateReviewResultAndFinalDecision()" class="btn btn-success">Add</button>  &nbsp;
+    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+  </div>
 </div>
 <!--Selected Value = {{selBCValue == 'Yes' ? 'true' : 'false' || 'none'}}-->
 
-<div align="center">
-  <button (click)="updateReviewResultAndFinalDecision()" class="btn btn-success">Add</button>  &nbsp;
-  <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
-</div>
+

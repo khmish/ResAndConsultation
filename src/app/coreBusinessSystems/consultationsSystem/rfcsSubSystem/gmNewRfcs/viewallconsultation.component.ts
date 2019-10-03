@@ -238,7 +238,7 @@ export class ViewallconsultationComponent implements OnInit, OnDestroy {
       header: 'Review',
       width: '500px',
       contentStyle: {
-        height: '250px', overflow: 'auto'
+        height: '350px', overflow: 'auto'
       },
       closable: false
     });

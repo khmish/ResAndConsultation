@@ -34,4 +34,14 @@ export class ConsulDeputyService {
       userId: userId1
     }, this.httpOptions);
   }
+
+  // tslint:disable-next-line:max-line-length
+  attachDiagTeamDecision(constId1: string, diagnosticAttachmentPath1: string, attachmentType1: string) {
+    return this.http.post('http://ho-smaiahl.ipaedu.sa:8082/consultationDeputyPrepareDecisions1Task07', {
+      constId: constId1,
+      diagnosticAttachmentPath: diagnosticAttachmentPath1,
+      attachmentType: attachmentType1,
+      userId: sessionStorage.getItem('authenticatedUser')
+    }, this.httpOptions);
+  }
 }
