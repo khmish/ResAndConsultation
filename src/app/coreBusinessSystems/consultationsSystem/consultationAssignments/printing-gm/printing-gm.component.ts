@@ -194,6 +194,7 @@ export class PrintingGMComponent implements OnInit {
           console.log('res.body ------------> ' + res);
           console.log(res.body.errorCode);
           if (res.body.errorCode === '0') {
+            this.ngOnInit();
             this.showSuccess('Reviewed Successfully');
           } else {
             console.log(res.body.errorEDescription);

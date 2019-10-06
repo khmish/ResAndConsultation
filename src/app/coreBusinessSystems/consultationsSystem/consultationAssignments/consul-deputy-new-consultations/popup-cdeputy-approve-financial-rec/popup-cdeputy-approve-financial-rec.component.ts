@@ -5,6 +5,7 @@ import {Message} from 'primeng/api';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
+import {ConsulDeputyNewConsultationsComponent} from '../consul-deputy-new-consultations.component';
 
 @Component({
   selector: 'app-popup-cdeputy-approve-financial-rec',
@@ -16,7 +17,7 @@ export class PopupCdeputyApproveFinancialRecComponent implements OnInit {
   allOk: boolean;
   userId: string;
   msgs: Message[] = [];
-  constructor(private viewAllCon: ConsulGmNewConsultationsComponent, private consulDeputyService: ConsulDeputyService ) { }
+  constructor(private viewAllCon: ConsulDeputyNewConsultationsComponent, private consulDeputyService: ConsulDeputyService ) { }
 
   ngOnInit() {
     this.remark = '';

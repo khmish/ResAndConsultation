@@ -37,7 +37,7 @@ export class ConsulDeputyService {
 
   // tslint:disable-next-line:max-line-length
   attachDiagTeamDecision(constId1: string, diagnosticAttachmentPath1: string, attachmentType1: string) {
-    return this.http.post('http://ho-smaiahl.ipaedu.sa:8082/consultationDeputyPrepareDecisions1Task07', {
+    return this.http.post('http://springdev.ipaedu.sa:8082/consultationDeputyPrepareDecisions1Task07', {
       constId: constId1,
       diagnosticAttachmentPath: diagnosticAttachmentPath1,
       attachmentType: attachmentType1,

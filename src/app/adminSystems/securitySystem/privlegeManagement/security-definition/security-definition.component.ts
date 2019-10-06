@@ -35,6 +35,9 @@ export class SecurityDefinitionComponent implements OnInit {
   resy: any
   shown: boolean = true
   sysCategoryId :any 
+  systemId:number 
+  subsystemId:number
+  systemRoleCode:number
 
   cols: any[]
   cols2: any[]
@@ -128,8 +131,8 @@ export class SecurityDefinitionComponent implements OnInit {
 
   }
   
-  updateclickSubSystemID(id, subSysAr, subSysEn, sysCategoryCode, userID) {
-    this.service.updateSubsystem(id, subSysAr, subSysEn, this.sysCategoryId, userID).subscribe(res => {
+  updateclickSystemID(id, subSysAr, subSysEn, sysCategoryCode, userID) {
+    this.service.updateSystem(id, subSysAr, subSysEn, this.sysCategoryId, userID).subscribe(res => {
       this.postitem = res;
       console.log("sysCategoryId=   "+ this.sysCategoryId)
       this.handleClick(this.sysCategoryId)
@@ -140,8 +143,8 @@ export class SecurityDefinitionComponent implements OnInit {
   }
 
 
- deleteclickSubSystemID(id, atcionD,userId) {
-    this.service.deleteSubSystems(id, atcionD,userId).subscribe(res => {
+ deleteclickSystemID(id, atcionD,userId) {
+    this.service.deleteSystems(id, atcionD,userId).subscribe(res => {
       console.log(res);
       this.postitem = res;
       this.handleClick(this.sysCategoryId)
@@ -158,6 +161,7 @@ export class SecurityDefinitionComponent implements OnInit {
   clickSubSystemID(id) {
     this.service.postSubsystem(id).subscribe(res => {
       console.log(res);
+      this.systemId=id;
       let errmsg = res.errorMessage.errorCode
       console.log("err " + errmsg);
       console.log("ID= " + id);
@@ -173,8 +177,30 @@ export class SecurityDefinitionComponent implements OnInit {
     ];
 
   }
+  updateclickSubSystemID(id, subSysAr, subSysEn, sysCategoryCode, userID) {
+    this.service.updateSubsystem(id, subSysAr, subSysEn, this.systemId, userID).subscribe(res => {
+      this.postSubSystems = res;
+      console.log("sysCategoryId=   "+ this.systemId)
+      this.clickSubSystemID(this.systemId)
+    }, err => { console.log("Error") });
 
-  
+    this.showUpdateMsg()
+
+  }
+  deleteclickSubSystemID(id, atcionD,userId) {
+    this.service.deleteSubSystem(id, atcionD,userId).subscribe(res => {
+      console.log(res);
+      console.log(id);
+      this.postSubSystems = res;
+      this.clickSubSystemID(this.systemId)
+      
+
+    }, err => { console.log("لايوجد بيانات"+this.postSubSystems) });
+
+    this.showDeleteMsg()
+  }
+
+
   
 
 
@@ -182,6 +208,7 @@ export class SecurityDefinitionComponent implements OnInit {
   clickSubSystemRoles(id) {
     this.service.postSubsystemRole(id).subscribe(res => {
       console.log(res);
+      this.subsystemId=id;
       let errmsg = res.errorMessage.errorCode
       console.log("err " + errmsg);
       console.log("ID= " + id);
@@ -195,11 +222,41 @@ export class SecurityDefinitionComponent implements OnInit {
 
     ];
 
+
+   // updateSystemRoles
+
   }
+
+  updateclickSystemRoles(id, subSysAr, subSysEn, sysCategoryCode, userID) {
+    this.service.updateSystemRoles(id, subSysAr, subSysEn, this.subsystemId, userID).subscribe(res => {
+      this.postSubSystemsRoles = res;
+      console.log("systemRoleCode=   "+ this.subsystemId)
+      this.clickSubSystemRoles(this.subsystemId)
+    }, err => { console.log("Error") });
+
+    this.showUpdateMsg()
+
+  }
+
+  deleteclickSystemRoles(id, atcionD,userId) {
+    this.service.deleteSystemRoles(id, atcionD,userId).subscribe(res => {
+      console.log(res);
+      console.log(id);
+      this.postSubSystemsRoles = res;
+      this.clickSubSystemRoles(this.subsystemId)
+      
+
+    }, err => { console.log("لايوجد بيانات"+this.postSubSystems) });
+
+    this.showDeleteMsg()
+  }
+
+
 
   clickSystemFunctionsRoles(id) {
     this.service.postSystemFunctionsRole(id).subscribe(res => {
       console.log(res);
+      this.systemRoleCode=id
       let errmsg = res.errorMessage.errorCode
       console.log("err " + errmsg);
       console.log("ID= " + id);
@@ -210,10 +267,40 @@ export class SecurityDefinitionComponent implements OnInit {
       { field: 'systemFunctionId', header: 'رمز الوظيفة ' },
       { field: 'systemFunctionAName', header: 'مسمى الوظيفة بالعربي' },
       { field: 'systemFunctionEName', header: 'مسمى الوظيفة بالانجليزي' },
+      { field: 'angularRouteLink', header: 'مسمى الوظيفة بالانجليزي' },
+      { field: 'systemFunctionEName', header: 'مسمى الوظيفة بالانجليزي' }
+      
 
     ];
 
   }
+
+  updateclickSystemFunctions(id, subSysAr, subSysEn,routrLink,icon, sysCategoryCode, userID) {
+    this.service.updateSystemFunctions(id, subSysAr, subSysEn,routrLink,icon, this.systemRoleCode, userID).subscribe(res => {
+      this.postSystemFunctionsRoles = res;
+      console.log("systemRoleCode=   "+ this.systemRoleCode)
+      this.clickSystemFunctionsRoles(this.systemRoleCode)
+    }, err => { console.log("Error") });
+
+    this.showUpdateMsg()
+
+  
+  }
+
+  deleteclickSystemFunctions(id, atcionD,userId) {
+    this.service.deleteSystemFunctions(id, atcionD,userId).subscribe(res => {
+      console.log(res);
+      console.log(id);
+      this.postSystemFunctionsRoles = res;
+      this.clickSystemFunctionsRoles(this.systemRoleCode)
+      
+
+    }, err => { console.log("لايوجد بيانات"+this.postSubSystems) });
+
+    this.showDeleteMsg()
+  }
+
+
   clickFunctionsDsForFunction(id) {
     this.service.postFunctionsDsForFunction(id).subscribe(res => {
       console.log(res);

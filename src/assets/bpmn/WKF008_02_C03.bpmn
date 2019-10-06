@@ -14,6 +14,7 @@
         <bpmn:flowNodeRef>ExclusiveGateway_01</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_06C03</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_09C03</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_12C03</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0k3ugl5" name="Specialized Department Employee">
         <bpmn:flowNodeRef>Task_02C03</bpmn:flowNodeRef>
@@ -152,6 +153,7 @@
       <bpmn:incoming>SequenceFlow_1b8sw8z</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0n0z2qh</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0yv8ysy</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1r7i71o</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:userTask id="Task_10C03" name="Notify Organization" camunda:candidateGroups="genMgrGrp">
       <bpmn:incoming>SequenceFlow_0yv8ysy</bpmn:incoming>
@@ -166,6 +168,7 @@
     <bpmn:parallelGateway id="ExclusiveGateway_1kkbeld">
       <bpmn:incoming>SequenceFlow_0u3xn7p</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_14ini3d</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_15ezi65</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1q8ijwd</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0u3xn7p" sourceRef="Task_11C03" targetRef="ExclusiveGateway_1kkbeld" />
@@ -174,6 +177,12 @@
       <bpmn:incoming>SequenceFlow_1q8ijwd</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1q8ijwd" sourceRef="ExclusiveGateway_1kkbeld" targetRef="EndEvent_01" />
+    <bpmn:sequenceFlow id="SequenceFlow_1r7i71o" sourceRef="ExclusiveGateway_0ena9pq" targetRef="Task_12C03" />
+    <bpmn:userTask id="Task_12C03" name="Send for recomponse calculation">
+      <bpmn:incoming>SequenceFlow_1r7i71o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_15ezi65</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_15ezi65" sourceRef="Task_12C03" targetRef="ExclusiveGateway_1kkbeld" />
   </bpmn:process>
   <bpmn:process id="Process_181f3lk" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -391,6 +400,19 @@
       <bpmndi:BPMNEdge id="SequenceFlow_1q8ijwd_di" bpmnElement="SequenceFlow_1q8ijwd">
         <di:waypoint x="2442" y="961" />
         <di:waypoint x="2528" y="961" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1r7i71o_di" bpmnElement="SequenceFlow_1r7i71o">
+        <di:waypoint x="1929" y="812" />
+        <di:waypoint x="1929" y="341" />
+        <di:waypoint x="2134" y="341" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_13tlhja_di" bpmnElement="Task_12C03">
+        <dc:Bounds x="2134" y="301" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_15ezi65_di" bpmnElement="SequenceFlow_15ezi65">
+        <di:waypoint x="2234" y="341" />
+        <di:waypoint x="2417" y="341" />
+        <di:waypoint x="2417" y="936" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

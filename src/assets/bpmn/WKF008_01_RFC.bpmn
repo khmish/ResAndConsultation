@@ -135,6 +135,7 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="meetingElementId" type="long" />
+          <camunda:formField id="specEmpl" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0fqajlj</bpmn:incoming>
@@ -227,7 +228,7 @@
         <bpmn:condition xsi:type="bpmn:tFormalExpression">#{w00801_RequestForConsultationWorkflowService.task_05_checkMeetingElementApproved(meetingElementId)}</bpmn:condition>
       </bpmn:conditionalEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:userTask id="Task_05" name="Review Suggestion and Give Recomendations">
+    <bpmn:userTask id="Task_05" name="Review Suggestion and Give Recomendations" camunda:assignee="#{specEmpl}">
       <bpmn:incoming>SequenceFlow_0xudol1</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_15dmeyg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ux5q0i</bpmn:outgoing>

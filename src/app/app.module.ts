@@ -259,7 +259,7 @@ import { AttachDiagTeamDesicionComponent } from './coreBusinessSystems/consultat
     SendToDesignerAfterDeputyReviewComponent, PopupProofreadingReportComponent, PopupDesignConsRepComponent, PopupGmRevDesignComponent,
     PopupGmSendRecompCalcComponent, PopupCalcRecompenseComponent, PopupFinacialLinkageComponent, PopupCgmApproveFinancialRecComponent,
     PopupCdeputyApproveFinancialRecComponent, RfcFullDetailsComponent, PopupCoordinateConsRepComponent,
-    AttachDiagTeamDesicionComponent ]
+    AttachDiagTeamDesicionComponent]
 
 })
 export class AppModule {

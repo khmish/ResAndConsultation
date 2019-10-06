@@ -154,7 +154,7 @@ export class SpecDeptService {
                               remarks1: string,
                               userId1: string,
                               reviewer1: string) {
-    return this.http.post('http://ho-smaiahl.ipaedu.sa:8082/c2Task08SendForProofreading', {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task08SendForProofreading', {
       constId: constId1,
       remarks: remarks1,
       userId: userId1,
@@ -177,7 +177,7 @@ export class SpecDeptService {
                      proofReadingSimpleRemarks1: string,
                      remarks1: string,
                      reviewer1: string) {
-    return this.http.post('http://HO-SMAIAHL.ipaedu.sa:8082/c2Task10ReviewProofReadingReport', {
+    return this.http.post('http://springdev.ipaedu.sa:8082/c2Task10ReviewProofReadingReport', {
       constId: constId1,
       proofReadingRemarksExists: proofReadingRemarksExists1,
       proofReadingSimpleRemarks: proofReadingSimpleRemarks1,

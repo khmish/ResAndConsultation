@@ -55,7 +55,7 @@ export class PopupFinacialLinkageComponent implements OnInit {
   uploadCalcRecompense() {
     if (this.sendOk) {
       // tslint:disable-next-line:max-line-length
-      this.specEmplService.c4Task01ProcessRecompenseCalculation(this.consultations.selRow, this.finLinkFileName, this.userId, this.finLinkFileType).pipe(
+      this.specEmplService.c4Task02ProcessFinancialLinkage(this.consultations.selRow, this.finLinkFileName, this.userId, this.finLinkFileType).pipe(
         catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           if (!err.message.includes('OK')) {

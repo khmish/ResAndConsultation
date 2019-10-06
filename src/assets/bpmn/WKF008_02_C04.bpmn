@@ -24,17 +24,13 @@
         <camunda:formData>
           <camunda:formField id="cId" type="long" />
           <camunda:formField id="DEPARTMENT_CODE" type="string" />
+          <camunda:formField id="specEmployee" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0p5rb1h</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0p5rb1h" sourceRef="StartEvent_01" targetRef="Task_01C04" />
     <bpmn:userTask id="Task_01C04" name="recompense Calculation" camunda:assignee="#{specEmployee}">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="specEmployee" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0p5rb1h</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0gnshgt</bpmn:outgoing>
     </bpmn:userTask>

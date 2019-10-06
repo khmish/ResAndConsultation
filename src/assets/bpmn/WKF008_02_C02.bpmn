@@ -130,11 +130,11 @@
       <bpmn:outgoing>SequenceFlow_1yv5pxo</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0fhuaqk</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_11C02" name="Review ProofReading Remarks" camunda:assignee="specializedEmployee">
+    <bpmn:userTask id="Task_11C02" name="Review ProofReading Remarks" camunda:assignee="#{specializedEmployee}">
       <bpmn:incoming>SequenceFlow_0mg5ppo</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1oalzj2</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_09C02" name="ProofReading" camunda:assignee="proofReader">
+    <bpmn:userTask id="Task_09C02" name="ProofReading" camunda:assignee="#{ProofReading}">
       <bpmn:incoming>SequenceFlow_1yo0hlv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13jd7hk</bpmn:outgoing>
     </bpmn:userTask>

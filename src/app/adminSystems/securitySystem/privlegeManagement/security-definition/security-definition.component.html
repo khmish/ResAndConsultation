@@ -120,10 +120,10 @@
                 </p>
             </td>
             <td > <i class="pi pi-info" (click)="clickSubSystemID(rowData.systemCode)"></i>
-                <i class="pi pi-ban" (click)="deleteclickSubSystemID(rowData.systemCode)"></i>
+                <i class="pi pi-ban" (click)="deleteclickSystemID(rowData.systemCode)"></i>
                 <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
                 <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" 
-                (click)="updateclickSubSystemID(rowData.systemCode,rowData.systemAName,rowData.systemEName,rowData.sysCategoryId,1)"></button>
+                (click)="updateclickSystemID(rowData.systemCode,rowData.systemAName,rowData.systemEName,rowData.sysCategoryId,1)"></button>
                 <button *ngIf="editing" pButton pCancelEditableRow  type="button"  icon="pi pi-times" class="ui-button-danger" ></button>
              </td>
         </tr>
@@ -140,7 +140,7 @@
 
 
 <div [hidden]="!shown">
-<p-table [columns]="cols3" [value]="postSubSystems?.subSystemHttpBodies" [paginator]="true" [rows]="5">
+<p-table [columns]="cols3" dataKey="subSystemId" [value]="postSubSystems?.subSystemHttpBodies" editMode="row" [paginator]="true" [rows]="5">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -149,7 +149,7 @@
             <th> الحالة</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-editing="editing"  let-columns="columns">
     
         <tr [pEditableRow]="rowData">
                 
@@ -187,7 +187,14 @@
                 <p *ngIf="rowData.deleted =='Y'">غير نشط
                 </p>
             </td>
-            <td> <i class="pi pi-info" (click)="clickSubSystemRoles(rowData.subSystemId)"></i></td>
+            <td> <i class="pi pi-info" (click)="clickSubSystemRoles(rowData.subSystemId)"></i>
+                <i class="pi pi-ban" (click)="deleteclickSubSystemID(rowData.subSystemId)"></i>
+                <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
+                <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" 
+                (click)="updateclickSubSystemID(rowData.subSystemId,rowData.subSystemAName,rowData.subSystemEName,rowData.systemCode,1)"></button>
+                <button *ngIf="editing" pButton pCancelEditableRow  type="button"  icon="pi pi-times" class="ui-button-danger" 
+                (click)="clickSubSystemID(rowData.systemCode)"></button>
+             </td>
             
         </tr>
     </ng-template>
@@ -198,7 +205,7 @@
         </div>
 
         <div >
-<p-table [columns]="cols4" [value]="postSubSystemsRoles?.systemRoleHttpBodyList" [paginator]="true" [rows]="5">
+<p-table [columns]="cols4" dataKey="systemRoleCode" [value]="postSubSystemsRoles?.systemRoleHttpBodyList" editMode="row"  [paginator]="true" [rows]="5">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -207,11 +214,37 @@
             <th> الحالة</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-columns="columns">
     
-        <tr>
-            <td *ngFor="let col of columns">
-                {{rowData[col?.field]}}
+        <tr [pEditableRow]="rowData">
+                
+                       
+                    
+            <td >
+                    
+                    {{rowData.systemRoleCode}}
+            </td >
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.systemRoleAName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.systemRoleAName}}
+                            </ng-template>
+                        </p-cellEditor>
+                   
+            </td>
+            <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.systemRoleEName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.systemRoleEName}}
+                            </ng-template>
+                        </p-cellEditor>
+                    
             </td>
             <td >
                 <p *ngIf="rowData.deleted =='N'">نشط
@@ -219,7 +252,13 @@
                 <p *ngIf="rowData.deleted =='Y'">غير نشط
                 </p>
             </td>
-            <td><i class="pi pi-info" (click)="clickSystemFunctionsRoles(rowData.systemRoleCode)"></i></td>
+            <td><i class="pi pi-info" (click)="clickSystemFunctionsRoles(rowData.systemRoleCode)"></i>
+                <i class="pi pi-ban" (click)="deleteclickSystemRoles(rowData.systemRoleCode)"></i>
+                <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
+                <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" 
+                (click)="updateclickSystemRoles(rowData.systemRoleCode,rowData.systemRoleAName,rowData.systemRoleEName,rowData.subSystemId,1)"></button>
+                <button *ngIf="editing" pButton pCancelEditableRow  type="button"  icon="pi pi-times" class="ui-button-danger" 
+                (click)="clickSubSystemID(rowData.systemCode)"></button></td>
         </tr>
     </ng-template>
     
@@ -230,7 +269,7 @@
         
 
                 <div >
-<p-table [columns]="cols5" [value]="postSystemFunctionsRoles?.systemFunctionHttpBodies" [paginator]="true" [rows]="5">
+<p-table [columns]="cols5" dataKey="systemFunctionId" [value]="postSystemFunctionsRoles?.systemFunctionHttpBodies" editMode="row" [paginator]="true" [rows]="5">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -239,19 +278,75 @@
             <th> الحالة</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-columns="columns">
     
         <tr>
-            <td *ngFor="let col of columns">
-                {{rowData[col?.field]}}
+            <tr [pEditableRow]="rowData">
+                
+                       
+                    
+                <td >
+                        
+                        {{rowData.systemFunctionId}}
+                </td >
+                <td>
+                        <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="rowData.systemFunctionAName" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                        {{rowData.systemFunctionAName}}
+                                </ng-template>
+                            </p-cellEditor>
+                       
+                </td>
+                <td>
+                    <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData.systemFunctionEName" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    {{rowData.systemFunctionEName}}
+                            </ng-template>
+                        </p-cellEditor>
+                   
             </td>
+     
+        <td>
+            <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.angularRouteLink" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                            {{rowData.angularRouteLink}}
+                    </ng-template>
+                </p-cellEditor>
+           
+    </td>
+                <td>
+                        <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="rowData.icon" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                        {{rowData.icon}}
+                                </ng-template>
+                            </p-cellEditor>
+                        
+                </td>
             <td >
                 <p *ngIf="rowData.deleted =='N'">نشط
                 </p>
                 <p *ngIf="rowData.deleted =='Y'">غير نشط
                 </p>
             </td>
-            <td> <i class="pi pi-info" (click)="clickFunctionsDsForFunction(rowData.systemFunctionId)"></i></td>
+            <td> <i class="pi pi-info" (click)="clickFunctionsDsForFunction(rowData.systemFunctionId)"></i>
+                <i class="pi pi-ban" (click)="deleteclickSystemFunctions(rowData.systemFunctionId)"></i>
+                <button *ngIf="!editing" pButton pInitEditableRow  type="button" icon="pi pi-pencil" class="ui-button-info"  ></button>
+                <button *ngIf="editing" pButton pSaveEditableRow   type="button"  icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" 
+                (click)="updateclickSystemFunctions(rowData.systemFunctionId,rowData.systemFunctionAName,rowData.systemFunctionEName,rowData.angularRouteLink,rowData.icon,rowData.systemRoleCode,1)"></button>
+                <button *ngIf="editing" pButton pCancelEditableRow  type="button"  icon="pi pi-times" class="ui-button-danger" 
+                (click)="clickSubSystemID(rowData.systemCode)"></button></td>
         </tr>
     </ng-template>
     
